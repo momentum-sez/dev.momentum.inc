@@ -1,0 +1,29 @@
+{
+ "_generated": "tools/extract-portal-data.sh \u2014 do not hand-edit",
+ "extracted_at": "2026-06-12",
+ "openapi": {
+  "paths": 597,
+  "operations": 656,
+  "active_tags": 16,
+  "component_schemas": 1412
+ },
+ "schema_browser_total": 1570,
+ "zones": 230,
+ "operation_families_dataset": 203,
+ "operation_families_kernel": 257,
+ "operation_yamls": 3104,
+ "entity_incorporate_variants": 125,
+ "mcp_tools": 243,
+ "moxie_methods": {
+  "total": 254,
+  "by_class": {
+   "Public": 163,
+   "AuthWrite": 74,
+   "AuthAdmin": 14,
+   "SignedAdmin": 1,
+   "Subscription": 2
+  }
+ },
+ "cli_commands": 15,
+ "kernel_crates": 72
+}

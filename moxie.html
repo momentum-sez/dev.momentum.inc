@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Moxie - clearing and settlement for claims</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+
+    <!-- SEO -->
+    <meta name="description" content="Moxie clears and settles PDCF-priced claims and their derivatives. Build event contracts, parimutuels, brand markets, royalty-linked assets, receivables, and custom claim programs over typed Claim primitives, CPCAM convex-program clearing, and AOT settlement receipts.">
+    <meta name="author" content="Momentum">
+    <link rel="canonical" href="https://dev.momentum.inc/moxie.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Moxie - clearing and settlement for claims">
+    <meta property="og:description" content="Typed Claim, PayoffProgram, Position, ConvexPotentialN. CPCAM clears correlated claims; AOT binds reliance. Mass issues and governs claims; Moxie clears, settles, prices.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dev.momentum.inc/moxie.html">
+    <meta property="og:image" content="https://dev.momentum.inc/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Moxie - clearing and settlement for claims">
+    <meta name="twitter:description" content="Typed Claim, PayoffProgram, Position, ConvexPotentialN. CPCAM clears correlated claims; AOT binds reliance.">
+    <meta name="twitter:image" content="https://dev.momentum.inc/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JP8T5J8M28"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JP8T5J8M28');
+    </script>
+
+    <!-- Adobe Fonts -->
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin>
+    <link rel="preload" href="https://use.typekit.net/zlu2quo.css" as="style">
+    <link rel="stylesheet" href="https://use.typekit.net/zlu2quo.css">
+
+    <!-- Fallback + Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/dev.css">
+    <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+<body class="page-dev page-moxie-docs">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="site-container">
+        <!-- HEADER -->
+        <header class="site-header">
+          <div class="container">
+            <div class="header-inner">
+              <a href="/" class="logo">Momentum</a>
+              <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">Menu</button>
+              <nav class="nav-primary" id="primary-nav" aria-label="Primary navigation">
+                <a href="/explore.html">Explore</a>
+                <a href="/docs.html">Mass API</a>
+                <a href="/moxie.html" aria-current="page">Moxie</a>
+                <a href="/moxie-api.html">API Spec</a>
+                <a href="https://github.com/momentum-sez">GitHub</a>
+                <a href="https://momentum.inc">momentum.inc</a>
+              </nav>
+            </div>
+          </div>
+        </header>
+
+        <main id="main">
+            <!-- HERO -->
+            <section class="docs-hero moxie-dev-hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <span class="hero-eyebrow">Moxie for Builders</span>
+                        <h1 class="hero-title">Clearing and settlement for claims.</h1>
+                        <p class="hero-subtitle">Moxie is a clearing-and-settlement layer you call as an API. Add tradeable items, prediction markets, and brand drops to your game or app &mdash; issue them, price them, and settle them atomically &mdash; in a few lines of code. One SDK covers every market: predictions, parimutuel pools, racing dividends, royalty streams, perpetuals, options, and insurance. Humans and AI agents drive the same markets through the same calls.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BUILDER USE CASES (preserved from existing portal) -->
+            <section class="docs-quickstart-section moxie-product-section moxie-builder-section">
+                <div class="container">
+                    <span class="section-eyebrow">What You Can Build</span>
+                    <h2 class="section-title">Start with products.</h2>
+                    <p class="section-subtitle">A contract market is any market where the payout depends on terms, events, ownership, or time. Moxie gives you one exchange surface for those markets, then clears related exposure together instead of forcing every app to build a one-off trading backend. Domain-natural SDK APIs &mdash; <code>client.gameEconomies.*</code>, <code>client.racing.*</code>, <code>client.claimPrograms.*</code> &mdash; parameterize a generic claims/obligations surface; one generic consensus surface serves every app.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Game developers</h4>
+                            <p>Create a market for a skin, card, trophy, pack, or tournament item. Players can buy, sell, or quote the item from your backend while your game keeps the native UX. The same account can later hold prediction positions, item inventory, and rewards without a separate clearing system per feature.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">Roblox / game backend</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> typescript</div>
+                                <pre class="code-block"><code><span class="code-dim">import</span> { Client, GridSizeCode, GeneratorCode } <span class="code-dim">from</span> <span class="code-string">"@moxie/sdk"</span>;
+
+<span class="code-dim">const</span> moxie = <span class="code-dim">new</span> Client({ apiKey: process.env.<span class="code-value">MOXIE_API_KEY</span> });
+
+<span class="code-comment">// Open price discovery for a limited in-game item.</span>
+<span class="code-dim">await</span> moxie.<span class="code-value">createContinuousMarket</span>({
+  key: process.env.<span class="code-value">MOXIE_SIGNING_KEY</span>,
+  market_id: <span class="code-string">"0x&lt;64-hex-dragon-skin-market&gt;"</span>,
+  omega_lo: <span class="code-string">"0"</span>,
+  omega_hi: <span class="code-string">"100000000000000000000"</span>,      <span class="code-comment">// 0..100 units</span>
+  grid_size_code: GridSizeCode.<span class="code-value">N64</span>,
+  generator_code: GeneratorCode.<span class="code-value">Entropy</span>,
+  initial_mu: [<span class="code-string">"25000000000000000000"</span>],    <span class="code-comment">// starts around 25</span>
+  swap_fee_bps: <span class="code-value">30</span>,
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Sports, racing, and live events</h4>
+                            <p>Build prediction markets, round-by-round fight games, racing pools, and parimutuel products where many outcomes clear together. A Hong Kong Jockey Club style pool, a combat-sports card, and a tournament bracket all reduce to event-linked markets with settlement receipts.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">event contract</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> typescript</div>
+                                <pre class="code-block"><code><span class="code-comment">// One market, multiple outcomes, settled when the event resolves.</span>
+<span class="code-dim">await</span> moxie.<span class="code-value">createStandaloneMarket</span>({
+  key: process.env.<span class="code-value">MOXIE_SIGNING_KEY</span>,
+  market_id: <span class="code-string">"0x&lt;64-hex-race-market&gt;"</span>,
+  question: <span class="code-string">"Which horse wins Race 7?"</span>,
+  resolution_time: <span class="code-value">1780000000</span>,
+  outcome_count: <span class="code-value">14</span>,
+  collateral_asset: <span class="code-string">"USD"</span>,
+});
+
+<span class="code-dim">await</span> moxie.<span class="code-value">predictionIssue</span>({
+  key: process.env.<span class="code-value">MOXIE_SIGNING_KEY</span>,
+  prediction_id: <span class="code-string">"0x&lt;64-hex-ticket&gt;"</span>,
+  event_id: <span class="code-string">"0x&lt;64-hex-race-event&gt;"</span>,
+  outcome_index: <span class="code-value">6</span>,
+  amount: <span class="code-string">"50000000000000000000"</span>,
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Brands, IP, and commerce</h4>
+                            <p>Attach markets to merch, drops, royalties, access passes, media catalogs, or cross-brand collaborations. Moxie exposes normal SDK calls for commerce and trading, while the deeper settlement layer keeps receipts, payout paths, and compliance evidence tied to the market.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">commerce + market data</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> typescript</div>
+                                <pre class="code-block"><code><span class="code-dim">const</span> merch = <span class="code-dim">await</span> moxie.<span class="code-value">getMerchandise</span>(<span class="code-string">"0x&lt;brand-id&gt;"</span>);
+<span class="code-dim">const</span> order = <span class="code-dim">await</span> moxie.<span class="code-value">merchOrder</span>({
+  buyer: <span class="code-string">"0x&lt;player-account&gt;"</span>,
+  itemId: merch[<span class="code-value">0</span>].id,
+  brandId: <span class="code-string">"0x&lt;brand-id&gt;"</span>,
+  quantity: <span class="code-value">1</span>,
+  paymentAsset: <span class="code-string">"USD"</span>,
+  maxPrice: <span class="code-string">"50000000000000000000"</span>,
+});
+
+console.log(order.order_id, order.status);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- QUICK START — triple-column Tier 1 SDKs (preserved from existing portal) -->
+            <section class="docs-quickstart-section moxie-product-section moxie-quickstart-section">
+                <div class="container">
+                    <span class="section-eyebrow">Quick Start</span>
+                    <h2 class="section-title">Install an SDK and create your first market</h2>
+                    <p class="section-subtitle">Start with the product action: create a market, ask Moxie for a quote, submit the trade, then wait for a receipt. Under the hood, the market lowers into a <code>(Claim, PayoffProgram, ConvexPotential)</code> triple. The details are above; the first integration is just a few SDK calls.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>TypeScript &mdash; <code>@moxie/sdk</code></h4>
+                            <p>Best first path for a web app, game backend, or commerce service. The TypeScript client exposes named methods, typed errors, idempotency headers, receipt polling, compliance preflight helpers, and realtime block subscriptions. The integer constants in the example are stable wire values; most builders only touch them when creating custom market shapes.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">install</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> terminal</div>
+                                <pre class="code-block"><code><span class="code-prompt">$</span> npm install @moxie/sdk@rc   <span class="code-comment"># v1.0.0-rc.1</span></code></pre>
+                            </div>
+                            <span class="docs-example-label">item market: create &rarr; quote &rarr; trade</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> typescript</div>
+                                <pre class="code-block"><code><span class="code-dim">import</span> {
+  Client,
+  GridSizeCode,
+  GeneratorCode,
+  DirectionCode,
+} <span class="code-dim">from</span> <span class="code-string">"@moxie/sdk"</span>;
+
+<span class="code-dim">const</span> moxie = <span class="code-dim">new</span> Client({
+  baseUrl: <span class="code-string">"http://localhost:8545"</span>,
+  apiKey: process.env.<span class="code-value">MOXIE_API_KEY</span>,
+});
+
+<span class="code-comment">// Create a market for a limited in-game item.</span>
+<span class="code-dim">const</span> txHash = <span class="code-dim">await</span> moxie.<span class="code-value">createContinuousMarket</span>({
+  key: <span class="code-string">"0x&lt;64-hex&gt;"</span>,
+  market_id: <span class="code-string">"0x&lt;64-hex-dragon-skin-market&gt;"</span>,
+  omega_lo: <span class="code-string">"0"</span>,
+  omega_hi: <span class="code-string">"100000000000000000000"</span>,
+  grid_size_code: GridSizeCode.<span class="code-value">N64</span>,
+  generator_code: GeneratorCode.<span class="code-value">Entropy</span>,
+  initial_mu: [<span class="code-string">"25000000000000000000"</span>],
+  swap_fee_bps: <span class="code-value">30</span>,
+});
+
+<span class="code-comment">// Quote a player buying exposure to the 20..30 price band.</span>
+<span class="code-dim">const</span> quote = <span class="code-dim">await</span> moxie.<span class="code-value">quoteContinuous</span>({
+  market_id: <span class="code-string">"0x&lt;64-hex-dragon-skin-market&gt;"</span>,
+  omega_a: <span class="code-string">"20000000000000000000"</span>,
+  omega_b: <span class="code-string">"30000000000000000000"</span>,
+  delta_amount: <span class="code-string">"1000000000000000000"</span>,
+  direction_code: DirectionCode.<span class="code-value">Buy</span>,
+});
+console.log(quote.total_payout, quote.iterations_used);
+
+<span class="code-comment">// Submit the trade; the SDK waits for the receipt by default.</span>
+<span class="code-dim">const</span> swap = <span class="code-dim">await</span> moxie.<span class="code-value">swapContinuous</span>({
+  key: <span class="code-string">"0x&lt;64-hex&gt;"</span>,
+  market_id: <span class="code-string">"0x&lt;64-hex-dragon-skin-market&gt;"</span>,
+  omega_a: <span class="code-string">"20000000000000000000"</span>,
+  omega_b: <span class="code-string">"30000000000000000000"</span>,
+  delta_amount: <span class="code-string">"1000000000000000000"</span>,
+  direction_code: DirectionCode.<span class="code-value">Buy</span>,
+});
+console.log(swap);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Rust &mdash; <code>moxie-sdk</code></h4>
+                            <p>Use Rust for validators, market-making bots, settlement workers, data pipelines, and services that need tight control over signing and replay. Create a <code>MoxieClient</code> with <code>MoxieClient::builder()</code>; typed resource namespaces cover the stable high-level domains, while <code>client.raw()</code> exposes every registered RPC method.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">Cargo.toml</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> toml</div>
+                                <pre class="code-block"><code>[dependencies]
+moxie-sdk = <span class="code-string">"1.0.0-rc.1"</span>
+serde_json = <span class="code-string">"1"</span>
+tokio = { version = <span class="code-string">"1"</span>, features = [<span class="code-string">"full"</span>] }</code></pre>
+                            </div>
+                            <span class="docs-example-label">create_continuous_market</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">use</span> moxie_sdk::MoxieClient;
+<span class="code-dim">use</span> serde_json::json;
+
+<span class="code-dim">let</span> client = MoxieClient::builder()
+    .base_url(<span class="code-string">"http://localhost:8545"</span>)
+    .build()?;
+
+<span class="code-dim">let</span> params = json!({
+    <span class="code-string">"key"</span>: <span class="code-string">"0x&lt;64-hex&gt;"</span>,
+    <span class="code-string">"market_id"</span>: <span class="code-string">"0x&lt;64-hex&gt;"</span>,
+    <span class="code-string">"omega_lo"</span>: <span class="code-string">"0"</span>,
+    <span class="code-string">"omega_hi"</span>: <span class="code-string">"1000000000000000000"</span>,
+    <span class="code-string">"grid_size_code"</span>: <span class="code-value">3</span>,        <span class="code-comment">// N64</span>
+    <span class="code-string">"generator_code"</span>: <span class="code-value">1</span>,        <span class="code-comment">// Entropy</span>
+    <span class="code-string">"initial_mu"</span>: [<span class="code-string">"500000000000000000"</span>],
+    <span class="code-string">"swap_fee_bps"</span>: <span class="code-value">30</span>,
+});
+
+<span class="code-dim">let</span> tx = client
+    .raw()
+    .create_continuous_market(&amp;[params])
+    .<span class="code-value">await</span>?;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Python &mdash; <code>moxie-sdk</code></h4>
+                            <p>Use Python for notebooks, analytics, pricing experiments, reporting, and operations scripts. The package installs as <code>moxie-sdk</code> and imports as <code>moxie_sdk</code>. Typed resources cover the common product surfaces; <code>client.rpc()</code> remains the exact JSON-RPC escape hatch.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">pip</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> terminal</div>
+                                <pre class="code-block"><code><span class="code-prompt">$</span> pip install moxie-sdk==1.0.0rc1</code></pre>
+                            </div>
+                            <span class="docs-example-label">create &amp; quote</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> python</div>
+                                <pre class="code-block"><code><span class="code-dim">from</span> moxie_sdk <span class="code-dim">import</span> MoxieClient
+
+moxie = MoxieClient(base_url=<span class="code-string">"http://localhost:8545"</span>)
+
+tx = moxie.rpc(<span class="code-string">"moxie_createContinuousMarket"</span>, {
+    <span class="code-string">"key"</span>: <span class="code-string">"0x&lt;64-hex&gt;"</span>,
+    <span class="code-string">"market_id"</span>: <span class="code-string">"0x&lt;64-hex&gt;"</span>,
+    <span class="code-string">"omega_lo"</span>: <span class="code-string">"0"</span>,
+    <span class="code-string">"omega_hi"</span>: <span class="code-string">"1000000000000000000"</span>,
+    <span class="code-string">"grid_size_code"</span>: <span class="code-value">3</span>,        <span class="code-comment"># N64</span>
+    <span class="code-string">"generator_code"</span>: <span class="code-value">1</span>,        <span class="code-comment"># Entropy</span>
+    <span class="code-string">"initial_mu"</span>: [<span class="code-string">"500000000000000000"</span>],
+    <span class="code-string">"swap_fee_bps"</span>: <span class="code-value">30</span>,
+})
+
+quote = moxie.rpc(<span class="code-string">"moxie_quoteContinuous"</span>, {
+    <span class="code-string">"market_id"</span>: <span class="code-string">"0x&lt;64-hex&gt;"</span>,
+    <span class="code-string">"omega_a"</span>: <span class="code-string">"100000000000000000"</span>,
+    <span class="code-string">"omega_b"</span>: <span class="code-string">"200000000000000000"</span>,
+    <span class="code-string">"delta_amount"</span>: <span class="code-string">"10000000000000000000"</span>,
+    <span class="code-string">"direction_code"</span>: <span class="code-value">0</span>,         <span class="code-comment"># Buy</span>
+})
+<span class="code-dim">print</span>(quote[<span class="code-string">"total_payout"</span>], quote[<span class="code-string">"iterations_used"</span>])</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Signed typed-Claim builders &mdash; <code>moxie_buildTransaction</code></h4>
+                            <p>The generic signed-transaction path now builds the typed-Claim and payoff consensus variants directly. <code>method: "payoffRegister"</code> lowers a standalone <code>PayoffProgram</code> into <code>NativeTx::PayoffRegister</code> and emits <code>payoff_registered</code> on success. <code>method: "claimRegister"</code> lowers a typed <code>Claim</code> plus <code>PayoffProgram</code> into <code>NativeTx::ClaimRegister</code> and emits <code>claim_registered</code> on success. <code>method: "claimAttestationReceived"</code> lowers a Mass <code>MassClaimAttestation</code> envelope into <code>NativeTx::ClaimAttestationReceived</code>. <code>method: "complianceAttestationReceived"</code> lowers the holder's Mass <code>MassComplianceAttestation</code> into <code>NativeTx::ComplianceAttestationReceived</code>; the live claim smoke requires that receipt before settlement. <code>method: "kycSetLevel"</code> lowers an authority-signed KYC grant into <code>NativeTx::KycSetLevel</code>, avoiding raw-key RPC mutation for live smoke and testnet operations. <code>method: "claimPayoffSettle"</code> lowers a holder settlement request into <code>NativeTx::ClaimPayoffSettle</code>; optional <code>settlement_trace_id</code> is copied into the Mass <code>PositionUpdate</code> market-signal payload as <code>run_id</code> for corpus correlation. All six return <code>{ tx_bytes, tx_hash }</code> for client-side signing, then submission through <code>moxie_submitSigned</code>. Public receipts preserve typed claim events as <code>payoff_registered</code>, <code>claim_registered</code>, <code>claim_attestation_applied</code>, <code>claim_payoff_settled</code>, <code>claim_position_frozen</code>, and <code>claim_attestation_revoked</code>; holder compliance admission is visible as <code>compliance_attestation_applied</code>.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">JSON-RPC &mdash; build then submit</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> json</div>
+                                <pre class="code-block"><code>{
+  <span class="code-string">"method"</span>: <span class="code-string">"moxie_buildTransaction"</span>,
+  <span class="code-string">"params"</span>: [{
+    <span class="code-string">"method"</span>: <span class="code-string">"payoffRegister"</span>,
+    <span class="code-string">"registrar"</span>: <span class="code-string">"0x..."</span>,
+    <span class="code-string">"program"</span>: { <span class="code-string">"ops"</span>: [ ... ], <span class="code-string">"output_index"</span>: <span class="code-value">0</span> },
+    <span class="code-string">"idempotency_key"</span>: <span class="code-string">"register-payoff-001"</span>
+  }]
+}
+
+{
+  <span class="code-string">"method"</span>: <span class="code-string">"moxie_buildTransaction"</span>,
+  <span class="code-string">"params"</span>: [{
+    <span class="code-string">"method"</span>: <span class="code-string">"claimRegister"</span>,
+    <span class="code-string">"claim"</span>: { <span class="code-string">"id"</span>: <span class="code-string">"0x..."</span>, <span class="code-string">"issuer"</span>: <span class="code-string">"0x..."</span>, <span class="code-string">"holder"</span>: <span class="code-string">"0x..."</span> },
+    <span class="code-string">"payoff"</span>: { <span class="code-string">"ops"</span>: [ ... ], <span class="code-string">"output_index"</span>: <span class="code-value">0</span> },
+    <span class="code-string">"idempotency_key"</span>: <span class="code-string">"register-claim-001"</span>
+  }]
+}
+
+{
+  <span class="code-string">"method"</span>: <span class="code-string">"moxie_buildTransaction"</span>,
+  <span class="code-string">"params"</span>: [{
+    <span class="code-string">"method"</span>: <span class="code-string">"claimAttestationReceived"</span>,
+    <span class="code-string">"attestation"</span>: { <span class="code-string">"attestor"</span>: <span class="code-string">"0x..."</span>, <span class="code-string">"claim_id"</span>: <span class="code-string">"0x..."</span>, <span class="code-string">"signature_composite"</span>: [ ... ] }
+  }]
+}
+
+{
+  <span class="code-string">"method"</span>: <span class="code-string">"moxie_buildTransaction"</span>,
+  <span class="code-string">"params"</span>: [{
+    <span class="code-string">"method"</span>: <span class="code-string">"complianceAttestationReceived"</span>,
+    <span class="code-string">"attestation"</span>: { <span class="code-string">"subject"</span>: <span class="code-string">"0x..."</span>, <span class="code-string">"corridor_id"</span>: <span class="code-string">"0x..."</span>, <span class="code-string">"signature_composite"</span>: [ ... ] }
+  }]
+}
+
+{
+  <span class="code-string">"method"</span>: <span class="code-string">"moxie_buildTransaction"</span>,
+  <span class="code-string">"params"</span>: [{
+    <span class="code-string">"method"</span>: <span class="code-string">"kycSetLevel"</span>,
+    <span class="code-string">"authority"</span>: <span class="code-string">"0x..."</span>,
+    <span class="code-string">"subject"</span>: <span class="code-string">"0x..."</span>,
+    <span class="code-string">"level"</span>: <span class="code-string">"L2"</span>
+  }]
+}
+
+{
+  <span class="code-string">"method"</span>: <span class="code-string">"moxie_buildTransaction"</span>,
+  <span class="code-string">"params"</span>: [{
+    <span class="code-string">"method"</span>: <span class="code-string">"claimPayoffSettle"</span>,
+    <span class="code-string">"claim_id"</span>: <span class="code-string">"0x..."</span>,
+    <span class="code-string">"holder"</span>: <span class="code-string">"0x..."</span>,
+    <span class="code-string">"idempotency_key"</span>: <span class="code-string">"settle-claim-001"</span>,
+    <span class="code-string">"settlement_trace_id"</span>: <span class="code-string">"live-smoke-20260506-001"</span>,
+    <span class="code-string">"evidence_index"</span>: <span class="code-value">0</span>,
+    <span class="code-string">"evidence_leaf_index"</span>: <span class="code-value">0</span>
+  }]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- THREE-TIER SDK SURFACE (preserved) -->
+            <section class="docs-quickstart-section moxie-product-section moxie-sdk-section">
+                <div class="container">
+                    <span class="section-eyebrow">Choose Your SDK</span>
+                    <h2 class="section-title">One exchange surface, many builder environments</h2>
+                    <p class="section-subtitle">Use the hand-maintained SDKs when you want the fastest path to production. Use generated SDKs when your team standardizes on enterprise languages. Use game-engine wrappers when Moxie should feel like a native game service instead of an external finance API.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Tier 1 &mdash; TypeScript, Rust, Python</h4>
+                            <p>Start here for most applications. TypeScript fits web apps, Roblox/OpenCloud-adjacent backends, creator tools, and dashboards. Rust fits market makers, validators, and settlement workers. Python fits notebooks, analytics, pricing, and ops scripts. All three expose the same market families: brands, merch, tickets, drops, predictions, continuous markets, racing, chain reads, receipts, and raw RPC escape hatches. Tier-1 versions: <code>moxie-sdk@1.0.0-rc.1</code> on crates.io, <code>@moxie/sdk@1.0.0-rc.1</code> on npm under <code>--tag rc</code>, <code>moxie-sdk==1.0.0rc1</code> on PyPI as a PEP 440 release-candidate.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">install &mdash; Tier 1</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> terminal</div>
+                                <pre class="code-block"><code><span class="code-prompt">$</span> npm install @moxie/sdk@rc                       <span class="code-comment"># v1.0.0-rc.1</span>
+<span class="code-prompt">$</span> cargo add moxie-sdk@<span class="code-string">"1.0.0-rc.1"</span>             <span class="code-comment"># v1.0.0-rc.1</span>
+<span class="code-prompt">$</span> pip install moxie-sdk==1.0.0rc1 httpx           <span class="code-comment"># v1.0.0rc1</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Tier 2 &mdash; Go, Java, C#, Kotlin, Swift</h4>
+                            <p>Use generated clients when Moxie is part of a larger enterprise or studio backend. The generated layer keeps request and response shapes exact; thin handwritten wrappers add retry, pagination, receipt polling, and amount helpers so teams do not have to hand-roll transport behavior.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">install &mdash; Tier 2</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> terminal</div>
+                                <pre class="code-block"><code><span class="code-prompt">$</span> go get github.com/momentum-sez/moxie-sdk-go
+<span class="code-prompt">$</span> mvn dependency:get -Dartifact=inc.momentum:moxie-sdk-java:0.1.0
+<span class="code-prompt">$</span> dotnet add package Moxie.Sdk
+<span class="code-prompt">$</span> implementation <span class="code-string">"inc.momentum:moxie-sdk-kotlin:0.1.0"</span>  <span class="code-comment"># Gradle</span>
+<span class="code-prompt">$</span> .package(url: <span class="code-string">"https://github.com/momentum-sez/moxie-sdk-swift"</span>)  <span class="code-comment"># SwiftPM</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Tier 3 &mdash; game-engine wrappers</h4>
+                            <p>Unity, Unreal, Godot, and Roblox integrations wrap the Rust SDK core so games can create markets, quote trades, subscribe to settlement, and show inventory state without exposing signing keys inside client code. Unity uses P/Invoke + UPM; Unreal uses a C++ plugin; Godot uses GDExtension; Roblox uses HttpService with signing in a backend service. Each engine wrapper ships on its own cadence across the v1.x point releases.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">install &mdash; Tier 3</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> terminal</div>
+                                <pre class="code-block"><code><span class="code-comment"># Unity (UPM)</span>
+<span class="code-prompt">$</span> openupm add inc.momentum.moxie-sdk
+
+<span class="code-comment"># Unreal (C++ plugin)</span>
+<span class="code-prompt">$</span> git submodule add \
+    https://github.com/momentum-sez/moxie-sdk-unreal \
+    Plugins/MoxieSdk
+
+<span class="code-comment"># Godot (GDExtension)</span>
+<span class="code-comment"># Roblox (OpenCloud backend)</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW SDK RESOURCES — claim/payoff/position/priceVector -->
+            <section class="docs-quickstart-section moxie-product-section moxie-claim-resources-section">
+                <div class="container">
+                    <span class="section-eyebrow">Typed Claim Resources</span>
+                    <h2 class="section-title">New SDK resource families: claims, payoffs, positions, price vectors, venue oracles</h2>
+                    <p class="section-subtitle">The typed-Claim surface ships four new SDK resource families: <code>claims</code>, <code>payoffs</code>, <code>positions</code> (typed), and <code>priceVectors</code>. Live claim and standalone payoff registration are consensus-backed: build <code>method: "claimRegister"</code> / <code>method: "payoffRegister"</code> through <code>moxie_buildTransaction</code>, sign locally, then submit with <code>moxie_submitSigned</code>. Server-side handlers are wired with idempotency on every mutation; Tier-1 client resources land identically across Rust, TypeScript, and Python with byte-equal Borsh canonical hashing across all three SDKs.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4><code>client.claims.*</code> &mdash; preflight, signed register, list, get</h4>
+                            <p>Author a typed <code>Claim</code> with its issuer, holder, settlement asset, payoff root, dependency set, and optional typed PDCF valuation bundle. The compliance preflight returns a typed <code>PreflightVerdict</code> with <code>ok</code>, <code>errors</code>, and the server-recomputed <code>claim_id</code>; it can also validate the supplied <code>pdcf_bundle</code> against <code>claim.pdcf_root</code>. On live nodes, registration is a signed <code>NativeTx::ClaimRegister</code>; the legacy <code>moxie_claimsDefine</code> compatibility handler refuses live RPC-local mutation and tells callers to use the signed path.</p>
+                            <ul>
+                                <li><code>moxie_claimsPreflight</code> &mdash; Public. 23-domain compliance preflight; SSB-required gate and optional PDCF bundle checks enforced. Returns the canonical <code>claim_id</code> before any write.</li>
+                                <li><code>moxie_buildTransaction</code> with <code>method: "claimRegister"</code> &mdash; <code>claims:write</code>. Builds unsigned Borsh bytes for <code>NativeTx::ClaimRegister { claim, payoff, program_kind?, pdcf_bundle?, idempotency_key, nonce }</code>; submit the signed envelope with <code>moxie_submitSigned</code>. Receipt emits <code>claim_registered</code>.</li>
+                                <li><code>moxie_claimsDefine</code> &mdash; compatibility/local-demo admission only. On live nodes it fails closed with <code>moxie.claims.define_requires_signed_native_tx</code> instead of mutating RPC-local executor state.</li>
+                                <li><code>moxie_claimsList</code> &mdash; Public. Cursor-paginated by <code>(brand_id, legal_profile_id, status)</code>.</li>
+                                <li><code>moxie_claimsGet</code> &mdash; Public. Returns <code>{ claim, pdcf_bundle? }</code>; <code>pdcf_bundle</code> is present when the typed valuation bundle was supplied and persisted at admission time.</li>
+                            </ul>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">define a typed Claim</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> typescript</div>
+                                <pre class="code-block"><code><span class="code-dim">const</span> pdcfBundle = {
+  version: <span class="code-value">1</span>,
+  asof_block: <span class="code-value">12_000_000</span>,
+  settlement_asset: <span class="code-string">"0x&lt;settlement-asset-root&gt;"</span>,
+  probability_model_root: probabilityModelRoot,
+  discount_curve_root: discountCurveRoot,
+  cash_flows: {
+    [cashFlowId]: {
+      payment_block: <span class="code-value">14_000_000</span>,
+      amount: { magnitude: <span class="code-string">"100000000000000000000"</span>, negative: <span class="code-value">false</span> },
+      probability: <span class="code-string">"850000000000000000"</span>,
+      discount_factor: <span class="code-string">"970000000000000000"</span>,
+      evidence_root: evidenceRoot,
+    },
+  },
+};
+
+<span class="code-dim">const</span> claim = {
+  issuer: <span class="code-string">"0x&lt;issuer&gt;"</span>,
+  holder: <span class="code-string">"0x&lt;holder&gt;"</span>,
+  settlement_asset: <span class="code-string">"0x&lt;settlement-asset-root&gt;"</span>,
+  payoff_root: payoffProgram.canonicalHash(),
+  depends_on: [],
+  pdcf_root: pdcfBundleRoot,
+  instrument_id: instrument.id,
+  legal_profile_id: legalProfileId,
+  ssb_attestation_root: <span class="code-string">"0x00..00"</span>,  <span class="code-comment">// non-zero iff Sharia profile</span>
+  effective_from_block: 12_000_000,
+  expires_at_block:     14_000_000,
+  version: 1,
+};
+
+<span class="code-dim">const</span> verdict = <span class="code-dim">await</span> moxie.claims.<span class="code-value">preflight</span>(claim, { pdcfBundle });
+<span class="code-dim">const</span> claim_id = verdict.claim_id;
+claim.id = verdict.claim_id;
+
+<span class="code-dim">const</span> unsigned = <span class="code-dim">await</span> moxie.claims.<span class="code-value">buildRegisterTransaction</span>(payoffProgram, claim, {
+  pdcfBundle,
+  idempotencyKey: <span class="code-string">"brand-note-2026-001"</span>,
+});
+
+<span class="code-dim">const</span> signed = <span class="code-dim">await</span> signer.signMoxieTx(unsigned.tx_hash);
+<span class="code-dim">const</span> tx_hash = <span class="code-dim">await</span> moxie.claims.<span class="code-value">submitSignedRegister</span>({
+  ...signed,
+  tx_bytes: unsigned.tx_bytes,
+}, { idempotencyKey: <span class="code-string">"brand-note-2026-001-submit"</span> });
+<span class="code-dim">const</span> receipt = <span class="code-dim">await</span> moxie.rpc(<span class="code-string">"moxie_getReceipt"</span>, [tx_hash]);
+<span class="code-dim">const</span> withValuation = <span class="code-dim">await</span> moxie.claims.<span class="code-value">getWithPdcfBundle</span>(claim_id);
+<span class="code-comment">// receipt.events includes claim_registered on consensus admission</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4><code>client.payoffs.*</code> &mdash; signed register, declare preview, validate, library, canonical_hash</h4>
+                            <p>The <code>payoffs</code> resource exposes the SSA-flat function-term tree as a first-class developer concept. <code>payoffs.library</code> returns the constructor catalog (<code>payoff_constant</code>, <code>payoff_fixed</code>, <code>payoff_event_contingent</code>, <code>payoff_linear_derivative</code>, <code>payoff_option_call</code>, <code>payoff_pool_share</code>, <code>payoff_index_linked</code>, <code>payoff_composite</code>, <code>payoff_spread</code>). Canonical hashing computes locally in Rust and dispatches server-side in TypeScript/Python, with byte equality pinned by the Borsh-canonical contract. Live standalone payoff persistence is consensus-backed through signed <code>NativeTx::PayoffRegister</code>; the compatibility declare handler validates and hashes without mutating live executor state.</p>
+                            <ul>
+                                <li><code>moxie_buildTransaction</code> with <code>method: "payoffRegister"</code> &mdash; <code>payoffs:write</code>. Builds unsigned Borsh bytes for <code>NativeTx::PayoffRegister { registrar, program, idempotency_key, nonce }</code>; submit the signed envelope with <code>moxie_submitSigned</code>. Receipt emits <code>payoff_registered</code>.</li>
+                                <li><code>moxie_payoffsDeclare</code> &mdash; AuthWrite compatibility preview. Validates the payoff body, computes <code>canonical_hash</code>, and enforces idempotency; live nodes use signed <code>payoffRegister</code> for consensus-visible persistence.</li>
+                                <li><code>moxie_payoffsValidate</code> &mdash; Public. Runs the seven structural validators.</li>
+                                <li><code>moxie_payoffsLibrary</code> &mdash; Public. Returns the constructor catalog with bounds.</li>
+                                <li><code>canonicalHash</code> / <code>canonical_hash</code> &mdash; Rust-local and TS/Python server-dispatched canonical hash helpers, pinned to the same Borsh digest.</li>
+                            </ul>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">payoffs.library + validate</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> python</div>
+                                <pre class="code-block"><code><span class="code-dim">from</span> moxie_sdk <span class="code-dim">import</span> MoxieClient, payoff_lib
+
+moxie = MoxieClient(base_url=<span class="code-string">"http://localhost:8545"</span>)
+
+program = payoff_lib.payoff_event_contingent(
+    evidence_index=0, leaf_index=0,
+    expected=<span class="code-string">"0x..."</span>,
+    win=<span class="code-string">"100"</span>, lose=<span class="code-string">"0"</span>,
+)
+payoff_root = moxie.payoffs.canonical_hash(program)
+
+<span class="code-comment"># Optional server-side validate (matches local).</span>
+moxie.payoffs.validate(program=program)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4><code>client.positions.*</code> &mdash; for_claim, apply_delta, conservation_check</h4>
+                            <p>Positions are returned as canonical <code>PositionLedger</code> sub-views per claim. <code>conservation_check</code> verifies <code>net_for_claim == 0</code> for derivative claims and <code>net == issuer_supply</code> for primary claims. Apply-delta is internal &mdash; the user-facing path is the existing <code>moxie_swapContinuous</code> / <code>moxie_predictionTrade</code> / <code>moxie_ammSwap</code> family.</p>
+                            <ul>
+                                <li><code>moxie_positionsForClaim</code> &mdash; Public. Cursor-paginated holders for one Claim.</li>
+                                <li><code>moxie_positionsApplyDelta</code> &mdash; AuthWrite. Internal; surfaced via existing trade methods.</li>
+                                <li><code>moxie_positionsConservationCheck</code> &mdash; Public. Returns <code>{net, total_long, total_short, is_balanced}</code>.</li>
+                            </ul>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">conservation check</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">use</span> moxie_sdk::MoxieClient;
+
+<span class="code-dim">let</span> client = MoxieClient::builder().base_url(...).build()?;
+
+<span class="code-dim">let</span> check = client.positions()
+    .conservation_check(claim_id)
+    .<span class="code-value">await</span>?;
+
+<span class="code-dim">assert</span>!(check.is_balanced);  <span class="code-comment">// derivative claim: net == 0</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4><code>client.priceVectors.*</code> &mdash; canonical, gradient</h4>
+                            <p>The canonical price vector is the intrinsic PDCF read path over admitted typed claims. <code>moxie_priceVectorsCanonical</code> walks the persisted claim registry, evaluates each stored <code>PdcfBundle.present_value()</code>, and returns a cursor page anchored at <code>asof_block</code>. <code>moxie_priceVectorsGradient</code> walks the admitted payoff DAG and returns intrinsic partials over PDCF-backed upstream <code>RefClaim</code> inputs. CPCAM correlation / Hessian witnesses remain clearing-engine artifacts, not fields on this page envelope.</p>
+                            <ul>
+                                <li><code>moxie_priceVectorsCanonical</code> &mdash; Public. Returns <code>{asof_block, items: [{claim_id, price, pdcf_root}], next_cursor?}</code>.</li>
+                                <li><code>moxie_priceVectorsGradient</code> &mdash; Public. Returns <code>{claim_id, asof_block, entries}</code> for intrinsic payoff-DAG partials; full CPCAM sensitivities remain a later clearing-engine witness.</li>
+                            </ul>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">canonical price vector</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> typescript</div>
+                                <pre class="code-block"><code><span class="code-dim">const</span> page = <span class="code-dim">await</span> moxie.priceVectors.<span class="code-value">canonical</span>(0n, {
+  settlement_asset: <span class="code-string">"0x&lt;64-hex&gt;"</span>,
+});
+
+console.log(page.asof_block);
+console.log(page.items[0].price);        <span class="code-comment">// PDCF present value</span>
+console.log(page.items[0].pdcf_root);    <span class="code-comment">// valuation witness root</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4><code>client.claimAmm().*</code> &mdash; reference prices from both venues, no indexer</h4>
+                            <p>Every claim trades on a per-claim order book and a per-claim AMM; the venue-oracle resource turns their receipts into reference prices your product can settle against. Volume-weighted (<code>ammPriceStats</code>, <code>orderMatchVwap</code>) for execution-quality views, block-time-weighted (<code>ammTwap</code>, <code>orderMatchTwap</code>) for manipulation-resistant settlement strikes, raw tape (<code>ammSwapHistory</code>, <code>orderMatchHistory</code>) for your own analytics, and one cross-venue canonical price (<code>unifiedReferencePrice</code>) that never mixes consideration units. Identical resources in Rust (<code>client.claim_amm()</code>) and Python (<code>client.claims.amm_*</code> / <code>order_match_*</code>). Full wire shapes on the <a href="/moxie-api.html#claim-oracles">API spec</a>.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">settle against a TWAP strike</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> typescript</div>
+                                <pre class="code-block"><code><span class="code-dim">const</span> twap = <span class="code-dim">await</span> moxie.<span class="code-value">claimAmm</span>().<span class="code-value">ammTwap</span>(claimId, <span class="code-value">64</span>);
+<span class="code-comment">// self-verifying: twap == cumulativeWeightedSpot / totalBlockSpan</span>
+
+<span class="code-dim">const</span> unified = <span class="code-dim">await</span> moxie.<span class="code-value">claimAmm</span>().<span class="code-value">unifiedReferencePrice</span>(claimId, <span class="code-value">128</span>);
+console.log(unified.unifiedVwap, unified.ammObservationCount);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AUTH PROFILES — quick map -->
+            <section class="docs-quickstart-section moxie-product-section moxie-auth-section">
+                <div class="container">
+                    <span class="section-eyebrow">Auth Profiles</span>
+                    <h2 class="section-title">Four auth profiles, same RPC surface</h2>
+                    <p class="section-subtitle">All four auth profiles share the same JSON-RPC and REST surface. Mass agent-store agents holding <code>mxk_sk_agent_*</code> with appropriate scope are indistinguishable from a human dev backend at the wire layer.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Profile 1 &mdash; DEV backend (server-to-server)</h4>
+                            <p>Credentials: <code>mxk_sk_&lt;env&gt;_&lt;kid&gt;_&lt;random&gt;</code>; OAuth 2.0 Client Credentials at node-local <code>POST /oauth/token</code> &rarr; <code>mxat_*</code> bearers. mTLS RFC 8705 + <code>private_key_jwt</code> RFC 7521. Use this for server-side claim definition, payoff declaration, position writes.</p>
+                            <h4>Profile 2 &mdash; Key-native player (signature-based authentication)</h4>
+                            <p><code>POST /v1/auth/signature/{nonce, verify}</code> &rarr; <code>mxs_player_*</code> session scoped to <code>Address</code>; the authentication subject is the account's public key. MPC-with-passkey keystore + ML-DSA-65 PQ seed. Players read positions, hold derivative claims, sign trade envelopes.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">profile 3 + 4</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-comment">// Profile 3 — Delegated session key (macaroon-attenuated).</span>
+<span class="code-comment">// Secondary signature keypair bound in the settlement record as a restricted signer.</span>
+<span class="code-comment">// Caveats as first-party macaroon predicates: max_cost, persona, device.</span>
+<span class="code-comment">// Attenuate-only; child ⊆ parent; depth ≤ 8.</span>
+<span class="code-comment">// Sponsored execution lives here; the first issuance carries no fee.</span>
+
+<span class="code-comment">// Profile 4 — Admin (HSM, m-of-n).</span>
+<span class="code-comment">// X-Admin-Key static is retired. Every admin* RPC is an HSM-rotatable</span>
+<span class="code-comment">// signed envelope (YubiHSM / CloudHSM), countersigned via m-of-n matching</span>
+<span class="code-comment">// the mez-recovery ceremony signer set. Claim revocation, SSB rotation,</span>
+<span class="code-comment">// and product-legal-profile updates run through this profile.</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- JSON-RPC METHOD CATALOG — typed-Claim methods and signed NativeTx builders -->
+            <section class="docs-quickstart-section moxie-product-section moxie-rpc-catalog-section">
+                <div class="container">
+                    <span class="section-eyebrow">JSON-RPC Method Catalog</span>
+                    <h2 class="section-title">Typed-Claim methods plus signed NativeTx builders</h2>
+                    <p class="section-subtitle">The typed-Claim read, preflight, payoff, position, and price-vector methods are wired across <code>moxie_claims*</code>, <code>moxie_payoffs*</code>, <code>moxie_positions*</code>, and <code>moxie_priceVectors*</code>. Live claim and standalone payoff registration use <code>moxie_buildTransaction</code> / <code>moxie_submitSigned</code> so the consensus path, nonce gate, fee accounting, and receipt root are exercised instead of RPC-local mutations.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Claims &mdash; <code>moxie_claimsPreflight</code>, <code>claimRegister</code>, <code>moxie_claimsList</code>, <code>moxie_claimsGet</code></h4>
+                            <p>Preflight a typed Claim with its issuer, holder, settlement asset, payoff root, dependency set, legal profile, and optional typed PDCF bundle. <code>preflight</code> runs the 23-domain compliance and PDCF root checks without a write. Registration is <code>moxie_buildTransaction { method: "claimRegister" }</code> followed by local signing and <code>moxie_submitSigned</code>; <code>getWithPdcfBundle</code> returns the persisted valuation bundle when it was admitted. <code>moxie_claimsDefine</code> remains a compatibility handler and refuses live nodes with <code>define_requires_signed_native_tx</code>.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">TypeScript &mdash; @moxie/sdk</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> typescript</div>
+                                <pre class="code-block"><code><span class="code-dim">import</span> { Client } <span class="code-dim">from</span> <span class="code-string">"@moxie/sdk"</span>;
+<span class="code-dim">const</span> moxie = <span class="code-dim">new</span> Client({ baseUrl, apiKey });
+
+<span class="code-comment">// 1. Preflight + signed consensus registration</span>
+<span class="code-dim">const</span> verdict = <span class="code-dim">await</span> moxie.claims.<span class="code-value">preflight</span>(claim, { pdcfBundle });
+claim.id = verdict.claim_id;
+<span class="code-dim">const</span> unsigned = <span class="code-dim">await</span> moxie.claims.<span class="code-value">buildRegisterTransaction</span>(payoffProgram, claim, {
+  programKind: <span class="code-string">"AutocallableStructuredNote"</span>,
+  pdcfBundle,
+  idempotencyKey: <span class="code-string">"my-claim-001"</span>,
+});
+<span class="code-dim">const</span> signed = <span class="code-dim">await</span> signer.signMoxieTx(unsigned.tx_hash);
+<span class="code-dim">const</span> tx_hash = <span class="code-dim">await</span> moxie.claims.<span class="code-value">submitSignedRegister</span>({
+  ...signed,
+  tx_bytes: unsigned.tx_bytes,
+}, { idempotencyKey: <span class="code-string">"my-claim-001-submit"</span> });
+
+<span class="code-comment">// 2. List</span>
+<span class="code-dim">const</span> page = <span class="code-dim">await</span> moxie.claims.<span class="code-value">list</span>({
+  holder, legal_profile_id, active_only: <span class="code-value">true</span>,
+});
+
+<span class="code-comment">// 3. Get</span>
+<span class="code-dim">const</span> claim = <span class="code-dim">await</span> moxie.claims.<span class="code-value">get</span>(claim_id);
+<span class="code-dim">const</span> claimEnvelope = <span class="code-dim">await</span> moxie.claims.<span class="code-value">getWithPdcfBundle</span>(claim_id);
+
+<span class="code-comment">// 4. Fetch the receipt and require claim_registered</span>
+<span class="code-dim">const</span> receipt = <span class="code-dim">await</span> moxie.rpc(<span class="code-string">"moxie_getReceipt"</span>, [tx_hash]);</code></pre>
+                            </div>
+                            <span class="docs-example-label">Rust &mdash; moxie-sdk</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">use</span> moxie_sdk::{MoxieClient, resources::claims::*};
+
+<span class="code-dim">let</span> client = MoxieClient::builder().base_url(...).build()?;
+
+<span class="code-comment">// 1. Preflight; live registration uses signed claimRegister.</span>
+<span class="code-dim">let</span> verdict  = client.claims().preflight_with_pdcf_bundle(claim.clone(), pdcf_bundle.clone()).<span class="code-value">await</span>?;
+<span class="code-dim">let</span> unsigned = client.claims().build_register_transaction(payoff_program, claim, BuildClaimRegisterOptions {
+  idempotency_key: <span class="code-string">"my-claim-001"</span>.into(),
+  program_kind: <span class="code-value">None</span>, pdcf_bundle: <span class="code-value">Some</span>(pdcf_bundle), nonce: <span class="code-value">None</span>,
+}).<span class="code-value">await</span>?;
+<span class="code-comment">// Sign unsigned.tx_hash locally, then submit with submit_signed_register.</span>
+
+<span class="code-comment">// 2. List | 3. Get</span>
+<span class="code-dim">let</span> page     = client.claims().list(holder, filter).<span class="code-value">await</span>?;
+<span class="code-dim">let</span> claim    = client.claims().get(claim_id).<span class="code-value">await</span>?.expect(<span class="code-string">"claim exists"</span>);
+<span class="code-dim">let</span> envelope = client.claims().get_with_pdcf_bundle(claim_id).<span class="code-value">await</span>?;</code></pre>
+                            </div>
+                            <span class="docs-example-label">Python &mdash; moxie-sdk</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> python</div>
+                                <pre class="code-block"><code><span class="code-dim">from</span> moxie_sdk <span class="code-dim">import</span> MoxieClient
+moxie = MoxieClient(base_url=<span class="code-string">"http://localhost:8545"</span>)
+
+<span class="code-comment"># 1. Preflight; live registration uses signed claimRegister.</span>
+verdict = moxie.claims.preflight(claim=claim, pdcf_bundle=pdcf_bundle)
+unsigned = moxie.claims.build_register_transaction(
+    payoff_program, claim, pdcf_bundle=pdcf_bundle, idempotency_key=<span class="code-string">"my-claim-001"</span>
+)
+<span class="code-comment"># Sign unsigned["tx_hash"] locally, then submit with submit_signed_register.</span>
+
+<span class="code-comment"># 2. List | 3. Get</span>
+page     = moxie.claims.list(holder=holder)
+claim    = moxie.claims.get(claim_id)
+assert claim is not None
+envelope = moxie.claims.get_with_pdcf_bundle(claim_id)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Payoffs &mdash; signed <code>payoffRegister</code>, <code>moxie_payoffsDeclare</code>, <code>moxie_payoffsValidate</code>, <code>moxie_payoffsLibrary</code>, <code>moxie_payoffsCanonicalHash</code></h4>
+                            <p>Register a payoff body through signed <code>moxie_buildTransaction</code> when the program must persist in consensus, run structural validation, fetch the constructor catalog, or compute the canonical hash server-side for cross-SDK byte-equality. Tier-1 SDKs expose this as <code>buildRegisterTransaction</code> / <code>submitSignedRegister</code> in TypeScript, <code>build_register_transaction</code> / <code>submit_signed_register</code> in Rust and Python. <code>declare</code> is a compatibility preview that validates, hashes, and checks idempotency without mutating live executor state.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">TypeScript</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> typescript</div>
+                                <pre class="code-block"><code><span class="code-comment">// 5. Live standalone payoff registration</span>
+<span class="code-dim">const</span> unsigned = <span class="code-dim">await</span> moxie.payoffs.<span class="code-value">buildRegisterTransaction</span>(
+  program,
+  registrar,
+  { idempotencyKey: <span class="code-string">"payoff-001"</span>, nonce: 7 },
+);
+<span class="code-dim">const</span> signed = <span class="code-dim">await</span> signer.signMoxieTx(unsigned.tx_hash);
+<span class="code-dim">await</span> moxie.payoffs.<span class="code-value">submitSignedRegister</span>(
+  { ...signed, tx_bytes: unsigned.tx_bytes },
+  { idempotencyKey: <span class="code-string">"payoff-001-submit"</span> },
+);
+
+<span class="code-comment">// 6. Declare preview (Idempotency-Key required; no live consensus write)</span>
+<span class="code-dim">await</span> moxie.payoffs.<span class="code-value">declare</span>(program,
+  { idempotencyKey: <span class="code-string">"payoff-preview-001"</span> });
+
+<span class="code-comment">// 7. Validate (pure; no write)</span>
+<span class="code-dim">const</span> v = <span class="code-dim">await</span> moxie.payoffs.<span class="code-value">validate</span>(program);
+
+<span class="code-comment">// 8. Library (constructor catalog + bounds)</span>
+<span class="code-dim">const</span> catalog = <span class="code-dim">await</span> moxie.payoffs.<span class="code-value">library</span>();
+
+<span class="code-comment">// 9. CanonicalHash — server-side for TS/Python cross-SDK parity</span>
+<span class="code-dim">const</span> canonicalHash =
+  <span class="code-dim">await</span> moxie.payoffs.<span class="code-value">canonicalHash</span>(program);</code></pre>
+                            </div>
+                            <span class="docs-example-label">Rust</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">use</span> moxie_sdk::resources::payoffs::*;
+
+<span class="code-dim">let</span> unsigned = client.payoffs().build_register_transaction(
+    program.clone(),
+    registrar,
+    BuildPayoffRegisterOptions {
+        idempotency_key: <span class="code-string">"payoff-001"</span>.into(),
+        nonce: Some(7),
+    },
+).<span class="code-value">await</span>?;
+<span class="code-dim">let</span> signed = signer.sign_moxie_tx(&amp;unsigned.tx_hash)?;
+client.payoffs().submit_signed_register(
+    SubmitSignedPayoffRegisterEnvelope {
+        tx_bytes: unsigned.tx_bytes,
+        signature: signed.signature,
+        signer: signed.signer,
+        cryptographic_epoch: Some(1),
+    },
+    SubmitPayoffRegisterOptions {
+        idempotency_key: <span class="code-string">"payoff-001-submit"</span>.into(),
+    },
+).<span class="code-value">await</span>?;
+
+<span class="code-dim">let</span> hash = moxie_sdk::payoff_canonical_hash(&amp;program);</code></pre>
+                            </div>
+                            <span class="docs-example-label">Python</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> python</div>
+                                <pre class="code-block"><code>unsigned = moxie.payoffs.build_register_transaction(
+    program,
+    registrar,
+    nonce=7,
+    idempotency_key=<span class="code-string">"payoff-001"</span>,
+)
+signed = signer.sign_moxie_tx(unsigned[<span class="code-string">"tx_hash"</span>])
+moxie.payoffs.submit_signed_register(
+    {**signed, <span class="code-string">"tx_bytes"</span>: unsigned[<span class="code-string">"tx_bytes"</span>]},
+    idempotency_key=<span class="code-string">"payoff-001-submit"</span>,
+)
+hash_ = moxie.payoffs.canonical_hash(program)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Positions &mdash; <code>moxie_positionsForClaim</code>, <code>moxie_positionsApplyDelta</code>, <code>moxie_positionsConservationCheck</code></h4>
+                            <p>Cursor-paginated holders for one Claim, internal apply-delta (surfaced via existing trade methods), and conservation check returning <code>{net, total_long, total_short, is_balanced}</code>. For derivative claims the protocol-level invariant is <code>net == 0</code>; for primary holdings <code>net == issuer_supply</code>.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">TypeScript</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> typescript</div>
+                                <pre class="code-block"><code><span class="code-comment">// 9. ForClaim — cursor-paginated holders</span>
+<span class="code-dim">const</span> page = <span class="code-dim">await</span> moxie.positionsTyped.<span class="code-value">forClaim</span>({
+  claim_id, cursor, limit: <span class="code-value">100</span>,
+});
+
+<span class="code-comment">// 10. ApplyDelta — internal; AuthWrite</span>
+<span class="code-dim">await</span> moxie.positionsTyped.<span class="code-value">applyDelta</span>(
+  { claim_id, holder, delta: { magnitude, is_negative: <span class="code-value">false</span> } },
+  { idempotency_key: <span class="code-string">"trade-001"</span> },
+);
+
+<span class="code-comment">// 11. ConservationCheck</span>
+<span class="code-dim">const</span> c = <span class="code-dim">await</span> moxie.positionsTyped.<span class="code-value">conservationCheck</span>(claim_id);
+console.log(c.is_balanced, c.net, c.total_long, c.total_short);</code></pre>
+                            </div>
+                            <span class="docs-example-label">Rust</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">use</span> moxie_sdk::resources::positions_typed::*;
+
+<span class="code-dim">let</span> page = client.positions_typed()
+    .for_claim(claim_id, cursor, <span class="code-value">100</span>).<span class="code-value">await</span>?;
+
+client.positions_typed().apply_delta(
+    claim_id, holder, signed_delta,
+    ApplyDeltaOptions { idempotency_key: <span class="code-string">"trade-001"</span>.into() },
+).<span class="code-value">await</span>?;
+
+<span class="code-dim">let</span> check = client.positions_typed()
+    .conservation_check(claim_id).<span class="code-value">await</span>?;
+<span class="code-dim">assert</span>!(check.is_balanced);</code></pre>
+                            </div>
+                            <span class="docs-example-label">Python</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> python</div>
+                                <pre class="code-block"><code>page  = moxie.positions_typed.for_claim(claim_id, cursor=cur, limit=<span class="code-value">100</span>)
+moxie.positions_typed.apply_delta(
+    claim_id=claim_id, holder=holder, delta=delta,
+    idempotency_key=<span class="code-string">"trade-001"</span>,
+)
+check = moxie.positions_typed.conservation_check(claim_id)
+<span class="code-dim">assert</span> check.is_balanced</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Price vectors &mdash; <code>moxie_priceVectorsCanonical</code>, <code>moxie_priceVectorsGradient</code></h4>
+                            <p>Canonical price vector returns <code>{asof_block, items, next_cursor?}</code>; each item is an admitted claim priced from its persisted <code>PdcfBundle.present_value()</code>. Gradient returns intrinsic payoff-DAG partials over PDCF-backed upstream <code>RefClaim</code> inputs. CPCAM correlation roots stay in the clearing-engine witness lane.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">TypeScript</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> typescript</div>
+                                <pre class="code-block"><code><span class="code-comment">// 12. Canonical — PDCF present-value page</span>
+<span class="code-dim">const</span> snap = <span class="code-dim">await</span> moxie.priceVectors.<span class="code-value">canonical</span>(0n, { limit: 100 });
+console.log(snap.asof_block, snap.items, snap.next_cursor);
+
+<span class="code-comment">// 13. Gradient — per-claim drill-down</span>
+<span class="code-dim">const</span> g = <span class="code-dim">await</span> moxie.priceVectors.<span class="code-value">gradient</span>({
+  claim_id, at_block,
+});</code></pre>
+                            </div>
+                            <span class="docs-example-label">Rust</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">use</span> moxie_sdk::resources::price_vectors::*;
+
+<span class="code-dim">let</span> snap = client.price_vectors()
+    .canonical(0, PriceVectorFilter::default()).<span class="code-value">await</span>?;
+<span class="code-dim">let</span> g    = client.price_vectors()
+    .gradient(claim_id, at_block).<span class="code-value">await</span>?;</code></pre>
+                            </div>
+                            <span class="docs-example-label">Python</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> python</div>
+                                <pre class="code-block"><code>snap = moxie.price_vectors.canonical(at_block=0)
+g    = moxie.price_vectors.gradient(claim_id=cid, at_block=blk)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OPENAPI SURFACE PREVIEW -->
+            <section class="docs-quickstart-section moxie-product-section moxie-openapi-section">
+                <div class="container">
+                    <span class="section-eyebrow">REST Surface</span>
+                    <h2 class="section-title">OpenAPI preview: <code>/v1/claims</code>, <code>/v1/payoffs</code>, <code>/v1/positions</code>, <code>/v1/price-vectors</code></h2>
+                    <p class="section-subtitle">The typed-Claim resources mount under <code>/v1</code> with cursor pagination, idempotency headers on writes, and the standard <code>X-Request-Id</code> / <code>X-RateLimit-*</code> / <code>X-Moxie-Load</code> / <code>traceparent</code> response set. The OpenAPI 3.1 generated spec at <code>specs/openapi/moxie-protocol-v1.generated.json</code> drives Tier-2 codegen across Go, Java, C#, Kotlin, and Swift.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Skeleton paths</h4>
+                            <p>Public-gateway examples use <code>/v1</code>; the node-local REST router currently mounts implementation routes under <code>/api/v1</code>. SDK docs document only mounted public routes.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">specs/openapi/moxie-protocol-v1.yaml (preview)</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> yaml</div>
+                                <pre class="code-block"><code><span class="code-comment"># Claims</span>
+POST   /v1/claims/define                                <span class="code-comment"># compatibility/local-demo; live nodes require signed claimRegister</span>
+GET    /v1/claims?holder=&amp;legal_profile_id=&amp;cursor=
+GET    /v1/claims/{claim_id}                            <span class="code-comment"># { claim, pdcf_bundle? }</span>
+POST   /v1/claims/preflight                             <span class="code-comment"># 23-domain compliance + optional PDCF</span>
+
+<span class="code-comment"># Payoffs</span>
+POST   /v1/payoffs                                      <span class="code-comment"># compatibility preview; live nodes require signed payoffRegister</span>
+GET    /v1/payoffs/{payoff_root}
+POST   /v1/payoffs/validate                             <span class="code-comment"># pure validate; no write</span>
+GET    /v1/payoffs/library                              <span class="code-comment"># constructor catalog + bounds</span>
+
+<span class="code-comment"># Positions</span>
+GET    /v1/positions/{claim_id}?cursor=&amp;limit=
+GET    /v1/positions/{claim_id}/conservation            <span class="code-comment"># {net, total_long, total_short, is_balanced}</span>
+GET    /v1/accounts/{addr}/positions?claim_id=&amp;cursor=  <span class="code-comment"># by holder</span>
+
+<span class="code-comment"># Price vectors</span>
+GET    /v1/price-vectors/canonical                     <span class="code-comment"># PDCF present-value page</span>
+GET    /v1/price-vectors/{claim_id}/gradient?at_block= <span class="code-comment"># intrinsic payoff-DAG partials</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API SPEC CTA (preserved) -->
+            <section class="docs-quickstart-section moxie-product-section moxie-api-cta-section">
+                <div class="container">
+                    <span class="section-eyebrow">API Spec</span>
+                    <h2 class="section-title">Need the exact wire surface?</h2>
+                    <p class="section-subtitle">Open the full Moxie API spec when you are wiring production paths: auth profiles, agent invocation envelopes, settlement jobs, continuous-market parameters, JSON-RPC methods, receipt proofs, realtime streams, and amount utilities.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Reference for backend, engine, and market infrastructure teams</h4>
+                            <p>The builder page stays focused on what you can ship first. The spec page carries the dense protocol material: clearing primitives, compliance preflight, AOT settlement receipts, MCP agent tools, method families, pagination, errors, WebSockets, and SDK amount helpers.</p>
+                            <a class="moxie-spec-link" href="/moxie-api.html">Open the Moxie API spec</a>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">production reference</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> moxie-api.html</div>
+                                <pre class="code-block"><code><span class="code-comment">// Move from first-market integration to exact wire semantics.</span>
+<span class="code-dim">await</span> moxie.<span class="code-value">preflightCompliance</span>({ purpose, entity_ids });
+<span class="code-dim">await</span> moxie.<span class="code-value">submitSigned</span>(signedEnvelope, { preflight });
+<span class="code-dim">await</span> moxie.<span class="code-value">getReceipt</span>(txHash, { includeProof: <span class="code-value">true</span> });
+<span class="code-dim">await</span> moxie.<span class="code-value">subscribeBlocks</span>(({ height }) =&gt; sync(height));</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIER-3 GAME-ENGINE SDKs -->
+            <section class="docs-quickstart-section moxie-product-section moxie-tier3-section">
+                <div class="container">
+                    <span class="section-eyebrow">Tier-3 Game Engine SDKs</span>
+                    <h2 class="section-title">Native wrappers for Unity, Unreal, Godot, and Roblox</h2>
+                    <p class="section-subtitle">Tier-3 wrappers expose Moxie as a native game service. Three of the four engines (Unity, Unreal, Godot) share a single Rust core via the canonical narrow C ABI at <code>crates/moxie-sdk-core/include/moxie_sdk_core.h</code>; <strong>signing keys never cross the FFI boundary</strong>. The fourth engine, Roblox, has no FFI surface in the Luau sandbox &mdash; the wrapper consumes the typed-Claim REST surface directly via <code>HttpService:RequestAsync</code> and signs through a host signing adapter; keys never leave the adapter. Each engine wrapper ships on its own cadence across the v1.x point releases.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Unity &mdash; UPM + UniTask + P/Invoke</h4>
+                            <p>UnityPackageManager package <code>inc.moxie.sdk</code>. C# surface backed by P/Invoke into the Rust core; UniTask for the async poll loop on the engine main thread. Native plugin from <code>cargo build -p moxie-sdk-core --release</code> placed under <code>Assets/Plugins/&lt;platform&gt;/</code>. ABI version pin at <code>moxie_sdk_core_abi_version()</code> verified at startup.</p>
+                            <p><strong>Signing-key discipline:</strong> the wrapper accepts only pre-signed envelopes. The host's key-management plugin (MPC-with-passkey or a platform keystore) holds the secret key entirely outside this SDK's address space; the C# layer marshals the JSON envelope through the C ABI to <code>moxie_claim_define_async</code>. The <code>moxie_envelope_sign</code> entry point exists for binding completeness only and returns <code>IntPtr.Zero</code>; <code>MoxieClient</code> never calls it. The <code>CannotSignAcrossFFIBoundary</code> reflection test asserts no public method or property name on <code>MoxieClient</code> matches <code>Sign | PrivateKey | SecretKey | Mnemonic | Seed | KeyPair | LoadKey | ImportKey | ExportKey</code>.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">install &mdash; Packages/manifest.json</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> jsonc</div>
+                                <pre class="code-block"><code>{
+  <span class="code-string">"dependencies"</span>: {
+    <span class="code-string">"inc.moxie.sdk"</span>:        <span class="code-string">"0.1.0"</span>,
+    <span class="code-string">"com.cysharp.unitask"</span>:  <span class="code-string">"2.5.0"</span>
+  }
+}</code></pre>
+                            </div>
+                            <span class="docs-example-label">submit a pre-signed envelope</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> csharp</div>
+                                <pre class="code-block"><code><span class="code-dim">using</span> Cysharp.Threading.Tasks;
+<span class="code-dim">using</span> Moxie.Sdk;
+
+<span class="code-dim">public async</span> UniTask SubmitClaim(<span class="code-dim">string</span> preSignedEnvelopeJson, CancellationToken ct)
+{
+    <span class="code-dim">using var</span> client = MoxieClient.Create(
+        rpcUrl: <span class="code-string">"https://rpc.moxie.example"</span>,
+        apiKey: <span class="code-string">"mxk_pk_prod_keyid_random"</span>);
+
+    <span class="code-dim">using</span> MoxieReceipt receipt = <span class="code-dim">await</span> client.DefineClaimAsync(
+        preSignedEnvelopeJson, ct);
+
+    Debug.Log($<span class="code-string">"receipt: {receipt.ToJson()}"</span>);
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Unreal Engine &mdash; UCLASS plugin + TFuture / FLatentActionInfo</h4>
+                            <p>Unreal Engine 5.3+ plugin under <code>sdk/unreal/MoxieSdk/</code>; UBT C++17 toolchain. <code>UMoxieClient</code>, <code>UMoxieJob</code>, and <code>UMoxieReceipt</code> are UObjects &mdash; pinned through <code>TStrongObjectPtr</code> or a <code>UPROPERTY</code> for the duration of access. Both Blueprint-friendly delegates (<code>FLatentActionInfo</code> + <code>OnCompleted</code> dynamic multicast) and C++-only futures (<code>TFuture&lt;UMoxieReceipt*&gt;</code>) are available. The runtime releases the underlying native handle on <code>BeginDestroy</code>; explicit <code>Disconnect</code> is idempotent.</p>
+                            <p><strong>Signing-key discipline:</strong> the same as Unity. <code>FNoSigningKeysCrossFFI</code> automation test asserts <code>moxie_envelope_sign</code> returns <code>NULL</code> and walks the reflected <code>UMoxieClient</code> UFunction set rejecting any <code>Sign | PrivateKey | SecretKey</code> member. The host key-management plugin (a separate native module wrapping the platform keychain or HSM-rotatable signing service) produces the JSON-encoded <code>submit_signed</code> envelope; the plugin forwards it without inspecting or re-signing.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">install &mdash; .uplugin</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> terminal</div>
+                                <pre class="code-block"><code><span class="code-prompt">$</span> git submodule add \
+    https://github.com/momentum-sez/moxie-sdk-unreal \
+    Plugins/MoxieSdk
+<span class="code-prompt">$</span> cargo build -p moxie-sdk-core --release
+<span class="code-prompt">$</span> cp target/release/libmoxie_sdk_core.dylib \
+   Plugins/MoxieSdk/Source/ThirdParty/MoxieSdkCore/Mac/</code></pre>
+                            </div>
+                            <span class="docs-example-label">submit + completion delegate</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> cpp</div>
+                                <pre class="code-block"><code><span class="code-dim">UMoxieClient*</span> Client = UMoxieClient::Connect(
+    TEXT(<span class="code-string">"http://localhost:8545"</span>),
+    TEXT(<span class="code-string">"mxk_pk_devnet_local"</span>));
+
+FLatentActionInfo Info;
+<span class="code-dim">UMoxieJob*</span> Job = Client-&gt;DefineClaimAsync(PreSignedEnvelopeJson, Info);
+Job-&gt;OnCompleted.AddDynamic(<span class="code-dim">this</span>, &amp;MyClass::HandleClaimComplete);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Godot &mdash; GDExtension + RefCounted + signals</h4>
+                            <p>GDExtension wrapper under <code>sdk/godot/moxie-sdk/</code>; godot-cpp 4.2+ via SCons. <code>MoxieClient</code>, <code>MoxieJob</code>, and <code>MoxieReceipt</code> are GDScript-callable RefCounted classes. <code>MoxieClient</code> emits <code>claim_defined</code> and <code>claim_failed</code> signals; callers may also poll the returned <code>MoxieJob</code> manually for deterministic test scenarios. Lifetimes are governed by <code>Ref&lt;&gt;</code> and <code>Vector&lt;&gt;</code>; native handles release in destructors idempotently.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">install + build</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> terminal</div>
+                                <pre class="code-block"><code><span class="code-prompt">$</span> git submodule add https://github.com/godotengine/godot-cpp \
+    sdk/godot/moxie-sdk/godot-cpp
+<span class="code-prompt">$</span> cargo build -p moxie-sdk-core --release
+<span class="code-prompt">$</span> cd sdk/godot/moxie-sdk &amp;&amp; \
+   scons platform=linuxbsd target=template_release</code></pre>
+                            </div>
+                            <span class="docs-example-label">GDScript signal flow</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> gdscript</div>
+                                <pre class="code-block"><code><span class="code-dim">extends</span> Node
+
+<span class="code-dim">var</span> client: MoxieClient
+
+<span class="code-dim">func</span> _ready() -&gt; <span class="code-dim">void</span>:
+    client = MoxieClient.new()
+    client.configure(<span class="code-string">"http://localhost:8545"</span>, <span class="code-string">"mxk_pk_dev_xxx"</span>)
+    client.claim_defined.connect(_on_claim_defined)
+    client.claim_failed.connect(_on_claim_failed)
+
+    <span class="code-dim">var</span> job: MoxieJob = client.define_claim_async(JSON.stringify(envelope))</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Roblox &mdash; HttpService + Wally + signed envelopes</h4>
+                            <p>Tier-3 wrapper under <code>sdk/roblox/MoxieSdk/</code>. Roblox uniquely has no FFI surface &mdash; the sandbox forbids native code &mdash; so this wrapper consumes the typed-Claim REST/read surface (<code>/v1/claims/{id}</code>, <code>/v1/claims/preflight</code>, <code>/v1/claims?holder=...</code>) via <code>HttpService:RequestAsync</code>. Live registration must route through a signing/session service that builds and signs <code>NativeTx::ClaimRegister</code>; <code>/v1/claims/define</code> is compatibility/local-demo only. Distributed via Wally; idempotency keys are constructed via <code>HttpService:GenerateGUID(false)</code> (RFC 4122 v4) so each mutation carries a unique tag.</p>
+                            <p><strong>Signing-key discipline:</strong> private keys never leave a host signing adapter. <code>client:AttachSigner(signer)</code> attaches an adapter that implements <code>signer:SignEnvelope(payloadJson) -&gt; hexSignature</code>. Server-script-only path for <code>mxk_sk_*</code> bearer tokens; never embed bearer tokens in a LocalScript that ships to clients.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">install &mdash; wally.toml</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> toml</div>
+                                <pre class="code-block"><code>[dependencies]
+MoxieSdk = <span class="code-string">"moxie/moxie-sdk@1.0.0-rc.1"</span></code></pre>
+                            </div>
+                            <span class="docs-example-label">define a typed Claim from a server script</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> luau</div>
+                                <pre class="code-block"><code><span class="code-dim">local</span> MoxieSdk = require(game:GetService(<span class="code-string">"ServerScriptService"</span>).MoxieSdk)
+<span class="code-dim">local</span> client = MoxieSdk.MoxieClient.new(
+    <span class="code-string">"https://rpc.moxie.inc"</span>,
+    <span class="code-string">"mxk_sk_&lt;env&gt;_&lt;kid&gt;_&lt;random&gt;"</span>)
+
+<span class="code-dim">local</span> receipt = client:DefineClaim({
+    claim   = claimTable,
+    payoff  = payoffTable,
+    issuer  = <span class="code-string">"0xaaaa..."</span>,
+})
+<span class="code-dim">print</span>(receipt:ClaimId(), receipt:TxHash())</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- UNDER THE HOOD — architecture -->
+            <section class="docs-quickstart-section moxie-product-section moxie-architecture-section">
+                <div class="container">
+                    <span class="section-eyebrow">Under the Hood</span>
+                    <h2 class="section-title">How Moxie clears a claim, end to end</h2>
+                    <p class="section-subtitle">The internals, for teams who want them: every market surface lowers into the same terminal object.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>The conceptual primitive: <code>Claim</code></h4>
+                            <p>The unified field theory of finance is that the value of any asset is the probability-weighted discounted future cash flow (PDCF). Therefore every tradeable instrument is a <em>claim</em> on a future cash flow stream. Moxie's outward-facing concept is the claim and its derivatives. <code>Claim</code> binds an issuer + holder pair, a <code>PayoffProgram</code> via <code>payoff_root</code>, a strict-forward-temporal DAG of dependencies via <code>depends_on</code>, a probability/discount weight bundle via <code>pdcf_root</code>, an instrument back-link, a governing legal profile, and (when required) an SSB attestation root.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">crates/moxie-types/src/claim.rs</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">pub struct</span> <span class="code-value">Claim</span> {
+    <span class="code-dim">pub</span> id: ClaimId,
+    <span class="code-dim">pub</span> issuer: Address,
+    <span class="code-dim">pub</span> holder: Address,
+    <span class="code-dim">pub</span> settlement_asset: Hash256,
+    <span class="code-dim">pub</span> payoff_root: Hash256,            <span class="code-comment">// = PayoffProgram::canonical_hash()</span>
+    <span class="code-dim">pub</span> depends_on: BTreeSet&lt;ClaimId&gt;,  <span class="code-comment">// strict-forward DAG witness</span>
+    <span class="code-dim">pub</span> pdcf_root: Hash256,             <span class="code-comment">// P x D weight bundle</span>
+    <span class="code-dim">pub</span> instrument_id: Hash256,         <span class="code-comment">// AOT InstrumentManifest link</span>
+    <span class="code-dim">pub</span> legal_profile_id: ProductLegalProfileId,
+    <span class="code-dim">pub</span> ssb_attestation_root: Hash256,  <span class="code-comment">// AAOIFI per-issuance SSB approval</span>
+    <span class="code-dim">pub</span> effective_from_block: BlockNumber,
+    <span class="code-dim">pub</span> expires_at_block: BlockNumber,
+    <span class="code-dim">pub</span> version: u32,
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>The protocol primitive: <code>AdmissibleObligationTransition</code></h4>
+                            <p>AOT is the only object that changes terminal consensus state. Every state-mutating call resolves into <code>AdmissionEnvelope + InstrumentManifest + ObligationGraph + ComplianceAttestationRef + RiskReserveHold + EvidenceEnvelope + ExecutionCertificate + SettlementJobRef + ReceiptProofRef + ReleaseRecoveryAuthorization + RelianceEnvelope</code>. The supremum source layer above AOT is <code>ClaimProgramDefinition &rarr; ClaimGraph &rarr; ClaimCompiler &rarr; AOT</code>; the ClaimCompiler lowers the parimutuel, concentrated-AMM, sukuk, parametric-insurance, IP-royalty, and structured-note product families.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">terminal kernel grammar</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">pub struct</span> <span class="code-value">AdmissibleObligationTransition</span> {
+    <span class="code-dim">pub</span> admission: AdmissionEnvelope,
+    <span class="code-dim">pub</span> instrument: InstrumentManifest,
+    <span class="code-dim">pub</span> obligation_graph: ObligationGraph,
+    <span class="code-dim">pub</span> compliance: ComplianceAttestationRef,
+    <span class="code-dim">pub</span> risk_reserve: RiskReserveHold,
+    <span class="code-dim">pub</span> evidence: EvidenceEnvelope,
+    <span class="code-dim">pub</span> execution: ExecutionCertificate,
+    <span class="code-dim">pub</span> settlement: SettlementJobRef,
+    <span class="code-dim">pub</span> receipt: ReceiptProofRef,
+    <span class="code-dim">pub</span> release_recovery: ReleaseRecoveryAuthorization,
+    <span class="code-dim">pub</span> reliance: RelianceEnvelope,
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>The product primitive: <code>TemplatePack</code></h4>
+                            <p>Equities, bonds, structured derivatives, sukuk, real-world-asset receivables, parametric insurance, IP royalties, parimutuel pools, prediction events, loyalty entitlements, and trade receivables all compile into Moxie as <code>TemplatePack</code> instances. A TemplatePack is a versioned product family pinned to a <code>ProductLegalProfile</code> with allowed node/edge kinds, lifecycle policy, lowering rules, risk model, settlement program, recovery policy, reporting pack, reliance limits, and compiler version. The same lowering rules, risk model, and settlement program clear a parametric insurance contract and a prediction market alike.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">claim program registry</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">pub struct</span> <span class="code-value">ClaimProgramDefinition</span> {
+    <span class="code-dim">pub</span> id: ClaimProgramId,
+    <span class="code-dim">pub</span> template_pack_id: TemplatePackId,
+    <span class="code-dim">pub</span> template_kind: TemplateKind,
+    <span class="code-dim">pub</span> legal_profile_id: ProductLegalProfileId,
+    <span class="code-dim">pub</span> version: u32,
+    <span class="code-dim">pub</span> schema_root: Hash256,
+    <span class="code-dim">pub</span> allowed_node_kinds_root: Hash256,
+    <span class="code-dim">pub</span> allowed_edge_kinds_root: Hash256,
+    <span class="code-dim">pub</span> lowering_rules_root: Hash256,
+    <span class="code-dim">pub</span> lifecycle_policy_root: Hash256,
+    <span class="code-dim">pub</span> enabled: bool,
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>The developer surface: SDK + REST + agent-store</h4>
+                            <p>Tier-1 hand-maintained Rust + TypeScript + Python SDKs at <code>v1.0.0-rc.1</code>. Tier-2 generated wrappers for Go / Java / C# / Kotlin / Swift. Tier-3 game-engine wrappers (Unity, Unreal, Godot, Roblox) over a Rust core; signing keys never cross the FFI boundary. JSON-RPC for the canonical wire surface, REST under <code>/v1</code> for resource-shaped endpoints, WebSocket for realtime, and four auth profiles (DEV backend, key-native player, delegated session key, admin HSM).</p>
+                            <p><strong>Mass issues and governs claims; Moxie clears, settles, prices, and binds reliance to them.</strong></p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">three-tier SDK surface (v1.0.0-rc.1)</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> terminal</div>
+                                <pre class="code-block"><code><span class="code-prompt">$</span> npm install @moxie/sdk@rc                       <span class="code-comment"># v1.0.0-rc.1</span>
+<span class="code-prompt">$</span> cargo add moxie-sdk@<span class="code-string">"1.0.0-rc.1"</span>             <span class="code-comment"># v1.0.0-rc.1</span>
+<span class="code-prompt">$</span> pip install moxie-sdk==1.0.0rc1 httpx           <span class="code-comment"># v1.0.0rc1</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TYPED PRIMITIVES — Claim, PayoffProgram, Position, ConvexPotentialN -->
+            <section class="docs-quickstart-section moxie-product-section moxie-primitives-section">
+                <div class="container">
+                    <span class="section-eyebrow">Typed Primitives</span>
+                    <h2 class="section-title">The core types</h2>
+                    <p class="section-subtitle">Four typed primitives span every market: <code>Claim</code>, <code>PayoffProgram</code>, <code>Position</code>/<code>PositionLedger</code>, and <code>ClaimReservesN</code>+<code>ConvexPotentialN</code>. The same types describe a Liverpool brand instrument, a Hong Kong Jockey Club daily double pool, a sukuk coupon, a Marvel royalty stream, an Aurelian Jockey Club perpetual, and a parametric flood-insurance contract.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4><code>PayoffProgram</code> &mdash; the SSA-flat function-term tree</h4>
+                            <p>A <code>PayoffProgram</code> is a sequence of operations that deterministically computes a <code>FixedPoint</code> value as a function of constants, oracle attestation evidence, and earlier-resolved claims. References are strictly backward (<code>ops[k].refs &sub; {0..k}</code>), and <code>RefClaim::time_offset_blocks &ge; 1</code> so a derivative claim may only resolve against parents that resolved at strictly earlier blocks. The two invariants together make derivative cycles unrepresentable at the type level.</p>
+                            <p>The operator set is &Sigma;&prime; = Σ &cup; <code>RefClaimReduce</code> &mdash; <strong>13 ops</strong> covering Asian-style averaged payoffs, lookback maxima, barrier knock-ins, memory coupons, Bermudan options with windowed exercise, and &mdash; through <code>SaturatingSub</code> plus the transcendental pair <code>Ln</code> and <code>Sqrt</code> &mdash; log-return variance legs and volatility (&radic;) legs for the structured-note family. <code>IndicatorPredicate::OpGteOp</code> compares two on-graph values for parametric insurance multi-tier policies. <code>ShariaInstrumentClass</code> encodes the AAOIFI structure-specific gate at the type level for sukuk Ijara / Murabaha / Mudaraba / Musharaka. Bounds: <code>MAX_PAYOFF_OPS = 256</code>, <code>MAX_PAYOFF_DEPTH = 32</code>, <code>MAX_LINEAR_COMBINE_INPUTS = 64</code>, <code>RefClaimReduce</code> window <code>[8, 4096]</code> blocks.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">13-op family (&Sigma;&prime;)</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">pub enum</span> <span class="code-value">PayoffOp</span> {
+    Const(FixedPoint),
+    OracleEvidence { evidence_index: u32, leaf_index: u32 },
+    RefClaim { claim_ref: ClaimRef, time_offset_blocks: u32 },
+    LinearCombine { coefficients: Vec&lt;FixedPoint&gt;, inputs: Vec&lt;PayoffOpId&gt; },
+    Multiply { lhs: PayoffOpId, rhs: PayoffOpId },
+    Cap { input: PayoffOpId, cap_value: FixedPoint },
+    Floor { input: PayoffOpId, floor_value: FixedPoint },
+    Indicator { predicate: IndicatorPredicate },
+    IfElse { cond: PayoffOpId, then_op: PayoffOpId, else_op: PayoffOpId },
+    <span class="code-comment">// &Sigma; &rarr; &Sigma;&prime; window-reduction extension:</span>
+    RefClaimReduce {
+        claim_ref: ClaimRef,
+        time_window_blocks: u32,        <span class="code-comment">// in [8, 4096]</span>
+        kind: ReduceKind,                <span class="code-comment">// Sum | Max | Min | Avg | Count</span>
+        threshold: Option&lt;FixedPoint&gt;,
+    },
+    <span class="code-comment">// Spread legs without underflow panics:</span>
+    SaturatingSub { lhs: PayoffOpId, rhs: PayoffOpId },
+    <span class="code-comment">// Transcendental basis &mdash; variance &amp; volatility legs:</span>
+    Ln { input: PayoffOpId },
+    Sqrt { input: PayoffOpId },
+}
+
+<span class="code-dim">pub enum</span> <span class="code-value">IndicatorPredicate</span> {
+    BlockGte { block: BlockNumber },
+    OpGte { op: PayoffOpId, threshold: FixedPoint },
+    OracleEquals { evidence_index: u32, leaf_index: u32, expected: Hash256 },
+    <span class="code-comment">// Parametric-insurance multi-tier dynamic-threshold predicate:</span>
+    OpGteOp { trigger: PayoffOpId, threshold: PayoffOpId },
+}
+
+<span class="code-dim">pub struct</span> <span class="code-value">PayoffProgram</span> {
+    <span class="code-dim">pub</span> ops: Vec&lt;PayoffOp&gt;,
+    <span class="code-dim">pub</span> output_index: PayoffOpId,
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4><code>Position</code> + <code>PositionLedger</code> &mdash; signed holdings</h4>
+                            <p><code>Position { claim_id, holder, signed_quantity }</code> is the logical destructuring of one ledger entry. <code>PositionLedger</code> is the canonical storage form: <code>BTreeMap&lt;ClaimId, BTreeMap&lt;Address, SignedFixedPoint&gt;&gt;</code>, deterministic iteration, zero-quantity entries removed in canonical form. For derivative claims the protocol-level invariant is <code>net == 0</code> across the sub-ledger; for primary holdings <code>net == issuer_supply</code>. Helpers <code>net_for_claim</code>, <code>total_long_for_claim</code>, <code>total_short_for_claim</code>, <code>is_balanced_for_claim</code>, <code>apply_delta</code>, and <code>canonical_root</code> ship with the typed-Position primitive.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">crates/moxie-types/src/position.rs</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">pub struct</span> <span class="code-value">Position</span> {
+    <span class="code-dim">pub</span> claim_id: ClaimId,
+    <span class="code-dim">pub</span> holder: Address,
+    <span class="code-dim">pub</span> signed_quantity: SignedFixedPoint,  <span class="code-comment">// + long, - short, 0 = empty</span>
+}
+
+<span class="code-dim">pub struct</span> <span class="code-value">PositionLedger</span> {
+    <span class="code-dim">pub</span> entries: BTreeMap&lt;ClaimId, BTreeMap&lt;Address, SignedFixedPoint&gt;&gt;,
+}
+
+<span class="code-dim">impl</span> PositionLedger {
+    <span class="code-dim">pub fn</span> apply_delta(&amp;<span class="code-dim">mut</span> self, claim_id: ClaimId, holder: Address,
+                       delta: SignedFixedPoint) -&gt; Result&lt;_, LedgerError&gt;;
+    <span class="code-dim">pub fn</span> net_for_claim(&amp;self, claim_id: ClaimId) -&gt; Result&lt;_, _&gt;;
+    <span class="code-dim">pub fn</span> is_balanced_for_claim(&amp;self, claim_id: ClaimId) -&gt; bool;
+    <span class="code-dim">pub fn</span> canonical_root(&amp;self) -&gt; Hash256;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4><code>ClaimReservesN</code> + <code>ConvexPotentialN</code> &mdash; n-asset CPCAM</h4>
+                            <p>The 2-asset <code>Reserves { hub, brand }</code> is the n=2 specialization of <code>ClaimReservesN(BTreeMap&lt;ClaimId, FixedPoint&gt;)</code>. <code>ConvexPotentialN</code> is the universal trait every pricing/clearing operator implements: <code>evaluate_n</code> (value at a reserve vector), <code>gradient_n</code> (the canonical price vector), and <code>correlation_root</code> (Hessian commitment, the same Hash256 that <code>RiskGeneratorV1InputRoot.correlation_root</code> consumes).</p>
+                            <p>Existing 2-asset engines (<code>ConstantProductPotential</code>, <code>WeightedProductPotential</code>, <code>ConcentratedPotential</code>) compile without modification; <code>PairPotential::new(potential, hub_id, brand_id)</code> lifts them into the n-claim surface. <code>MahalanobisPotential</code> (<code>phi(x) = &frac12; x<sup>T</sup> C x</code>) is documented as the universal local quadratic linearization of any convex phi at equilibrium.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">crates/moxie-dex/src/reserves_n.rs</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">pub trait</span> <span class="code-value">ConvexPotentialN</span>: Send + Sync {
+    <span class="code-dim">fn</span> evaluate_n(&amp;self, reserves: &amp;ClaimReservesN) -&gt; FixedPoint;
+
+    <span class="code-dim">fn</span> gradient_n(&amp;self, reserves: &amp;ClaimReservesN)
+        -&gt; BTreeMap&lt;ClaimId, SignedFixedPoint&gt;;
+
+    <span class="code-dim">fn</span> correlation_root(&amp;self, reserves: &amp;ClaimReservesN) -&gt; Hash256;
+
+    <span class="code-dim">fn</span> as_mahalanobis(&amp;self) -&gt; Option&lt;&amp;MahalanobisPotential&gt; { None }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- UNIVERSALITY — eight reductions -->
+            <section class="docs-quickstart-section moxie-product-section moxie-universality-section">
+                <div class="container">
+                    <span class="section-eyebrow">Universality</span>
+                    <h2 class="section-title">Every market reduces to one shape</h2>
+                    <p class="section-subtitle">Every shipped market lowers into a <code>(Claim, PayoffProgram, ConvexPotential)</code> triple. The replay-equivalence conformance corpus at <code>specs/sdk-conformance/claim_universality/</code> covers <strong>12 active fixtures</strong> &mdash; 8 baseline reductions plus 4 product-family extensions (concentrated AMM, sukuk Ijara, parametric insurance, IP royalty stream) &mdash; with additional structural-products fixtures for the autocallable structured note, trade receivable, engagement loyalty, and variance swap.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>1. Constant-product AMM</h4>
+                            <p>Brand pools, settlement-asset/MOXIE anchor, all 23 demo brand pools. Reserves <code>(R<sub>hub</sub>, R<sub>brand</sub>)</code> on a <code>k = R<sub>hub</sub> &middot; R<sub>brand</sub></code> manifold. Each side is a Claim with constant unit payoff (the pool unit itself). The CPCAM operator is <code>ConstantProductPotential</code> lifted to <code>ConvexPotentialN</code> via <code>PairPotential::new(p, hub_claim, brand_claim)</code>. Gradient ratio is the spot price.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">PayoffProgram::Const</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">use</span> moxie_types::payoff_lib::payoff_constant;
+
+<span class="code-comment">// Settlement-asset unit-claim payoff: always pay 1.00 USD.</span>
+<span class="code-dim">let</span> usd_payoff = payoff_constant(FixedPoint::one());
+
+<span class="code-comment">// CPCAM operator on (USD, MOXIE):</span>
+<span class="code-dim">let</span> phi = PairPotential::new(
+    ConstantProductPotential,
+    usd_claim_id,
+    moxie_claim_id,
+);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>2. Bonding curve</h4>
+                            <p>Stage 1 of the 5-stage market lifecycle. <code>P(S) = P<sub>0</sub> &middot; ((S + S<sub>init</sub>) / S<sub>0</sub>)<sup>n</sup></code> &mdash; shifted power-law. Each issued unit is a Claim of constant unit value; the supply-conditioned price comes from a <code>ConvexPotentialN</code> whose gradient evaluates the curve. Graduates into Stage-2 EquilibriumAMM at the <code>PackVersionChanged</code> cascade.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">primary holding + curve</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-comment">// Brand-unit Claim: constant unit payoff, brand-issued.</span>
+<span class="code-dim">let</span> unit_claim = Claim {
+    payoff_root: payoff_constant(FixedPoint::one()).canonical_hash(),
+    legal_profile_id: brand_legal_profile,
+    <span class="code-comment">// ...</span>
+};
+
+<span class="code-comment">// Bonding-curve potential (stage 1).</span>
+<span class="code-dim">let</span> phi = BondingCurvePotential::shifted_power_law(p0, s0, s_init, n);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>3. LMSR persona / prediction</h4>
+                            <p>Persona LMSR (logarithmic market scoring rule) is a known convex potential. Each persona outcome is a Claim with binary indicator payoff under <code>OracleEvidence</code>; the persona engine's cost function is its <code>evaluate_n</code>; gradient is the per-outcome odds vector.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">persona LMSR triple</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-comment">// Outcome i Claim: indicator(oracle == i) -> 1, else 0.</span>
+<span class="code-dim">use</span> moxie_types::payoff_lib::payoff_event_contingent;
+<span class="code-dim">let</span> outcome_payoff = payoff_event_contingent(
+    /*evidence_index*/ 0,
+    /*leaf_index*/    0,
+    expected_outcome_hash,
+    /*win*/  FixedPoint::one(),
+    /*lose*/ FixedPoint::zero(),
+);
+
+<span class="code-comment">// CPCAM operator: LMSR cost (existing implementation).</span>
+<span class="code-comment">// Replay-equivalence fixture covers persona_lmsr engine.</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>4. Parimutuel pool</h4>
+                            <p>Hong Kong Jockey Club daily double, win pools, place pools. Each ticket is a Claim of <code>payoff_pool_share(pool_total_ref, share_factor, time_offset)</code>. Pool total resolves at the race block; ticket Claims reference the pool Claim with <code>time_offset_blocks &ge; 1</code> so settlement is strictly forward in time. The first <code>ClaimCompiler</code> vertical is the parimutuel/product vertical.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">parimutuel ticket</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">use</span> moxie_types::payoff_lib::payoff_pool_share;
+
+<span class="code-dim">let</span> ticket_payoff = payoff_pool_share(
+    pool_total_claim_ref,
+    /*share_factor*/  FixedPoint::from_ratio(stake, winning_pool),
+    /*time_offset*/   1,  <span class="code-comment">// resolves at parent block + 1</span>
+);
+
+<span class="code-comment">// First ClaimGraph compiler vertical:</span>
+<span class="code-comment">// crates/moxie-types/src/claim_graph.rs lowers parimutuel into AOT.</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>5. Binary prediction</h4>
+                            <p>Yes/no events. Two outcome Claims with mutually-exclusive <code>payoff_event_contingent</code> programs over the same <code>OracleEvidence</code> leaf. CPCAM operator is the prediction-market AMM (PW-AMM coupling C1 clipped). The one-way coupling invariant (I-25) is type-level: <code>MarketSpec.payoff</code> may consume AMM signals; AMM state must not feed back into prediction payoff.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">YES/NO event Claims</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">let</span> yes_payoff = payoff_event_contingent(0, 0, yes_hash, FixedPoint::one(), FixedPoint::zero());
+<span class="code-dim">let</span> no_payoff  = payoff_event_contingent(0, 0, no_hash,  FixedPoint::one(), FixedPoint::zero());
+
+<span class="code-comment">// PW-AMM C1 clipped coupling (proven equivalent to logit).</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>6. Perpetual</h4>
+                            <p>FIGHT, MRDN, BULL perpetual markets at genesis. The perp position is a derivative Claim with <code>payoff_linear_derivative(underlying, factor, time_offset)</code>; mark price comes from the underlying brand AMM. Funding accrual rides on a per-block <code>RefClaim</code> chain. CPCAM operator is the perpetual clearing potential.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">linear derivative payoff</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">use</span> moxie_types::payoff_lib::payoff_linear_derivative;
+
+<span class="code-dim">let</span> perp_payoff = payoff_linear_derivative(
+    underlying_brand_claim_ref,
+    /*factor*/       FixedPoint::one(),  <span class="code-comment">// 1x exposure</span>
+    /*time_offset*/  1,
+);
+
+<span class="code-comment">// SignedFixedPoint at the Position layer carries long/short sign.</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>7. Bond coupon</h4>
+                            <p>NativeTx bond variants 90-95 (issuance, transfer, redemption, acceleration, coupon payment) execute through Phase-3 handlers. Each coupon claim is <code>payoff_fixed(amount, due_block)</code>; redemption is a separate Claim under the same TemplatePack. Sukuk-class issuance binds <code>Claim.legal_profile_id</code> to a Sharia-required profile and a non-zero <code>ssb_attestation_root</code> per AAOIFI SS 17 + GS 12.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">coupon payoff</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">use</span> moxie_types::payoff_lib::payoff_fixed;
+
+<span class="code-comment">// Coupon: pay 50.00 USD at block 12,500,000.</span>
+<span class="code-dim">let</span> coupon_payoff = payoff_fixed(FixedPoint::from_integer(50), BlockNumber(12_500_000));
+
+<span class="code-comment">// Sukuk Claim: ssb_attestation_root MUST be non-zero.</span>
+<span class="code-dim">let</span> sukuk = Claim {
+    legal_profile_id: sukuk_legal_profile_id,
+    ssb_attestation_root: aaoifi_ssb_root,
+    <span class="code-comment">// ...</span>
+};</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>8. Linear option call</h4>
+                            <p>Strike-bounded payoff on an underlying claim: <code>max(value(underlying) - strike, 0)</code>, time-gated by expiry block. <code>payoff_lib::payoff_option_call</code> emits the building blocks; the deterministic per-op SSA evaluator at <code>crates/moxie-execution/src/payoff_evaluator.rs</code> walks the tree at settlement. Same SSA discipline forbids cycles between the option Claim and its underlying.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">European call</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">use</span> moxie_types::payoff_lib::payoff_option_call;
+
+<span class="code-dim">let</span> call_payoff = payoff_option_call(
+    underlying_claim_ref,
+    /*strike*/        FixedPoint::from_integer(2_50),  <span class="code-comment">// 2.50</span>
+    /*expiry_block*/  BlockNumber(13_000_000),
+    /*time_offset*/   1,
+);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 12-fixture replay-equivalence corpus -->
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Replay-equivalence conformance corpus</h4>
+                            <p>The universality conformance corpus at <code>specs/sdk-conformance/claim_universality/</code> wires <code>payoff_evaluator</code> into a replay-equivalence harness against the existing implementations. <strong>All 8 baseline reductions actively pass</strong>: constant-product AMM, bonding curve, LMSR persona, parimutuel, binary prediction, perpetual, bond coupon, option call. The three <code>ConvexPotentialN</code> implementations that close the loop &mdash; <code>BondingCurvePotential1D</code>, <code>LogSumExpPotential</code>, <code>ConstantSumPotentialKOutcome</code> &mdash; ship in <code>crates/moxie-dex/src/potential.rs</code> with 19 unit tests pinning the canonical cross-checks byte-equal modulo divide-order.</p>
+                            <p><strong>Four product-family fixtures extend the corpus</strong>: <code>concentrated_amm</code> (CC-CFMM), <code>sukuk_ijara</code> (AAOIFI Ijara structure with <code>ShariaInstrumentClass</code>-pinned <code>ProductLegalProfile</code>), <code>parametric_insurance</code> (multi-tier hurricane cat-bond using <code>IndicatorPredicate::OpGteOp</code>), and <code>ip_royalty_stream</code> (royalty waterfall on revenue oracle). <strong>Autocallable structured notes now have a ClaimCompiler witness</strong>: <code>autocallable_structured_note</code> lowers as <code>AutocallableStructuredNote</code> into the programmable-security TemplatePack with byte-equal AOT replay. <strong>Trade-receivable and engagement-loyalty fixtures</strong> extend the corpus: <code>trade_receivable</code> (factoring with default-event indicator), <code>engagement_loyalty</code> (vesting points with <code>RefClaimReduce(Sum)</code>). <strong>The transcendental basis has since graduated</strong>: <code>PayoffOp::Ln</code> lowers the variance-swap family natively (squared log-returns reduced with <code>RefClaimReduce(Sum)</code>), and <code>PayoffOp::Sqrt</code> expresses the volatility-swap leg &radic;realised-variance directly &mdash; the market-quoted &sigma; without composition tricks.</p>
+                            <ul>
+                                <li><strong>1. Constant-product AMM</strong> &mdash; <code>payoff_constant(1.0)</code> + <code>ConstantProductPotential</code> via <code>PairPotential</code>. <strong>Active</strong>.</li>
+                                <li><strong>2. Bonding curve</strong> &mdash; <code>payoff_constant(1.0)</code> + <code>BondingCurvePotential1D</code> shifted power-law. <strong>Active</strong>.</li>
+                                <li><strong>3. LMSR persona / prediction</strong> &mdash; <code>payoff_event_contingent</code> + <code>LogSumExpPotential</code> cost <code>C(q) = b &middot; log&sum;<sub>i</sub> exp(q<sub>i</sub> / b)</code>. <strong>Active</strong>.</li>
+                                <li><strong>4. Parimutuel pool</strong> &mdash; <code>payoff_pool_share</code> + <code>ConstantSumPotentialKOutcome</code> k-outcome lift. <strong>Active</strong>.</li>
+                                <li><strong>5. Binary prediction</strong> &mdash; YES/NO <code>payoff_event_contingent</code> pair under PW-AMM C1 clipped coupling. <strong>Active</strong>.</li>
+                                <li><strong>6. Perpetual</strong> &mdash; <code>payoff_linear_derivative</code> + perpetual clearing potential. <strong>Active</strong>.</li>
+                                <li><strong>7. Bond coupon</strong> &mdash; <code>payoff_fixed(amount, due_block)</code> + <code>BlockGte</code> indicator. <strong>Active</strong>.</li>
+                                <li><strong>8. Linear option call</strong> &mdash; <code>payoff_option_call</code> hockey-stick. <strong>Active</strong>.</li>
+                                <li><strong>9. Concentrated AMM (CC-CFMM)</strong> &mdash; range-bounded liquidity using <code>Cap</code>/<code>Floor</code>; concentrated potential. <strong>Active</strong>.</li>
+                                <li><strong>10. Sukuk Ijara</strong> &mdash; AAOIFI lease-back: principal + N lease-period <code>payoff_ijara_rent</code> + balloon, gated on <code>ShariaInstrumentClass::Ijara</code> + non-zero <code>ssb_attestation_root</code>. <strong>Active</strong>.</li>
+                                <li><strong>11. Parametric insurance</strong> &mdash; multi-tier cat-bond via <code>OracleEvidence &times; 2 &rarr; Indicator(OpGteOp) &rarr; IfElse</code>; tier composition via <code>LinearCombine</code> over per-tier indicators. <strong>Active</strong>.</li>
+                                <li><strong>12. IP royalty stream</strong> &mdash; revenue-share waterfall: <code>RefClaimReduce(Sum)</code> over a window of revenue oracle leaves with per-tranche payoff. <strong>Active</strong>.</li>
+                                <li><strong>Autocallable structured note</strong> &mdash; <code>RefClaimReduce(Max)</code> barrier lookback + <code>RefClaimReduce(Sum)</code> memory coupon, lowered as <code>AutocallableStructuredNote</code> through ClaimCompiler into AOT with byte-equal replay. <strong>Active compiler witness</strong>.</li>
+                                <li><strong>Structural extensions</strong> &mdash; <code>trade_receivable</code>, <code>engagement_loyalty</code>. Pin the schema without exercising new evaluation paths.</li>
+                                <li><strong>Variance &amp; volatility swaps</strong> &mdash; <code>PayoffOp::Ln</code> (graduated) lowers realised variance from squared log-returns; <code>PayoffOp::Sqrt</code> (graduated) takes &radic;realised-variance for the volatility leg.</li>
+                            </ul>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">replay-equivalence harness</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-comment">// crates/moxie-conformance-claim-universality/</span>
+<span class="code-comment">//   tests/replay_integration.rs</span>
+<span class="code-comment">//</span>
+<span class="code-comment">// 8 baseline reductions — all active:</span>
+<span class="code-dim">fn</span> constant_product_amm_pool_side_holdings_evaluate_to_one();
+<span class="code-dim">fn</span> bonding_curve_under_bonding_curve_potential_1d();
+<span class="code-dim">fn</span> lmsr_persona_under_log_sum_exp_potential();
+<span class="code-dim">fn</span> parimutuel_under_constant_sum_potential_k_outcome();
+<span class="code-dim">fn</span> binary_prediction_evaluates_yes_then_no_per_oracle_attestation();
+<span class="code-dim">fn</span> perpetual_long_evaluates_to_factor_times_underlying_at_t_minus_1();
+<span class="code-dim">fn</span> bond_coupon_evaluates_zero_pre_due_and_amount_at_or_after_due();
+<span class="code-dim">fn</span> option_call_in_the_money_yields_positive_and_otm_yields_zero();
+
+<span class="code-comment">// 4 product-family fixtures — all active:</span>
+<span class="code-dim">fn</span> concentrated_amm_range_liquidity();
+<span class="code-dim">fn</span> sukuk_ijara_lease_period_pays_at_due_block();
+<span class="code-dim">fn</span> parametric_insurance_hurricane_category_5_triggers_payout();
+<span class="code-dim">fn</span> ip_royalty_stream_waterfall();</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CROSS-LANGUAGE COVERAGE MAP -->
+            <section class="docs-quickstart-section moxie-product-section moxie-coverage-section">
+                <div class="container">
+                    <span class="section-eyebrow">Cross-Language Coverage</span>
+                    <h2 class="section-title">Typed-Claim primitives across all 8 client languages + frontend</h2>
+                    <p class="section-subtitle">Tier-1 (Rust + TypeScript + Python) + Tier-2 (Go + Java + C# + Kotlin + Swift) cover the typed-Claim surface byte-for-byte. The frontend consumes the same primitives through TanStack Query hooks. <strong>All 8 languages produce a byte-parallel <code>SignedAmount {magnitude, is_negative}</code> wire mirror</strong> &mdash; the identity for derivative-claim conservation across long/short positions, pinned by 32 cross-language conformance tests.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Coverage matrix &mdash; eight client languages plus frontend</h4>
+                            <p>The 13 JSON-RPC methods land identically across <strong>all three Tier-1 SDKs</strong>. Tier-2 wrappers inherit the wire surface from the JSON spec at <code>specs/openapi/moxie-protocol-v1.generated.json</code>. <strong>Tier-3 game-engine wrappers</strong> wrap the same Tier-1 Rust core via the canonical C ABI at <code>crates/moxie-sdk-core/include/moxie_sdk_core.h</code>; signing keys never cross the FFI boundary in Unity / Unreal / Godot, and Roblox uses <code>HttpService</code> to consume the typed-Claim REST surface directly because the sandbox has no FFI escape hatch.</p>
+                            <ul>
+                                <li><strong>Tier-1 (hand-maintained)</strong> &mdash; Rust at <code>crates/moxie-sdk/src/resources/{claims, payoffs, positions_typed, price_vectors}.rs</code>; TypeScript at <code>sdk/typescript/src/resources/{claims, payoffs, positions-typed, price-vectors}.ts</code>; Python at <code>packages/sdk-python/moxie_sdk/resources/{claims, payoffs, positions_typed, price_vectors}.py</code>.</li>
+                                <li><strong>Tier-2 (codegen)</strong> &mdash; Go at <code>sdk/go/generated/</code>; Java at <code>sdk/java/generated/</code>; C# at <code>sdk/csharp/generated/</code>; Kotlin at <code>sdk/kotlin/generated/</code>; Swift at <code>sdk/swift/generated/</code>. Regenerated via <code>openapi-generator-cli 7.10.0</code> against the OpenAPI spec.</li>
+                                <li><strong>Tier-3 (game engines)</strong> &mdash; Unity (P/Invoke + UPM + UniTask) at <code>sdk/unity/MoxieSdk/</code>; Unreal (UCLASS plugin + <code>TFuture</code>/<code>FLatentActionInfo</code>) at <code>sdk/unreal/MoxieSdk/</code>; Godot (GDExtension + <code>RefCounted</code> + signals) at <code>sdk/godot/moxie-sdk/</code>; Roblox (HttpService + Wally + <code>HttpService:GenerateGUID</code> idempotency) at <code>sdk/roblox/MoxieSdk/</code>.</li>
+                                <li><strong>Frontend</strong> &mdash; TanStack Query v5 hooks at <code>web/src/lib/typed-claim-hooks.ts</code>, with <code>web/src/views/ClaimsTabView.tsx</code> registered in the hash router. Polling cadence 3s critical / 5s financial / 15s ambient.</li>
+                            </ul>
+                            <p><strong>Cross-language wire parity</strong> at <code>specs/sdk-conformance/typed_claim_wire_parity/</code> &mdash; 7 fixtures covering claim struct, define request, indicator predicate variants, payoff op variants, payoff program canonical hash, canonical price vector response, apply-position-delta request. The <code>SignedAmount {magnitude, is_negative}</code> wire mirror is byte-equal across all three Tier-1 SDKs &mdash; the identity for derivative-claim conservation across long/short positions.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">SignedAmount wire-parity</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> json</div>
+                                <pre class="code-block"><code><span class="code-comment">// specs/sdk-conformance/typed_claim_wire_parity/</span>
+<span class="code-comment">//   apply_position_delta_request.json</span>
+<span class="code-comment">// All 8 languages emit and consume this exact wire shape.</span>
+{
+  <span class="code-string">"claim_id"</span>: <span class="code-string">"0x9a3f..."</span>,
+  <span class="code-string">"holder"</span>:   <span class="code-string">"0xabc1..."</span>,
+  <span class="code-string">"delta"</span>: {
+    <span class="code-string">"magnitude"</span>:   <span class="code-string">"1500000000000000000"</span>,
+    <span class="code-string">"is_negative"</span>: <span class="code-value">false</span>
+  }
+}
+
+<span class="code-comment">// Long: is_negative=false, magnitude > 0</span>
+<span class="code-comment">// Short: is_negative=true,  magnitude > 0</span>
+<span class="code-comment">// Canonical zero: magnitude="0", is_negative=false</span></code></pre>
+                            </div>
+                            <span class="docs-example-label">witness commands</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> terminal</div>
+                                <pre class="code-block"><code><span class="code-prompt">$</span> cargo test -p moxie-sdk --test typed_claim_wire_parity
+<span class="code-comment">#   8 tests pass (Rust)</span>
+
+<span class="code-prompt">$</span> cd sdk/typescript &amp;&amp; npx vitest run \
+    tests/typed-claim-wire-parity.test.ts
+<span class="code-comment">#   8 tests pass (TypeScript)</span>
+
+<span class="code-prompt">$</span> pytest packages/sdk-python/tests/test_typed_claim_wire_parity.py
+<span class="code-comment">#   16 tests pass (Python)</span>
+
+<span class="code-prompt">$</span> cargo test -p moxie-rpc
+<span class="code-comment">#   671 / 671 pass — server side</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 28 INVARIANTS — applies-to-Claim subset -->
+            <section class="docs-quickstart-section moxie-product-section moxie-invariants-section">
+                <div class="container">
+                    <span class="section-eyebrow">Universal Invariants</span>
+                    <h2 class="section-title">28 invariants thread every surface</h2>
+                    <p class="section-subtitle">28 universal invariants (I-1 through I-28) thread every surface. The eight that bind Claim resources directly are surfaced here; the full catalog is on the <a href="/moxie-api.html">API spec page</a>.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Invariants applied to Claim resources</h4>
+                            <ul>
+                                <li><strong>I-1 Brand tenant.</strong> Every Claim is keyed by <code>(region_id, brand_id, claim_id)</code>. OAuth tokens scope claim-write to a tenant set.</li>
+                                <li><strong>I-5 Corridor correlation.</strong> <code>corridor_id = blake3(idempotency_key &Vert; tx_payload &Vert; mass_entity_id &Vert; asof)</code> threads claim-mutating envelopes across <code>moxie-rpc</code>, <code>moxie-execution</code>, <code>mez-moxie-bridge</code>.</li>
+                                <li><strong>I-8 Idempotency mandatory.</strong> <code>Idempotency-Key</code> required on every <code>POST /v1/claims</code>, <code>POST /v1/payoffs</code>, <code>POST /v1/positions</code>. Same key + same body returns the cached response.</li>
+                                <li><strong>I-9 Cursor pagination.</strong> <code>moxie_claimsList</code>, <code>moxie_positionsForClaim</code> emit opaque base64 cursors. Offset pagination silently corrupts under mutation; cursors do not.</li>
+                                <li><strong>I-11 Typed scalars.</strong> <code>FixedPoint</code> 18-decimal strings, <code>Hash256</code> lowercase 0x hex, <code>Address</code> checksummed 20-byte hex, <code>BlockNumber</code> u64 decimal string in REST. Identical across all ten language surfaces.</li>
+                                <li><strong>I-12 Typed errors.</strong> <code>moxie.claim.invalid_payoff_root</code>, <code>moxie.claim.ssb_required_but_zero</code>, <code>moxie.claim.dependency_mismatch</code>, <code>moxie.claim.empty_validity_window</code> &mdash; namespaced, additive-only, OpenAPI-cataloged.</li>
+                                <li><strong>I-15 23-domain compliance preflight.</strong> Every claim-mutating call preflights through the 23-domain tensor. Composition by pointwise meet on the Applicable fragment.</li>
+                                <li><strong>I-25 NativeTx lifecycle.</strong> <code>NativeTx::TerminalKernel</code> (variant 88) admits the AOT lowering for ClaimGraphs. Claim-resource RPC methods build typed NativeTx variants under the same lifecycle.</li>
+                            </ul>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">typed-error envelope (I-12)</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> json</div>
+                                <pre class="code-block"><code>{
+  <span class="code-string">"error_code"</span>: <span class="code-string">"moxie.claim.ssb_required_but_zero"</span>,
+  <span class="code-string">"message"</span>: <span class="code-string">"legal profile requires SSB attestation but ssb_attestation_root is ZERO"</span>,
+  <span class="code-string">"retryable"</span>: <span class="code-string">"never"</span>,
+  <span class="code-string">"remediation"</span>: <span class="code-string">"Obtain per-issuance AAOIFI SSB approval and bind ssb_attestation_root before retry."</span>,
+  <span class="code-string">"correlation_id"</span>: <span class="code-string">"err_01HX..."</span>,
+  <span class="code-string">"http_status"</span>: <span class="code-value">409</span>,
+  <span class="code-string">"docs_url"</span>: <span class="code-string">"https://docs.moxie.inc/errors/moxie.claim.ssb_required_but_zero"</span>,
+  <span class="code-string">"context"</span>: { <span class="code-string">"legal_profile_id"</span>: <span class="code-string">"0x..."</span> }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MASS INTERFACE -->
+            <section class="docs-quickstart-section moxie-product-section moxie-mass-interface-section">
+                <div class="container">
+                    <span class="section-eyebrow">Mass Interface</span>
+                    <h2 class="section-title">Mass issues and governs claims; Moxie clears them</h2>
+                    <p class="section-subtitle">Mass kernel is the authority and governance source for claims. Moxie is the clearing kernel that prices, settles, and binds reliance to those claims through the <code>mez-moxie-bridge</code>.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Cross-repo binding contract</h4>
+                            <p>A typed Claim binds to Mass attestations via composite-signed envelopes (Ed25519 &Vert; ML-DSA-65 &Vert; SLH-DSA-SHA2-128s = <strong>11,229-byte signature</strong>).</p>
+                            <ul>
+                                <li><strong><code>MassComplianceAttestation</code></strong> carries the full 23-coordinate <code>L23Value</code> tensor under composite-sig. Persisted in <code>MassBridgeState::compliance_gate_attestation_meta</code> keyed by <code>(brand_id, target_stage)</code>; consumed by <code>NativeTx::ComplianceAttestationReceived</code>; revocation cascades through <code>NativeTx::ComplianceRevoke</code>.</li>
+                                <li><strong><code>MassClaimAttestation</code></strong> carries <code>(claim_id, legal_profile_id, ssb_attestation_root, instrument_id)</code> under composite-sig. Mass authority verifies, attests, and posts; Moxie admits via the AOT envelope.</li>
+                                <li><strong><code>corridor_id</code> binding</strong> (I-5). Every claim-mutating envelope threads <code>corridor_id</code> across both kernels for cross-repo correlation. Derivation: <code>blake3-derive("moxie/claim/corridor/v1", legal_profile_id &Vert; holder &Vert; effective_from_block)</code> &mdash; the <code>Claim.corridor_id</code> field carries this binding (Site 1).</li>
+                                <li><strong><code>ObservationKind::PositionUpdate</code> emission</strong>. Moxie posts position deltas back to the Mass corpus via <code>MassObservationRelay::relay</code> at <code>/v1/kernel/market-signals</code>, joining <code>AgentInvocationOutcome</code> as a typed observation kind.</li>
+                            </ul>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">Composite signature wire format</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-dim">pub struct</span> <span class="code-value">MassClaimAttestation</span> {
+    <span class="code-dim">pub</span> claim_id: ClaimId,
+    <span class="code-dim">pub</span> legal_profile_id: ProductLegalProfileId,
+    <span class="code-dim">pub</span> instrument_id: Hash256,
+    <span class="code-dim">pub</span> ssb_attestation_root: Hash256,  <span class="code-comment">// non-zero iff required</span>
+    <span class="code-dim">pub</span> issued_at_block: BlockNumber,
+    <span class="code-dim">pub</span> expires_at_block: BlockNumber,
+    <span class="code-dim">pub</span> cryptographic_epoch: u32,
+    <span class="code-dim">pub</span> nonce: u64,
+    <span class="code-comment">// Ed25519 (64) ‖ ML-DSA-65 (3,309) ‖ SLH-DSA-SHA2-128s (7,856) = 11,229 B</span>
+    <span class="code-dim">pub</span> signature_composite: [u8; 11_229],
+}
+
+<span class="code-comment">// Moxie admits via NativeTx::TerminalKernel.</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>10 Mass-bridge integration sites &mdash; all built</h4>
+                            <p>Each site is a single point in the Moxie execution path where a claim binds to a Mass attestation, an observation, or a revocation. Every site is committed and source-backed.</p>
+                            <ul>
+                                <li><strong>Site 1</strong> &mdash; <code>Claim.corridor_id</code> field on <code>crates/moxie-types/src/claim.rs</code>. Mass-bridge corridor binding on the typed-Claim primitive itself.</li>
+                                <li><strong>Site 2</strong> &mdash; <code>KernelState</code> typed-Claim fields: <code>state.frozen_claim_positions: BTreeMap&lt;(ClaimId, Address), FrozenClaimEntry&gt;</code> revocation-cascade scaffold.</li>
+                                <li><strong>Site 3</strong> &mdash; <code>TxReceiptEvent::ClaimPositionFrozen</code> + <code>BlockExecutorError::{ClaimMassValidation, ClaimPositionFrozen}</code> typed-error variants.</li>
+                                <li><strong>Site 4</strong> &mdash; observation routing: <code>mass_bridge::market_signal_from_observation</code> routes <code>PositionUpdate</code> to <code>MarketSignalKind::BrandVolume</code>; <code>mass_observation_relay::observation_to_corpus_fields</code> emits <code>domain="market-conduct"</code> / <code>evidence_type="position-update"</code> with claim+holder tags.</li>
+                                <li><strong>Site 5</strong> &mdash; revocation-cascade emit: <code>exec_claim_revocation_cascade(revoked_issuer, revoked_at_block, reason)</code> walks <code>state.claims</code> filtered by <code>claim.issuer == revoked_issuer</code>, freezes non-zero positions via <code>mass_bridge.frozen_claim_positions.insert(...)</code>.</li>
+                                <li><strong>Site 6</strong> &mdash; AOT compliance cross-validation: <code>AdmissibleObligationTransition::validate_with_compliance_binding</code> cross-validates AOT <code>compliance.tensor_root</code> + <code>revocation_root</code> against typed-claim's legal profile + Mass-bridge's live revocation root. Integration test <code>aot_compliance_binding</code> covers profile mismatch, missing legal profile, Mass revocation mismatch, SSB-required-but-tensor-zero (sukuk path), eligibility-policy-zero, and the success path; 6/6 pass.</li>
+                                <li><strong>Site 7</strong> &mdash; <code>settlement_compliance_gate(claim_id, holder, current_block)</code> runs BEFORE <code>exec_claim_payoff_settle</code> on every <code>NativeTx::ClaimPayoffSettle</code>; gate failure surfaces typed-error in the receipt.</li>
+                                <li><strong>Site 8</strong> &mdash; <code>validate_position_open(claim, holder, legal_profile, state)</code> runs <code>meets_minimum_compliance(&amp;gate_status)</code>; for SSB-tagged claims, queries <code>entity_grades</code> directly for the Sharia coordinate.</li>
+                                <li><strong>Site 9</strong> &mdash; <code>AgentInvocation</code> claim_id route enforcement + composite-sig envelope for typed-Claim mutations.</li>
+                                <li><strong>Site 10</strong> &mdash; snapshot-restore propagation: <code>KernelState.position_ledger</code> and <code>KernelState.claims</code> propagated through <code>chain/mod.rs</code> snapshot-restore flow.</li>
+                            </ul>
+                            <p><strong>Production admit gate active.</strong> The legacy fail-closed <code>HandlerNotImplemented</code> arm in <code>block_executor::exec_phase1</code> is replaced with <code>unreachable!()</code> &mdash; the gate-then-handler path is now exhaustive.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">corridor_id derivation</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> rust</div>
+                                <pre class="code-block"><code><span class="code-comment">// crates/moxie-types/src/claim.rs (Site 1):</span>
+<span class="code-comment">// corridor_id derivation for typed-Claim &harr; Mass binding.</span>
+
+<span class="code-dim">pub fn</span> <span class="code-value">derive_corridor_id</span>(
+    legal_profile_id: ProductLegalProfileId,
+    holder: Address,
+    effective_from_block: BlockNumber,
+) -&gt; CorridorId {
+    blake3_derive(
+        <span class="code-string">b"moxie/claim/corridor/v1"</span>,
+        &amp;[
+            legal_profile_id.as_bytes(),
+            holder.as_bytes(),
+            &amp;effective_from_block.to_le_bytes(),
+        ],
+    )
+}
+
+<span class="code-comment">// Threaded through every claim-mutating envelope as I-5 corridor</span>
+<span class="code-comment">// correlation. Bridges across moxie-rpc, moxie-execution,</span>
+<span class="code-comment">// mez-moxie-bridge for cross-kernel observability and trace.</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TLA+ FORMAL VERIFICATION -->
+            <section class="docs-quickstart-section moxie-product-section moxie-tla-section">
+                <div class="container">
+                    <span class="section-eyebrow">Formal Verification</span>
+                    <h2 class="section-title">TLA+ refinement: typed-Claim payoff scheduler</h2>
+                    <p class="section-subtitle">A bounded model-check at <code>specs/tla/MoxieClaimPayoffScheduler.tla</code> faithfully models the typed-Claim DAG-depth-round scheduler at <code>crates/moxie-execution/src/claim_payoff_handler.rs::schedule_phase1_claim_settlements</code>. The model exhaustively explores acyclic parent-relation shapes over four claims, depth bound 3, block horizon 5 &mdash; covering every DAG topology the scheduler can encounter.</p>
+
+                    <div class="docs-split">
+                        <div class="docs-desc">
+                            <h4>Witness</h4>
+                            <ul>
+                                <li><strong>States generated:</strong> 524,422 / <strong>distinct:</strong> 285,547 / <strong>state-graph depth:</strong> 9</li>
+                                <li><strong>Temporal properties checked:</strong> 4 branches over the complete state space (1,142,188 distinct states across temporal subspaces) &mdash; <strong>all pass</strong></li>
+                                <li><strong>Wall time:</strong> ~16s on M-series hardware with JDK 25 + 4 worker threads</li>
+                                <li><strong>Result:</strong> No error has been found</li>
+                            </ul>
+                            <p>Invariants verified: <code>DepthBounded</code> (round-loop respects <code>MAX_SETTLEMENT_DEPTH_PER_BLOCK = 8</code>), <code>NoForwardReference</code> (<code>RefClaim::time_offset_blocks &ge; 1</code> at admission), <code>CycleImpossible</code> (admission rejects any payload that would create a derivative cycle), <code>FrozenImmutable</code> (Mass-bridge frozen-position ledger is monotone &mdash; cascade-frozen claims never re-enter Pending), <code>PendingNeverResolvedTwice</code> (<code>pending_claim_settlements.remove</code> after each settle), and a liveness witness <code>AllResolvableEventuallyResolve</code> under TLC fairness.</p>
+                        </div>
+                        <div class="docs-code-col">
+                            <span class="docs-example-label">run TLC</span>
+                            <div class="code-panel">
+                                <div class="code-block-header"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> terminal</div>
+                                <pre class="code-block"><code><span class="code-prompt">$</span> cd specs/tla
+<span class="code-prompt">$</span> java -XX:+UseParallelGC -cp lib/tla2tools.jar tlc2.TLC \
+    -workers 4 \
+    -metadir /tmp/moxie-tla-claim-scheduler \
+    -config MoxieClaimPayoffScheduler.cfg \
+    MoxieClaimPayoffScheduler.tla
+<span class="code-comment"># 524,422 states / 285,547 distinct / depth 9</span>
+<span class="code-comment"># 4 temporal property branches all pass</span>
+<span class="code-comment"># No error has been found.   Finished in 14s.</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CI / CD GATES -->
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+          <div class="container">
+            <div class="footer-inner">
+              <div class="footer-contact">
+                <p class="footer-label">Developer Inquiries</p>
+                <a href="mailto:developers@momentum.inc">developers@momentum.inc</a>
+                <p class="footer-secondary">Saadiyat Island, Abu Dhabi &middot; Miami, USA &middot; Cape Town, South Africa &middot; Shanghai, China</p>
+              </div>
+              <nav class="footer-nav" aria-label="Footer">
+                <a href="/explore.html">Explore</a>
+                <a href="/docs.html">Mass API</a>
+                <a href="/moxie.html">Moxie</a>
+                <a href="/moxie-api.html">API Spec</a>
+                <a href="https://momentum.inc/thesis.html">Thesis</a>
+                <a href="https://momentum.inc/ez.html">Infrastructure</a>
+                <a href="https://momentum.inc/team.html">Team</a>
+              </nav>
+            </div>
+            <div class="footer-legal">
+              <p>The materials on this website are for illustration and discussion purposes only and do not constitute an offer to sell, or a solicitation of an offer to buy, any securities or interests. Any such offering may be made only to eligible investors via one or more confidential offering documents. Past performance is not indicative of future results. &copy; 2026 Momentum</p>
+            </div>
+          </div>
+        </footer>
+    </div>
+
+    <script src="/site.js" defer></script>
+</body>
+</html>

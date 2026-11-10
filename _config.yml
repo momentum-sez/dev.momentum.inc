@@ -1,0 +1,16 @@
+exclude:
+  - AGENTS.md
+  - CLAUDE.md
+  - README.md
+  - SUPREMUM-DISCIPLINE.md
+  - SUPREMUM-IMPLEMENTATION.md
+  - READER-FIRST-DOCTRINE.md
+  - openapitools.json
+  - .claude/
+  - docs/
+  - integration-tests/
+  - supremum-checklists/
+  - data/cli.json
+  - data/operations.json
+  - data/sdk-index.json
+  - data/zones.json

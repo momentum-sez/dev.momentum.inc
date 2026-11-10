@@ -1,0 +1,4114 @@
+[
+  {
+    "file": "openapi.json#programs",
+    "tag": "programs",
+    "title": "programs",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 37,
+    "operation_count": 39,
+    "operations": [
+      {
+        "method": "POST",
+        "path": "/v1/assets/combine",
+        "summary": "POST /v1/assets/combine — merge N asset IDs into a single successor.",
+        "operationId": "combine_assets"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/assets/{id}/dissolve",
+        "summary": "POST /v1/assets/:id/dissolve — dissolve an asset with cascade/reparent.",
+        "operationId": "dissolve_asset"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/assets/{id}/program-upgrade",
+        "summary": "POST /v1/assets/:id/program-upgrade — governance-gated bytecode swap.",
+        "operationId": "program_upgrade"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/assets/{id}/split",
+        "summary": "POST /v1/assets/:id/split — fork an asset into N child assets.",
+        "operationId": "split_asset"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/authoring/corridors/{zone_a}/{zone_b}/descent",
+        "summary": "GET /v1/authoring/corridors/:zone_a/:zone_b/descent — compute descent obstruction.",
+        "operationId": "compute_descent"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/authoring/dashboard/{jurisdiction}",
+        "summary": "GET /v1/authoring/dashboard/:jurisdiction — regulatory dashboard data.",
+        "operationId": "regulatory_dashboard"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/authoring/domains/register",
+        "summary": "POST /v1/authoring/domains/register — register a new compliance domain.",
+        "operationId": "register_domain"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/authoring/fibers/submit",
+        "summary": "POST /v1/authoring/fibers/submit — submit a fiber for deployment.",
+        "operationId": "submit_fiber"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/authoring/programs",
+        "summary": "`POST /v1/authoring/programs` — validate a signed L5 `MassProgram` envelope.",
+        "operationId": "authoring_mass_program_submit"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/authoring/programs/check",
+        "summary": "POST /v1/authoring/programs/check — type-check an Op program.",
+        "operationId": "check_op_program"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/coordinations",
+        "summary": "`GET /v1/coordinations` — list pending coordinations.",
+        "operationId": "list_coordinations"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/coordinations",
+        "summary": "`POST /v1/coordinations` — stage a new `PendingCosignedProgram`.",
+        "operationId": "create_coordination"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/coordinations/{id}",
+        "summary": "`GET /v1/coordinations/:id` — fetch a single pending coordination.",
+        "operationId": "get_coordination"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/coordinations/{id}/cancel",
+        "summary": "`POST /v1/coordinations/:id/cancel` — refusal / cancellation.",
+        "operationId": "cancel_coordination"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/coordinations/{id}/sign",
+        "summary": "`POST /v1/coordinations/:id/sign` — append a co-signer biscuit.",
+        "operationId": "sign_coordination"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/coordinations/{id}/submit",
+        "summary": "`POST /v1/coordinations/:id/submit` — pre-fire admission re-check.",
+        "operationId": "submit_coordination"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/op-coordinations",
+        "summary": "`GET /v1/op-coordinations` — list coordinations.",
+        "operationId": "list_op_coordinations"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/op-coordinations",
+        "summary": "`POST /v1/op-coordinations` — stage a new op-coordination intent.",
+        "operationId": "create_op_coordination"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/op-coordinations/{id}",
+        "summary": "`GET /v1/op-coordinations/:id` — fetch one coordination.",
+        "operationId": "get_op_coordination"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/op-coordinations/{id}/cancel",
+        "summary": "`POST /v1/op-coordinations/:id/cancel` — terminate a coordination.",
+        "operationId": "cancel_op_coordination"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/op-coordinations/{id}/sign",
+        "summary": "`POST /v1/op-coordinations/:id/sign` — append a signature.",
+        "operationId": "sign_op_coordination"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/op-coordinations/{id}/signatures/{signer_did}/revoke",
+        "summary": "`POST /v1/op-coordinations/:id/signatures/:signer_did/revoke` — caller",
+        "operationId": "revoke_op_coordination_signature"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/op-coordinations/{id}/simulate",
+        "summary": "`POST /v1/op-coordinations/:id/simulate` — dry-run quorum projection.",
+        "operationId": "simulate_op_coordination"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/op-coordinations/{id}/submit",
+        "summary": "`POST /v1/op-coordinations/:id/submit` — finalise a created intent",
+        "operationId": "submit_op_coordination"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/programs/compile",
+        "summary": "",
+        "operationId": "programs_program_compile"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/programs/estimate",
+        "summary": "POST /v1/programs/estimate",
+        "operationId": "estimate_program"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/programs/simulate",
+        "summary": "POST /v1/programs/simulate",
+        "operationId": "programs_program_simulate"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/programs/submit",
+        "summary": "POST /v1/programs/submit: submit an Op program for type-checked execution.",
+        "operationId": "programs_program_submit"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/programs/submit/bytecode",
+        "summary": "POST /v1/programs/submit/bytecode",
+        "operationId": "submit_bytecode_program"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/savm/compile",
+        "summary": "POST /v1/savm/compile — Compile compliance domains into SAVM bytecode.",
+        "operationId": "compile_program"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/savm/execute",
+        "summary": "POST /v1/savm/execute — Execute a SAVM program against the compliance tensor.",
+        "operationId": "execute_program"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/savm/routines",
+        "summary": "List all compiled SAVM routines (the standard library).",
+        "operationId": "list_routines"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/savm/routines/{key}",
+        "summary": "Fetch a single compiled SAVM routine by operation key.",
+        "operationId": "get_routine"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/savm/scheduled",
+        "summary": "`POST /v1/savm/scheduled` — submit an authenticated `MassProgram`",
+        "operationId": "savm_program_scheduled_submit"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/savm/simulate",
+        "summary": "POST /v1/savm/simulate — Dry-run / simulation execution.",
+        "operationId": "savm_program_simulate"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/savm/submit",
+        "summary": "POST /v1/savm/submit — Submit a SAVM bytecode program for execution.",
+        "operationId": "savm_program_submit"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/savm/validate",
+        "summary": "POST /v1/savm/validate — Validate SAVM bytecode without executing.",
+        "operationId": "validate_program"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/templates",
+        "summary": "GET /v1/templates — list templatepacks.",
+        "operationId": "list_templates"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/templates/{id}/instantiate",
+        "summary": "POST /v1/templates/:id/instantiate — instantiate a template with a slot fill.",
+        "operationId": "instantiate_template"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#biscuits",
+    "tag": "biscuits",
+    "title": "biscuits",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 5,
+    "operation_count": 5,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/v1/biscuits/me",
+        "summary": "`GET /v1/biscuits/me?status=active` — list the calling agent's",
+        "operationId": "list_my_biscuits_handler"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/biscuits/mint",
+        "summary": "`POST /v1/biscuits/mint` — mint a root MassBiscuit for the caller.",
+        "operationId": "mint_handler"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/biscuits/mint-for-user",
+        "summary": "`POST /v1/biscuits/mint-for-user` — server-side biscuit mint for the",
+        "operationId": "mint_for_user_handler"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/biscuits/revocation-proof",
+        "summary": "`GET /v1/biscuits/revocation-proof` — fetch a fresh non-revocation",
+        "operationId": "fetch_revocation_proof_handler"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/biscuits/revoke",
+        "summary": "`POST /v1/biscuits/revoke` — owner-side revocation of a MassBiscuit.",
+        "operationId": "revoke_biscuit_handler"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#proofs",
+    "tag": "proofs",
+    "title": "proofs",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 16,
+    "operation_count": 16,
+    "operations": [
+      {
+        "method": "POST",
+        "path": "/v1/assets/{id}/credentials/compliance",
+        "summary": "POST /v1/assets/:id/credentials/compliance — Evaluate and attest.",
+        "operationId": "issue_compliance_credential"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/attestation/audit-trail",
+        "summary": "`POST /v1/attestation/audit-trail` — append one audit-trail row.",
+        "operationId": "append_attestation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/attestation/audit-trail/filters",
+        "summary": "`GET /v1/attestation/audit-trail/filters` — static filter facets.",
+        "operationId": "list_attestation_audit_trail_filters"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/attestation/audit-trail/search",
+        "summary": "`POST /v1/attestation/audit-trail/search` — paginated audit-trail",
+        "operationId": "search_attestation_audit_trail"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/attestation/audit-trail/{id}",
+        "summary": "`GET /v1/attestation/audit-trail/:id` — fetch one audit-trail row",
+        "operationId": "get_attestation_audit_trail_by_id"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/attestations",
+        "summary": "POST /v1/attestations — Issue and persist a kernel-owned compliance",
+        "operationId": "create_attestation"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/credentials",
+        "summary": "POST /v1/credentials — Issue a generic W3C Verifiable Credential.",
+        "operationId": "issue_credential"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/credentials/verify",
+        "summary": "POST /v1/credentials/verify — Verify a Verifiable Credential.",
+        "operationId": "verify_credential"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/credentials/{credential_id}/revoke",
+        "summary": "POST /v1/credentials/:credential_id/revoke — Issue a revocation credential.",
+        "operationId": "revoke_credential"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/observe",
+        "summary": "POST /v1/observe — capability-scoped observation primitive.",
+        "operationId": "observe"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/proofs/mass/verify",
+        "summary": "POST /v1/proofs/mass/verify — verify a canonical SDK v1 `MassProof`.",
+        "operationId": "verify_mass_proof"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/proofs/mass/{verdict_ref}",
+        "summary": "GET /v1/proofs/mass/{verdict_ref}: resolve the durable MassProof bound to",
+        "operationId": "get_mass_proof"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/proofs/obligations/{obligation_id}",
+        "summary": "GET /v1/proofs/obligations/{obligation_id}: issue a MassProof v1",
+        "operationId": "get_obligation_proof"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/proofs/obligations/{obligation_id}/manual-receipts",
+        "summary": "POST /v1/proofs/obligations/{obligation_id}/manual-receipts: verify a",
+        "operationId": "ingest_obligation_manual_receipt"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/proofs/passport/{entity_id}",
+        "summary": "GET /v1/proofs/passport/{entity_id}: emit a `MassProof` v1 envelope",
+        "operationId": "get_passport_proof"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/proofs/verify",
+        "summary": "POST /v1/proofs/verify — independently verify a Lex proof bundle.",
+        "operationId": "verify_proof"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#messages",
+    "tag": "messages",
+    "title": "messages",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 16,
+    "operation_count": 16,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/v1/corridors/peers",
+        "summary": "List all known corridor peers.",
+        "operationId": "list_peers"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/peers/abort",
+        "summary": "Acknowledge a cross-zone 3PC abort notification.",
+        "operationId": "abort_cross_zone"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/peers/accept",
+        "summary": "Receive a corridor acceptance from a peer zone.",
+        "operationId": "accept_corridor"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/peers/attestations",
+        "summary": "Receive a watcher attestation from a peer zone.",
+        "operationId": "receive_attestation"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/peers/commit",
+        "summary": "Acknowledge a cross-zone 3PC commit notification.",
+        "operationId": "commit_cross_zone"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/peers/evaluate",
+        "summary": "Evaluate compliance for a cross-zone operation step.",
+        "operationId": "evaluate_cross_zone"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/peers/health",
+        "summary": "List health metrics for all active corridors.",
+        "operationId": "get_corridor_health"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/peers/lawchain",
+        "summary": "Receive lawchain links from a peer zone.",
+        "operationId": "receive_lawchain"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/peers/network-status",
+        "summary": "Run a basic network topology status check.",
+        "operationId": "get_network_status"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/peers/packs",
+        "summary": "Receive pack version announcements from a peer zone.",
+        "operationId": "exchange_packs"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/peers/passport-exchange",
+        "summary": "Receive a compliance passport exchange from a peer zone.",
+        "operationId": "receive_passport_exchange"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/peers/propose",
+        "summary": "Receive a corridor proposal from a peer zone.",
+        "operationId": "propose_corridor"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/peers/receipts",
+        "summary": "Receive an inbound receipt from a peer zone.",
+        "operationId": "receive_receipt"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/peers/topology",
+        "summary": "Get peer mesh topology — structured connectivity summary.",
+        "operationId": "get_topology"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/peers/{zone_id}",
+        "summary": "Get a specific peer by zone ID.",
+        "operationId": "get_peer"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/peers/{zone_id}/trust",
+        "summary": "Get trust level for corridors associated with a specific zone.",
+        "operationId": "get_corridor_trust"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#entities",
+    "tag": "entities",
+    "title": "entities",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 65,
+    "operation_count": 82,
+    "operations": [
+      {
+        "method": "POST",
+        "path": "/v1/entities",
+        "summary": "`POST /v1/entities` — create a new root entity aggregate.",
+        "operationId": "create_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/all",
+        "summary": "`GET /v1/entities/all` — paged list of every entity, with optional scalar",
+        "operationId": "list_entities"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/drafts",
+        "summary": "`GET /v1/entities/drafts` — list drafts owned by the logged-in",
+        "operationId": "list_drafts"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/drafts",
+        "summary": "`POST /v1/entities/drafts` — insert a new draft owned by the",
+        "operationId": "save_draft"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/entities/drafts/{draft_id}",
+        "summary": "`DELETE /v1/entities/drafts/{draft_id}` — delete a draft.",
+        "operationId": "delete_draft"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/drafts/{draft_id}",
+        "summary": "`GET /v1/entities/drafts/{draft_id}` — single draft owned by the",
+        "operationId": "get_draft"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/entities/drafts/{draft_id}",
+        "summary": "`PUT /v1/entities/drafts/{draft_id}` — replace `form_data` on a",
+        "operationId": "update_draft"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/entities/incorporation/draft/{entity_id}",
+        "summary": "`DELETE /v1/entities/incorporation/draft/{entity_id}` — clear the draft.",
+        "operationId": "delete_incorporation_draft"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/incorporation/draft/{entity_id}",
+        "summary": "GET /v1/entities/incorporation/draft/:entity_id — fetch the current draft.",
+        "operationId": "get_incorporation_draft"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/incorporation/draft/{entity_id}",
+        "summary": "`POST /v1/entities/incorporation/draft/{entity_id}` — upsert the draft.",
+        "operationId": "save_incorporation_draft"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/jurisdiction/{jurisdiction}",
+        "summary": "`GET /v1/entities/jurisdiction/{jurisdiction}` — paged list of entities",
+        "operationId": "list_entities_for_jurisdiction"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/litigation-hold",
+        "summary": "POST /v1/entities/litigation-hold — Impose a litigation hold.",
+        "operationId": "enforce_litigation_hold_route"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/product/voucher/{product_id}",
+        "summary": "`GET /v1/entities/product/voucher/{product_id}` — vouchers for a product.",
+        "operationId": "list_product_vouchers"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/product/{id}",
+        "summary": "`GET /v1/entities/product/{id}` — fetch a single product by id (no scope).",
+        "operationId": "get_product"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/user/{user_id}",
+        "summary": "`GET /v1/entities/user/{user_id}` — paged list of entities the user is a",
+        "operationId": "list_entities_for_user"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/entities/valuation/draft/{draft_id}/complete",
+        "summary": "`PUT /v1/entities/valuation/draft/{draft_id}/complete` — Java",
+        "operationId": "complete_valuation_draft"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/valuation/{id}",
+        "summary": "`GET /v1/entities/valuation/{id}` — single-row valuation read by id.",
+        "operationId": "get_valuation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/valuations",
+        "summary": "`GET /v1/entities/valuations` — paged list across every entity (admin).",
+        "operationId": "list_all_valuations"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{entity_id}/reports/upload",
+        "summary": "`POST /v1/entities/:id/reports/upload` — store a generated-report URL",
+        "operationId": "upload_generated_report"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/entities/{id}",
+        "summary": "`DELETE /v1/entities/{id}` — dissolve an entity (terminal lifecycle write).",
+        "operationId": "dissolve_entity"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/entities/{id}",
+        "summary": "`PUT /v1/entities/{id}` — partial update of an existing entity.",
+        "operationId": "update_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/audit-log",
+        "summary": "`GET /v1/entities/{id}/audit-log` — paged audit-log entries for an entity,",
+        "operationId": "list_audit_log_by_entity_id"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/board/officers/change",
+        "summary": "`POST /v1/entities/{id}/board/officers/change` — BOARD remediation #1.",
+        "operationId": "change_officer"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/compliance/composed",
+        "summary": "GET /v1/entities/:id/compliance/composed — composed compliance across harbors.",
+        "operationId": "get_composed_compliance"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/compliance/residual",
+        "summary": "GET /v1/entities/:id/compliance/residual — Heyting residual: \"what must improve?\"",
+        "operationId": "get_compliance_residual"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/detail-fields",
+        "summary": "`POST /v1/entities/{id}/detail-fields` — create a custom detail field.",
+        "operationId": "create_detail_field"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/entities/{id}/detail-fields/{field_id}",
+        "summary": "`DELETE /v1/entities/{id}/detail-fields/{field_id}` — hard-delete a field.",
+        "operationId": "delete_detail_field"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/entities/{id}/detail-fields/{field_id}",
+        "summary": "`PUT /v1/entities/{id}/detail-fields/{field_id}` — patch a detail field.",
+        "operationId": "update_detail_field"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/directors",
+        "summary": "`POST /v1/entities/{id}/directors` — add a director to the board.",
+        "operationId": "add_director"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/entities/{id}/directors/{director_id}",
+        "summary": "`DELETE /v1/entities/{id}/directors/{director_id}` — soft-delete a director.",
+        "operationId": "remove_director"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/entities/{id}/directors/{director_user_id}/roles",
+        "summary": "`PUT /v1/entities/{id}/directors/{director_user_id}/roles` — BOARD",
+        "operationId": "update_director_roles"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/documents",
+        "summary": "`GET /v1/entities/{id}/documents` — list documents, newest-first.",
+        "operationId": "list_documents"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/documents",
+        "summary": "`POST /v1/entities/{id}/documents` — append a document to the entity.",
+        "operationId": "add_document"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/entities/{id}/documents/{document_id}",
+        "summary": "`DELETE /v1/entities/{id}/documents/{document_id}` — hard-delete a document.",
+        "operationId": "remove_document"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/dossier",
+        "summary": "GET /v1/entities/:id/dossier — Cross-primitive entity intelligence aggregation.",
+        "operationId": "entity_dossier"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/events",
+        "summary": "`GET /v1/entities/{id}/events` — paged list of active marketing events,",
+        "operationId": "list_marketing_events_by_entity_id"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/events",
+        "summary": "`POST /v1/entities/{id}/events` — create a marketing event.",
+        "operationId": "create_organization_event"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/entities/{id}/events/{event_id}",
+        "summary": "`DELETE /v1/entities/{id}/events/{event_id}` — soft-delete a marketing event.",
+        "operationId": "delete_organization_event"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/events/{event_id}",
+        "summary": "`GET /v1/entities/{entity_id}/events/{event_id}` — fetch one event by id.",
+        "operationId": "get_marketing_event_by_id"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/entities/{id}/events/{event_id}",
+        "summary": "`PUT /v1/entities/{id}/events/{event_id}` — patch a marketing event.",
+        "operationId": "update_organization_event"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/events/{event_id}/archive",
+        "summary": "`POST /v1/entities/{id}/events/{event_id}/archive` — soft-archive an event.",
+        "operationId": "archive_organization_event"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/events/{event_id}/blast",
+        "summary": "POST /v1/entities/:id/events/:event_id/blast — queue a text or email blast.",
+        "operationId": "send_event_blast"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/harbors",
+        "summary": "`GET /v1/entities/{id}/harbors` — list every harbor binding for the entity.",
+        "operationId": "list_harbors"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/harbors",
+        "summary": "POST /v1/entities/:id/harbors — establish a new harbor jurisdiction.",
+        "operationId": "establish_harbor"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/entities/{id}/harbors/{jurisdiction_id}",
+        "summary": "DELETE /v1/entities/:id/harbors/:jurisdiction_id — withdraw a harbor.",
+        "operationId": "withdraw_harbor"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/members",
+        "summary": "`POST /v1/entities/{id}/members` — insert a new ACTIVE membership row.",
+        "operationId": "add_member"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/members/user/{user_id}",
+        "summary": "`GET /v1/entities/{id}/members/user/{user_id}` — single ACTIVE member.",
+        "operationId": "get_member_by_user_id"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/entities/{id}/members/{member_id}",
+        "summary": "`PUT /v1/entities/{id}/members/{member_id}` — patch a membership row.",
+        "operationId": "update_member"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/navigation",
+        "summary": "GET /v1/entities/:id/navigation — compliance navigation map for AI agents.",
+        "operationId": "get_navigation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/products",
+        "summary": "`GET /v1/entities/{entity_id}/products` — paged product list for an entity.",
+        "operationId": "list_products"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/products",
+        "summary": "POST /v1/entities/:id/products — create a product for an entity.",
+        "operationId": "create_product"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/products/{product_id}",
+        "summary": "`GET /v1/entities/{entity_id}/products/{product_id}` — entity-scoped product.",
+        "operationId": "get_entity_product"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/products/{product_id}/orders",
+        "summary": "`GET /v1/entities/{id}/products/{product_id}/orders` — orders for a product.",
+        "operationId": "list_product_orders"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/valuation-draft",
+        "summary": "`GET /v1/entities/{entity_id}/valuation-draft` — the active DRAFT row.",
+        "operationId": "get_valuation_draft"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/valuation/draft",
+        "summary": "`POST /v1/entities/{id}/valuation/draft` — upsert the active draft row.",
+        "operationId": "save_valuation_draft"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/valuation/upload-report",
+        "summary": "",
+        "operationId": "upload_valuation_report"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/entities/{id}/valuation/{valuation_id}/report",
+        "summary": "",
+        "operationId": "update_valuation_report"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/valuations",
+        "summary": "`GET /v1/entities/{entity_id}/valuations` — paged list scoped to an entity.",
+        "operationId": "list_valuations"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/valuations",
+        "summary": "`POST /v1/entities/{entity_id}/valuations` — create a company valuation.",
+        "operationId": "create_valuation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/vouchers",
+        "summary": "GET /v1/entities/:id/vouchers — list vouchers for an entity.",
+        "operationId": "list_vouchers"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{id}/vouchers",
+        "summary": "`POST /v1/entities/{id}/vouchers` — create a voucher.",
+        "operationId": "entities_voucher_create"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/entities/{id}/vouchers/{voucher_id}",
+        "summary": "`PUT /v1/entities/{id}/vouchers/{voucher_id}` — patch a voucher.",
+        "operationId": "entities_voucher_update"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/licenses",
+        "summary": "GET /v1/licenses — List licenses for an entity from the kernel cache.",
+        "operationId": "list_licenses"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/licenses",
+        "summary": "POST /v1/licenses — Create a new license application.",
+        "operationId": "create_license"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/licenses/entity/{entity_id}",
+        "summary": "GET /v1/licenses/entity/:entity_id — List licenses for an entity by path param.",
+        "operationId": "list_licenses_by_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/licenses/overview",
+        "summary": "GET /v1/licenses/overview — Aggregate license-count dashboard.",
+        "operationId": "get_licensing_overview"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/licenses/{id}",
+        "summary": "GET /v1/licenses/:id — Get license details from the kernel cache.",
+        "operationId": "get_license"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/licenses/{id}",
+        "summary": "PUT /v1/licenses/:id — Update license metadata.",
+        "operationId": "update_license"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/licenses/{id}/transition",
+        "summary": "POST /v1/licenses/:id/transition — Transition a license state.",
+        "operationId": "transition_license"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/licensing/requests",
+        "summary": "`POST /v1/licensing/requests` — create a licensing application.",
+        "operationId": "create_licensing_request"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/licensing/requests/{application_id}",
+        "summary": "`PUT /v1/licensing/requests/{application_id}` — patch a licensing application.",
+        "operationId": "update_licensing_request"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/relationships/{entity_id}/add",
+        "summary": "`POST /v1/relationships/{entity_id}/add` — add a relationship.",
+        "operationId": "add_relationship"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/relationships/{entity_id}/{relationship_id}",
+        "summary": "`DELETE /v1/relationships/{entity_id}/{relationship_id}` — remove (soft-delete)",
+        "operationId": "remove_relationship"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/service-providers",
+        "summary": "",
+        "operationId": "create_service_provider"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/sovereign/regulator-keys/register",
+        "summary": "`POST /v1/sovereign/regulator-keys/register`",
+        "operationId": "register_regulator_key"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/sovereign/regulator-overrides/submit",
+        "summary": "POST /v1/sovereign/regulator-overrides/submit",
+        "operationId": "submit_regulator_override"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ubo/common-ubo",
+        "summary": "GET /v1/ubo/common-ubo?entity_a=..&entity_b=..",
+        "operationId": "get_common_ubo"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/ubo/edges",
+        "summary": "POST /v1/ubo/edges",
+        "operationId": "create_edge"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ubo/edges/{id}",
+        "summary": "GET /v1/ubo/edges/:id",
+        "operationId": "get_edge"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/ubo/edges/{id}/terminate",
+        "summary": "POST /v1/ubo/edges/:id/terminate",
+        "operationId": "terminate_edge"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ubo/entity/{id}/control-closure",
+        "summary": "GET /v1/ubo/entity/:id/control-closure",
+        "operationId": "get_control_closure"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/zones/{zone_id}/banking-partners",
+        "summary": "GET `/v1/zones/:zone_id/banking-partners`",
+        "operationId": "get_zone_banking_partners"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#operations",
+    "tag": "operations",
+    "title": "operations",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 48,
+    "operation_count": 50,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/v1/agent/thresholds/{jurisdiction_id}",
+        "summary": "`GET /v1/agent/thresholds/{jurisdiction_id}` — public threshold",
+        "operationId": "get_thresholds_handler"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/agent/unlocks/propose",
+        "summary": "`POST /v1/agent/unlocks/propose` — submit a throughput-class",
+        "operationId": "propose_unlock_handler"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/arbitration/institutions",
+        "summary": "GET /v1/arbitration/institutions — List supported arbitration institutions.",
+        "operationId": "list_institutions"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corporations/{id}/events",
+        "summary": "",
+        "operationId": "list_corporation_events"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/disputes",
+        "summary": "GET /v1/disputes — List all disputes.",
+        "operationId": "list_disputes"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/disputes",
+        "summary": "POST /v1/disputes — File a new dispute.",
+        "operationId": "file_dispute"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/disputes/{id}",
+        "summary": "GET /v1/disputes/:id — Get dispute details.",
+        "operationId": "get_dispute"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/disputes/{id}/begin-review",
+        "summary": "POST /v1/disputes/:id/begin-review — Filed → UnderReview.",
+        "operationId": "begin_review"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/disputes/{id}/close",
+        "summary": "POST /v1/disputes/:id/close — Enforced → Closed.",
+        "operationId": "close"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/disputes/{id}/decide",
+        "summary": "POST /v1/disputes/:id/decide — Hearing → Decided.",
+        "operationId": "decide"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/disputes/{id}/dismiss",
+        "summary": "POST /v1/disputes/:id/dismiss — Dismiss from Filed or UnderReview.",
+        "operationId": "dismiss"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/disputes/{id}/enforce",
+        "summary": "POST /v1/disputes/:id/enforce — Decided → Enforced.",
+        "operationId": "enforce"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/disputes/{id}/machine-resolve",
+        "summary": "POST /v1/disputes/:id/machine-resolve — Attempt machine-first resolution.",
+        "operationId": "machine_resolve"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/disputes/{id}/open-evidence",
+        "summary": "POST /v1/disputes/:id/open-evidence — UnderReview → EvidenceCollection.",
+        "operationId": "open_evidence"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/disputes/{id}/schedule-hearing",
+        "summary": "POST /v1/disputes/:id/schedule-hearing — EvidenceCollection → Hearing.",
+        "operationId": "schedule_hearing"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/disputes/{id}/settle",
+        "summary": "POST /v1/disputes/:id/settle — Settle from any pre-decision state.",
+        "operationId": "settle"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/lawchain",
+        "summary": "GET /v1/entities/{entity_id}/lawchain — Retrieve the full lawchain",
+        "operationId": "get_entity_lawchain"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/lawchain/verify",
+        "summary": "GET /v1/entities/{entity_id}/lawchain/verify — Verify the integrity of an",
+        "operationId": "verify_entity_lawchain"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{id}/twin",
+        "summary": "Reconstruct a corporation twin at any historical point by replaying events.",
+        "operationId": "get_temporal_twin"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/lawchain/verify",
+        "summary": "POST /v1/lawchain/verify — Verify a detached lawchain bundle.",
+        "operationId": "verify_detached_lawchain"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/migrations",
+        "summary": "POST /v1/migrations — Initiate a cross-zone migration record.",
+        "operationId": "initiate_migration"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/migrations/{migration_id}/cancel",
+        "summary": "POST /v1/migrations/:migration_id/cancel — Cancel a cross-zone migration.",
+        "operationId": "cancel_migration"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/operations",
+        "summary": "",
+        "operationId": "list_operations"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations",
+        "summary": "",
+        "operationId": "create_operation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/operations/compare",
+        "summary": "",
+        "operationId": "compare_jurisdictions"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/plan",
+        "summary": "",
+        "operationId": "plan_operation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/operations/requirements",
+        "summary": "",
+        "operationId": "get_operation_requirements"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/simulate",
+        "summary": "",
+        "operationId": "simulate_operation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/operations/types",
+        "summary": "",
+        "operationId": "list_operation_types"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/verify-proof",
+        "summary": "POST /v1/operations/verify-proof — Full replay verification of an operation",
+        "operationId": "verify_operation_proof"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/operations/{id}",
+        "summary": "",
+        "operationId": "get_operation"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/{id}/advance",
+        "summary": "POST /v1/operations/{id}/advance — Advance an operation by one step.",
+        "operationId": "advance_step"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/{id}/cancel",
+        "summary": "",
+        "operationId": "cancel_operation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/operations/{id}/certificate",
+        "summary": "GET /v1/operations/{id}/certificate — Retrieve the lawchain link (completion",
+        "operationId": "get_operation_certificate"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/{id}/contest",
+        "summary": "POST /v1/operations/{id}/contest — File a dispute against an operation.",
+        "operationId": "contest_operation"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/{id}/events",
+        "summary": "",
+        "operationId": "deliver_event"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/operations/{id}/proof",
+        "summary": "GET /v1/operations/{id}/proof — Retrieve the cryptographic proof chain for",
+        "operationId": "get_operation_proof"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/operations/{id}/steps/{step_id}",
+        "summary": "",
+        "operationId": "get_operation_step"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/{id}/steps/{step_id}/advance",
+        "summary": "POST /v1/operations/{id}/steps/{step_id}/advance — Advance a specific step.",
+        "operationId": "advance_specific_step"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/{id}/steps/{step_id}/agent-note",
+        "summary": "`POST /v1/operations/{id}/steps/{step_id}/agent-note` — append a",
+        "operationId": "append_agent_note"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/{id}/steps/{step_id}/consent-webhook",
+        "summary": "",
+        "operationId": "deliver_consent_webhook"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/{id}/steps/{step_id}/filing-webhook",
+        "summary": "",
+        "operationId": "deliver_filing_webhook"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/{id}/steps/{step_id}/resend-notification",
+        "summary": "`POST /v1/operations/{id}/steps/{step_id}/resend-notification` —",
+        "operationId": "resend_step_notification"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/{id}/steps/{step_id}/screening-webhook",
+        "summary": "Deliver a `screening.completed` / `screening.rejected` callback for a",
+        "operationId": "deliver_screening_webhook"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/operations/{id}/steps/{step_id}/templating-webhook",
+        "summary": "",
+        "operationId": "deliver_templating_webhook"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/operations/{id}/stream",
+        "summary": "GET /v1/operations/{id}/stream — Server-Sent Events stream for live operation progress.",
+        "operationId": "operation_stream"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/packs/published",
+        "summary": "List all published (announced) packs.",
+        "operationId": "list_published"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/packs/recognized",
+        "summary": "List all recognized packs (active recognitions only).",
+        "operationId": "list_recognized"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/packs/versions",
+        "summary": "List pack versions, optionally filtered by jurisdiction and kind.",
+        "operationId": "list_pack_versions"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/packs/versions/{digest}",
+        "summary": "Get a specific pack version by digest.",
+        "operationId": "get_pack_version"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#corridors",
+    "tag": "corridors",
+    "title": "corridors",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 27,
+    "operation_count": 29,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/v1/corridors",
+        "summary": "GET /v1/corridors — List corridors with pagination.",
+        "operationId": "list_corridors"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors",
+        "summary": "POST /v1/corridors — Create a new corridor.",
+        "operationId": "create_corridor"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/demo/compose",
+        "summary": "Simulate cross-zone corridor composition from two supplied tensor slices.",
+        "operationId": "corridor_demo_compose"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/health",
+        "summary": "GET /v1/corridors/health — Corridor network health monitoring.",
+        "operationId": "corridor_health"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/receipts/link",
+        "summary": "POST /v1/corridors/receipts/link — Link receipt-chain attestations.",
+        "operationId": "link_receipts"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/route",
+        "summary": "POST /v1/corridors/route — Find the optimal route between jurisdictions.",
+        "operationId": "find_route"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/state/anchor",
+        "summary": "POST /v1/corridors/state/anchor — Anchor corridor checkpoint to the settlement anchor.",
+        "operationId": "anchor_commitment"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/state/finality-status",
+        "summary": "POST /v1/corridors/state/finality-status — Query settlement-anchor finality status.",
+        "operationId": "finality_status"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/state/fork-resolve",
+        "summary": "POST /v1/corridors/state/fork-resolve — Resolve receipt fork.",
+        "operationId": "fork_resolve"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/state/propose",
+        "summary": "POST /v1/corridors/state/propose — Propose a receipt.",
+        "operationId": "propose_receipt"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/{corridor_id}/instrument-presheaf",
+        "summary": "GET /v1/corridors/{corridor_id}/instrument-presheaf",
+        "operationId": "get_instrument_presheaf"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/{corridor_id}/operations/{operation_id}/finality",
+        "summary": "GET /v1/corridors/:corridor_id/operations/:operation_id/finality",
+        "operationId": "get_corridor_operation_finality"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/{id}",
+        "summary": "GET /v1/corridors/:id — Get a corridor.",
+        "operationId": "get_corridor"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/{id}/activate",
+        "summary": "POST /v1/corridors/:id/activate — Compatibility activation endpoint.",
+        "operationId": "activate_corridor"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/{id}/audit-proof",
+        "summary": "GET /v1/corridors/:id/audit-proof — Generate a cryptographic audit proof.",
+        "operationId": "get_audit_proof"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/{id}/checkpoint",
+        "summary": "GET /v1/corridors/:id/checkpoint — Get the latest checkpoint for a corridor.",
+        "operationId": "get_checkpoint"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/{id}/checkpoint",
+        "summary": "POST /v1/corridors/:id/checkpoint — Create a checkpoint for a corridor.",
+        "operationId": "create_checkpoint"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/{id}/compliance",
+        "summary": "Evaluate corridor compliance by composing local zone tensor with remote",
+        "operationId": "evaluate_corridor_compliance"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/{id}/deactivate",
+        "summary": "POST /v1/corridors/:id/deactivate — Compatibility deactivation endpoint.",
+        "operationId": "deactivate_corridor"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/{id}/health",
+        "summary": "GET /v1/corridors/:id/health — Per-corridor peer health status.",
+        "operationId": "get_per_corridor_health"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/{id}/pilot",
+        "summary": "POST /v1/corridors/:id/pilot — Record a pilot trade-flow receipt.",
+        "operationId": "pilot_corridor_trade_flow"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/{id}/pilot/{pilot_id}/reverse",
+        "summary": "POST /v1/corridors/:id/pilot/:pilot_id/reverse — Record a pilot reversal.",
+        "operationId": "reverse_corridor_pilot_trade_flow"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corridors/{id}/receipts",
+        "summary": "GET /v1/corridors/:id/receipts — Query the receipt chain for a corridor.",
+        "operationId": "get_receipts"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/{id}/settlement/compute",
+        "summary": "POST /v1/corridors/:id/settlement/compute — Compute a settlement plan.",
+        "operationId": "compute_settlement"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corridors/{id}/settlement/instruct",
+        "summary": "POST /v1/corridors/:id/settlement/instruct — Generate SWIFT pacs.008 messages.",
+        "operationId": "generate_instructions"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/corridors/{id}/transition",
+        "summary": "PUT /v1/corridors/:id/transition — Transition a corridor's lifecycle state.",
+        "operationId": "transition_corridor"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/intelligence/corridor/predict-transfer",
+        "summary": "POST /v1/intelligence/corridor/predict-transfer",
+        "operationId": "predict_transfer"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/intelligence/corridor/recommend-route",
+        "summary": "POST /v1/intelligence/corridor/recommend-route",
+        "operationId": "recommend_route"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/intelligence/corridor/{corridor_id}/friction",
+        "summary": "GET /v1/intelligence/corridor/{corridor_id}/friction",
+        "operationId": "get_friction_profile"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#auth-exchange",
+    "tag": "auth-exchange",
+    "title": "auth-exchange",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 24,
+    "operation_count": 28,
+    "operations": [
+      {
+        "method": "POST",
+        "path": "/oauth/token",
+        "summary": "`POST /oauth/token` — OAuth 2.0 Client Credentials grant.",
+        "operationId": "token_handler"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/api-keys",
+        "summary": "List API keys owned by the authenticated user.",
+        "operationId": "list_api_keys_handler"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/api-keys",
+        "summary": "Create a user-owned API key.",
+        "operationId": "create_api_key_handler"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/api-keys/{id}",
+        "summary": "Revoke an API key owned by the authenticated user.",
+        "operationId": "revoke_api_key_handler"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/auth/exchange-api-key",
+        "summary": "`POST /v1/auth/exchange-api-key` — exchange a legacy API key for a",
+        "operationId": "exchange_api_key_handler"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/auth/login",
+        "summary": "Authenticate with email and password.",
+        "operationId": "login_user"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/auth/me",
+        "summary": "Get the current authenticated user's identity.",
+        "operationId": "get_current_user"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/auth/refresh",
+        "summary": "Refresh an existing valid JWT.",
+        "operationId": "refresh_token"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/auth/register",
+        "summary": "Register a new user with email and password.",
+        "operationId": "register_user"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/authority-cascade/revoke",
+        "summary": "POST /v1/authority-cascade/revoke — BFS cascade from an authority root.",
+        "operationId": "post_cascade_revoke"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/delegations",
+        "summary": "",
+        "operationId": "list_delegations"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/delegations",
+        "summary": "`POST /v1/delegations` — issue a new human→agent delegation.",
+        "operationId": "issue_delegation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/delegations/{id}",
+        "summary": "",
+        "operationId": "get_delegation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/delegations/{id}/chain",
+        "summary": "",
+        "operationId": "get_delegation_chain"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/delegations/{id}/revoke",
+        "summary": "`POST /v1/delegations/{id}/revoke` — revoke a delegation with cascade.",
+        "operationId": "revoke_delegation"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/delegations/{id}/sub-delegate",
+        "summary": "`POST /v1/delegations/{id}/sub-delegate` — derive a sub-delegation",
+        "operationId": "post_sub_delegate"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/agents",
+        "summary": "GET /v1/entities/{entity_id}/agents — Entity operator lists their entity's",
+        "operationId": "entities_authority_delegations_list"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{entity_id}/agents",
+        "summary": "POST /v1/entities/{entity_id}/agents — Entity operator grants a capability",
+        "operationId": "entities_authority_delegations_grant"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/entities/{entity_id}/agents/{delegation_id}",
+        "summary": "DELETE /v1/entities/{entity_id}/agents/{delegation_id} — Entity operator",
+        "operationId": "entities_authority_delegations_revoke"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{entity_id}/agents/{delegation_id}/sub-delegate",
+        "summary": "POST /v1/entities/{entity_id}/agents/{delegation_id}/sub-delegate — Entity",
+        "operationId": "entities_authority_delegations_sub_delegate"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/internal/entities/{entity_id}/agents",
+        "summary": "POST /v1/internal/entities/{entity_id}/agents — Grant a capability to an",
+        "operationId": "internal_authority_delegations_grant"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/internal/entities/{entity_id}/agents/{delegation_id}",
+        "summary": "DELETE /v1/internal/entities/{entity_id}/agents/{delegation_id} — Revoke an",
+        "operationId": "internal_authority_delegations_revoke"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/oauth/introspect",
+        "summary": "`POST /oauth/introspect` — Token introspection (RFC 7662).",
+        "operationId": "introspect_handler"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/passcodes/by-id/{id}",
+        "summary": "DELETE `/v1/passcodes/by-id/{id}` — soft-delete a passcode.",
+        "operationId": "delete_passcode"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/passcodes/validate",
+        "summary": "POST `/v1/passcodes/validate` — optional-auth passcode validation.",
+        "operationId": "validate_passcode"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/passcodes/{fundraiser_id}",
+        "summary": "GET `/v1/passcodes/{fundraiser_id}` — list passcodes for a fundraiser, or",
+        "operationId": "list_passcodes"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/passcodes/{fundraiser_id}",
+        "summary": "POST `/v1/passcodes/{fundraiser_id}` — create a passcode for a fundraiser.",
+        "operationId": "create_passcode"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/passcodes/{id}/expire",
+        "summary": "PUT `/v1/passcodes/{id}/expire` — mark a passcode expired.",
+        "operationId": "expire_passcode"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#discovery",
+    "tag": "discovery",
+    "title": "discovery",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 22,
+    "operation_count": 22,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/.well-known/mass-zone",
+        "summary": "GET /.well-known/mass-zone — Zone capability card (RFC 8615 discovery).",
+        "operationId": "zone_capability_card_well_known"
+      },
+      {
+        "method": "GET",
+        "path": "/.well-known/mass-zone/schemas/corridor-message-v1.json",
+        "summary": "GET /.well-known/mass-zone/schemas/corridor-message-v1.json",
+        "operationId": "schema_corridor_message_v1"
+      },
+      {
+        "method": "GET",
+        "path": "/.well-known/mass-zone/schemas/mass-biscuit-v1.json",
+        "summary": "GET /.well-known/mass-zone/schemas/mass-biscuit-v1.json",
+        "operationId": "schema_mass_biscuit_v1"
+      },
+      {
+        "method": "GET",
+        "path": "/.well-known/mass-zone/schemas/mass-program-v1.json",
+        "summary": "GET /.well-known/mass-zone/schemas/mass-program-v1.json",
+        "operationId": "schema_mass_program_v1"
+      },
+      {
+        "method": "GET",
+        "path": "/.well-known/mass-zone/schemas/mass-proof-v1.json",
+        "summary": "GET /.well-known/mass-zone/schemas/mass-proof-v1.json",
+        "operationId": "schema_mass_proof_v1"
+      },
+      {
+        "method": "GET",
+        "path": "/.well-known/mass-zone/schemas/universal-verdict-v1.json",
+        "summary": "GET /.well-known/mass-zone/schemas/universal-verdict-v1.json",
+        "operationId": "schema_universal_verdict_v1"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/agent-work",
+        "summary": "",
+        "operationId": "list_agent_work"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/agent-work/stream",
+        "summary": "",
+        "operationId": "agent_work_stream"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/agents/{agent_entity_id}/principals",
+        "summary": "",
+        "operationId": "list_agent_principals"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/documents/extract",
+        "summary": "POST `/v1/documents/extract` — universal OCR + structured field",
+        "operationId": "extract_document"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/agent-cockpit",
+        "summary": "",
+        "operationId": "get_agent_cockpit"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/capabilities",
+        "summary": "",
+        "operationId": "list_active_capabilities"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/entities/{entity_id}/pending-actions",
+        "summary": "",
+        "operationId": "list_pending_actions"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/jurisdictions",
+        "summary": "`GET /v1/jurisdictions` — list jurisdictions supported by this zone.",
+        "operationId": "list_jurisdictions"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/jurisdictions/{jurisdiction_id}/throttle-state",
+        "summary": "",
+        "operationId": "get_jurisdiction_throttle_state"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/jurisdictions/{jurisdiction_id}/throttle-state/stream",
+        "summary": "",
+        "operationId": "stream_jurisdiction_throttle_state"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/reference-code/{code}",
+        "summary": "",
+        "operationId": "lookup_reference_code"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/zone",
+        "summary": "GET /v1/zone — Zone capability card.",
+        "operationId": "zone_capability_card"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/zone/keys/rotate",
+        "summary": "`POST /v1/zone/keys/rotate` — register a new verifying key.",
+        "operationId": "rotate_verifying_key"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/zone/mode",
+        "summary": "GET /v1/zone/mode — Deployment mode indicator.",
+        "operationId": "zone_mode"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/zone/revocation/log",
+        "summary": "`GET /v1/zone/revocation/log?since=<seq>`",
+        "operationId": "get_revocation_log"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/zone/zk-keys/rotate",
+        "summary": "`POST /v1/zone/zk-keys/rotate` — register a new ZK verifying key for a",
+        "operationId": "rotate_zk_verifying_key"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#events",
+    "tag": "events",
+    "title": "events",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 17,
+    "operation_count": 19,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/v1/events",
+        "summary": "",
+        "operationId": "list_events"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/events/export",
+        "summary": "",
+        "operationId": "export_events"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/events/stream",
+        "summary": "SSE long-stream over the canonical event log.",
+        "operationId": "stream_events"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/notifications/history",
+        "summary": "",
+        "operationId": "notifications_history"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/notifications/preferences",
+        "summary": "",
+        "operationId": "notifications_list_preferences"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/notifications/preferences",
+        "summary": "`POST /v1/notifications/preferences` — upsert one preference (crate F131) → standard `MassProof`.",
+        "operationId": "notifications_upsert_preference"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/notifications/preferences/{id}",
+        "summary": "`DELETE /v1/notifications/preferences/{id}` — disable a preference (crate",
+        "operationId": "notifications_disable_preference"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/transaction-review",
+        "summary": "",
+        "operationId": "list_reviews"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/transaction-review/{id}",
+        "summary": "",
+        "operationId": "get_review"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/watchers",
+        "summary": "GET /v1/watchers — List all registered watchers.",
+        "operationId": "list_watchers"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/watchers",
+        "summary": "POST /v1/watchers — Register a new watcher node.",
+        "operationId": "register_watcher"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/watchers/{watcher_id}",
+        "summary": "GET /v1/watchers/:watcher_id — Get watcher details.",
+        "operationId": "get_watcher"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/watchers/{watcher_id}/activate",
+        "summary": "POST /v1/watchers/:watcher_id/activate — Activate for corridor monitoring.",
+        "operationId": "activate_watcher"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/watchers/{watcher_id}/attest",
+        "summary": "POST /v1/watchers/:watcher_id/attest — Record a successful attestation.",
+        "operationId": "record_attestation"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/watchers/{watcher_id}/bond",
+        "summary": "POST /v1/watchers/:watcher_id/bond — Post a bond (stake collateral).",
+        "operationId": "bond_watcher"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/watchers/{watcher_id}/complete-unbond",
+        "summary": "POST /v1/watchers/:watcher_id/complete-unbond — Complete unbonding (terminal).",
+        "operationId": "complete_unbond_watcher"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/watchers/{watcher_id}/rebond",
+        "summary": "POST /v1/watchers/:watcher_id/rebond — Re-bond after being slashed.",
+        "operationId": "rebond_watcher"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/watchers/{watcher_id}/slash",
+        "summary": "POST /v1/watchers/:watcher_id/slash — Slash for a protocol violation.",
+        "operationId": "slash_watcher"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/watchers/{watcher_id}/unbond",
+        "summary": "POST /v1/watchers/:watcher_id/unbond — Begin voluntary unbonding.",
+        "operationId": "unbond_watcher"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#ownership",
+    "tag": "ownership",
+    "title": "ownership",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 229,
+    "operation_count": 256,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/v1/account-limit/account/{account_id}",
+        "summary": "`GET /v1/account-limit/account/:account_id` — list all limits for an",
+        "operationId": "get_limits_by_account"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/account-limit/account/{account_id}/user",
+        "summary": "`GET /v1/account-limit/account/:account_id/user?user_id=` — single limit",
+        "operationId": "get_limit_by_account_and_user"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/account-limit/entity/{entity_id}",
+        "summary": "",
+        "operationId": "get_limits_by_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/account/balance-summary/{entity_id}",
+        "summary": "",
+        "operationId": "get_balance_summary"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/account/entity/{entity_id}",
+        "summary": "",
+        "operationId": "get_account_by_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/account/treasury/{treasury_id}",
+        "summary": "",
+        "operationId": "list_accounts_by_treasury"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/account/{id}",
+        "summary": "",
+        "operationId": "get_account"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/accounting-sync/authorization/{entity_id}",
+        "summary": "",
+        "operationId": "get_accounting_authorization"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/aml/screening/query",
+        "summary": "Dispatch an AML screening inquiry to the configured provider.",
+        "operationId": "aml_screening_query"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/assets",
+        "summary": "GET /v1/assets — List smart assets with optional filtering.",
+        "operationId": "list_assets"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/assets/genesis",
+        "summary": "POST /v1/assets/genesis — Create smart asset genesis.",
+        "operationId": "create_asset"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/assets/registry",
+        "summary": "POST /v1/assets/registry — Submit/update smart asset registry VC.",
+        "operationId": "submit_registry"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/assets/{id}",
+        "summary": "GET /v1/assets/:id — Get a smart asset.",
+        "operationId": "get_asset"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/assets/{id}/anchors/corridor/verify",
+        "summary": "POST /v1/assets/:id/anchors/corridor/verify — Verify anchor.",
+        "operationId": "verify_anchor"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/assets/{id}/compliance/evaluate",
+        "summary": "POST /v1/assets/:id/compliance/evaluate — Evaluate compliance.",
+        "operationId": "evaluate_compliance"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/assets/{id}/definition",
+        "summary": "GET /v1/assets/:id/definition — Get the formal five-tuple AssetDefinition.",
+        "operationId": "get_asset_definition"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/assets/{id}/freeze",
+        "summary": "POST /v1/assets/:id/freeze — Freeze a smart asset (sovereign action).",
+        "operationId": "freeze_asset"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/assets/{id}/programs",
+        "summary": "GET /v1/assets/:id/programs — List all program versions for a smart asset.",
+        "operationId": "list_programs"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/assets/{id}/programs",
+        "summary": "POST /v1/assets/:id/programs — Bind a SAVM program to a smart asset.",
+        "operationId": "bind_program"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/assets/{id}/programs/{version}/activate",
+        "summary": "POST /v1/assets/:id/programs/:version/activate — Activate a program version.",
+        "operationId": "activate_program"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/assets/{id}/receipts",
+        "summary": "GET /v1/assets/:id/receipts — List SAVM execution receipts for an asset.",
+        "operationId": "list_receipts"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/assets/{id}/transfer",
+        "summary": "POST /v1/assets/:id/transfer — Transfer a smart asset to a new subject.",
+        "operationId": "transfer_asset"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/blob/upload",
+        "summary": "",
+        "operationId": "upload_blob"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/capital-calls",
+        "summary": "`GET /v1/capital-calls` — list-all capital calls with optional",
+        "operationId": "investment_capital_calls_list_capital_calls"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/capital-calls/fundraiser/{fundraiser_id}",
+        "summary": "`GET /v1/capital-calls/fundraiser/{fundraiser_id}` — capital-call overview",
+        "operationId": "investment_capital_calls_fundraiser_overview"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/capital-calls/fundraiser/{fundraiser_id}/issue",
+        "summary": "`POST /v1/capital-calls/fundraiser/{fundraiser_id}/issue` — issue capital",
+        "operationId": "investment_capital_calls_issue_fundraiser_capital_calls"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/capital-calls/investment/{investment_id}",
+        "summary": "`GET /v1/capital-calls/investment/{investment_id}` — capital-call overview",
+        "operationId": "investment_capital_calls_investment_overview"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/capital-calls/investment/{investment_id}",
+        "summary": "`POST /v1/capital-calls/investment/{investment_id}` — create a capital call",
+        "operationId": "investment_capital_calls_create_capital_call"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/capital-calls/{capital_call_id}/confirm-received",
+        "summary": "`PUT /v1/capital-calls/{capital_call_id}/confirm-received` — confirm receipt",
+        "operationId": "investment_capital_calls_confirm_capital_call_received"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/capital-calls/{id}",
+        "summary": "`GET /v1/capital-calls/{id}` — read a single capital call.",
+        "operationId": "investment_capital_calls_get_capital_call"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/card/all/account/{account_id}",
+        "summary": "",
+        "operationId": "list_cards_by_account"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/card/all/entity/{entity_id}",
+        "summary": "",
+        "operationId": "list_cards_by_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/card/user/entity-id/{entity_id}",
+        "summary": "",
+        "operationId": "list_cards_by_user_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/card/{id}",
+        "summary": "",
+        "operationId": "get_card"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/consents/organization/{organization_id}",
+        "summary": "",
+        "operationId": "listConsentsByOrganization"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/dynamic-letter/all/{organization_id}",
+        "summary": "`GET /v1/dynamic-letter/all/{organization_id}` — paged dynamic letters for an",
+        "operationId": "dynamic_letters_by_org"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/dynamic-letter/{id}",
+        "summary": "`GET /v1/dynamic-letter/{id}` — fetch a single dynamic letter (statement,",
+        "operationId": "dynamic_letter_by_id"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fibers/check",
+        "summary": "POST /v1/fibers/check — validate a Lex compliance rule.",
+        "operationId": "check_fiber"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fibers/register",
+        "summary": "POST /v1/fibers/register — persist a validated fiber in the registry.",
+        "operationId": "register_fiber"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fibers/{fiber_id}/lifecycle",
+        "summary": "GET /v1/fibers/:fiber_id/lifecycle — get the current lifecycle state.",
+        "operationId": "get_fiber_lifecycle"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fibers/{fiber_id}/transition",
+        "summary": "POST /v1/fibers/:fiber_id/transition — advance the fiber lifecycle state.",
+        "operationId": "transition_fiber"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/file/generate/signed-url",
+        "summary": "`POST /v1/file/generate/signed-url` — mint a templating-engine signed GET URL.",
+        "operationId": "generate_signed_url"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fiscal/account-limits/account/{account_id}",
+        "summary": "",
+        "operationId": "get_account_limits_by_account"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/account-limits/user",
+        "summary": "",
+        "operationId": "update_account_user_limit"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/fiscal/account-limits/{id}",
+        "summary": "",
+        "operationId": "deactivate_account_limit"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/accounting-sync/authorization",
+        "summary": "",
+        "operationId": "start_accounting_authorization"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/fiscal/accounting-sync/authorization/{entity_id}",
+        "summary": "",
+        "operationId": "revoke_accounting_authorization"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/accounting-sync/complete-authorization",
+        "summary": "",
+        "operationId": "complete_accounting_authorization"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/accounts",
+        "summary": "POST /v1/fiscal/accounts — Create a fiscal account with compliance evaluation.",
+        "operationId": "create_account"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/fiscal/accounts",
+        "summary": "",
+        "operationId": "update_account"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fiscal/accounts/organization/{entity_id}",
+        "summary": "",
+        "operationId": "list_platform_accounts"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fiscal/application/create/{entity_id}",
+        "summary": "",
+        "operationId": "create_treasury_application_link"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/authorized-users",
+        "summary": "",
+        "operationId": "save_authorized_user"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/cards/update",
+        "summary": "",
+        "operationId": "update_card"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/cards/visa",
+        "summary": "",
+        "operationId": "create_visa_card"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/charges",
+        "summary": "",
+        "operationId": "create_charge"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fiscal/currency/{account_id}",
+        "summary": "GET /v1/fiscal/currency/:account_id — supported currencies for recipient creation.",
+        "operationId": "get_supported_currencies"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/payment-otp/email",
+        "summary": "POST /v1/fiscal/payment-otp/email — deliver the NB-15 payment",
+        "operationId": "send_payment_otp_email"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/payment-requirements",
+        "summary": "POST /v1/fiscal/payment-requirements — get payment form requirements.",
+        "operationId": "get_payment_requirements"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/payments",
+        "summary": "POST /v1/fiscal/payments — Initiate a payment with compliance evaluation.",
+        "operationId": "initiate_payment"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/quotes",
+        "summary": "Extract a stable UUID for audit resource binding.",
+        "operationId": "generate_quote"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/recipients",
+        "summary": "POST /v1/fiscal/recipients — create a recipient with full compliance",
+        "operationId": "create_recipient"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fiscal/recipients/requirements/{account_id}",
+        "summary": "GET /v1/fiscal/recipients/requirements/:account_id — get recipient requirements.",
+        "operationId": "get_recipient_requirements"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/recipients/verify",
+        "summary": "POST /v1/fiscal/recipients/verify — verify a recipient via treasury-info.",
+        "operationId": "verify_recipient"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/fiscal/recipients/{id}",
+        "summary": "DELETE /v1/fiscal/recipients/:id — delete a recipient via treasury-info.",
+        "operationId": "delete_recipient"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/transaction-reviews/{id}/mark-paid",
+        "summary": "",
+        "operationId": "mark_transaction_review_paid"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/treasuries",
+        "summary": "",
+        "operationId": "create_treasury"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/fiscal/treasuries",
+        "summary": "",
+        "operationId": "update_treasury"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fiscal/treasuries/requirements/documents",
+        "summary": "",
+        "operationId": "get_treasury_required_documents"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/fiscal/treasuries/{id}/assign-default",
+        "summary": "",
+        "operationId": "assign_default_treasury"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fiscal/treasuries/{treasury_id}/authorized-user",
+        "summary": "",
+        "operationId": "add_treasury_authorized_user"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fund-admin/actions",
+        "summary": "`GET /v1/fund-admin/actions` — paginated list of fund-admin actions for an",
+        "operationId": "list_fund_admin_actions"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fund-admin/dashboard",
+        "summary": "",
+        "operationId": "get_fund_admin_dashboard_by_query"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fund-admin/{organization_id}",
+        "summary": "",
+        "operationId": "get_fund_overview"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fund-admin/{organization_id}/admin-actions",
+        "summary": "`GET /v1/fund-admin/{organization_id}/admin-actions` — Java-parity",
+        "operationId": "list_fund_admin_actions_for_organization"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fund-admin/{organization_id}/admin-actions",
+        "summary": "`POST /v1/fund-admin/{organization_id}/admin-actions` — submit a fund-admin",
+        "operationId": "create_fund_admin_action"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fund-admin/{organization_id}/dashboard",
+        "summary": "",
+        "operationId": "get_fund_admin_dashboard"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fund-admin/{organization_id}/economics",
+        "summary": "",
+        "operationId": "get_fund_economics"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fund-admin/{organization_id}/investors",
+        "summary": "",
+        "operationId": "get_fund_investor_detail"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fund-admin/{organization_id}/overview",
+        "summary": "",
+        "operationId": "get_fund_overview_detailed"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fund-admin/{organization_id}/performance",
+        "summary": "",
+        "operationId": "get_fund_performance_metrics"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/fundraiser",
+        "summary": "`POST /v1/fundraiser` — create a fundraiser.",
+        "operationId": "fundraiser_create"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/fundraiser",
+        "summary": "`PUT /v1/fundraiser` — full update of a fundraiser.",
+        "operationId": "fundraiser_update"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fundraiser/all",
+        "summary": "`GET /v1/fundraiser/all` — paginated list across all organizations.",
+        "operationId": "fundraiser_list_all"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fundraiser/organization/{organization_id}",
+        "summary": "`GET /v1/fundraiser/organization/{organization_id}` — paginated list of",
+        "operationId": "fundraiser_list_by_org"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fundraiser/organization/{organization_id}/overview",
+        "summary": "`GET /v1/fundraiser/organization/{organization_id}/overview` — per-status",
+        "operationId": "fundraiser_overview_by_org"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fundraiser/requirements/{fundraiser_id}",
+        "summary": "`GET /v1/fundraiser/requirements/{fundraiser_id}` — derive the four-boolean",
+        "operationId": "fundraiser_investment_requirements"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/fundraiser/{id}",
+        "summary": "`DELETE /v1/fundraiser/{id}` — delete a fundraiser.",
+        "operationId": "fundraiser_delete"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fundraiser/{id}",
+        "summary": "`GET /v1/fundraiser/{id}` — public read-by-id.",
+        "operationId": "fundraiser_get_by_id"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/fundraiser/{id}/status",
+        "summary": "`PUT /v1/fundraiser/{id}/status` — update a fundraiser's status.",
+        "operationId": "fundraiser_update_status"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/governance/agreement/{id}",
+        "summary": "`GET /v1/governance/agreement/{id}` — fetch a single agreement by",
+        "operationId": "getAgreementById"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/governance/agreements/{organization_id}",
+        "summary": "",
+        "operationId": "list_agreements"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/governance/board-meetings",
+        "summary": "`POST /v1/governance/board-meetings` — schedule a board meeting.",
+        "operationId": "schedule_board_meeting"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/governance/cap-table/by-org/{entity_id}",
+        "summary": "`GET /v1/governance/cap-table/by-org/{entity_id}` — kernel-canonical",
+        "operationId": "getCapTableByOrg"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/governance/consent/{id}",
+        "summary": "",
+        "operationId": "get_consent"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/governance/corporate-action/{id}",
+        "summary": "",
+        "operationId": "get_corporate_action"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/governance/corporate-action/{id}",
+        "summary": "",
+        "operationId": "update_corporate_action"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/governance/corporate-actions",
+        "summary": "",
+        "operationId": "list_all_corporate_actions"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/governance/corporate-actions",
+        "summary": "",
+        "operationId": "create_corporate_action"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/governance/corporate-actions/overview",
+        "summary": "",
+        "operationId": "get_corporate_actions_overview"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/governance/corporate-actions/{organization_id}",
+        "summary": "",
+        "operationId": "list_corporate_actions"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/governance/equity-offers/{id}/validate-access",
+        "summary": "`POST /v1/governance/equity-offers/{id}/validate-access` —",
+        "operationId": "validateUserAccessOfEquityOffer"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/governance/items/{id}",
+        "summary": "",
+        "operationId": "update_governance_item"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/governance/requested-documents",
+        "summary": "",
+        "operationId": "create_requested_document"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/governance/requested-documents/{id}",
+        "summary": "",
+        "operationId": "delete_requested_document"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/governance/requested-documents/{id}",
+        "summary": "",
+        "operationId": "update_requested_document"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/governance/scenarios/calculate/{organization_id}",
+        "summary": "`POST /v1/governance/scenarios/calculate/{organization_id}` —",
+        "operationId": "calculateScenario"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/governance/vesting/preview",
+        "summary": "`POST /v1/governance/vesting/preview` — kernel-canonical vesting",
+        "operationId": "generateVestingPlanPreview"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/accreditations/profile/{profile_id}",
+        "summary": "List all accreditations for an investor profile (including expired /",
+        "operationId": "accreditation_get_by_profile"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/identity/accreditations/profile/{profile_id}",
+        "summary": "Create an accreditation record for an investor profile.",
+        "operationId": "accreditation_create"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/accreditations/profile/{profile_id}/check",
+        "summary": "Check whether a profile is currently accredited in a given jurisdiction.",
+        "operationId": "check_accreditation"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/identity/accreditations/{accreditation_id}/status",
+        "summary": "Transition an accreditation's lifecycle status.",
+        "operationId": "update_status"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/identities",
+        "summary": "List identities (paged), optionally filtered by exact email.",
+        "operationId": "list"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/identity/identities",
+        "summary": "Create a new identity record (admin superset).",
+        "operationId": "create"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/identity/identities/batch",
+        "summary": "Batch-fetch identities by UID list.",
+        "operationId": "batch_get_by_ids"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/identities/email/{email}",
+        "summary": "Fetch one identity by email address.",
+        "operationId": "get_by_email"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/identities/linked",
+        "summary": "List all identities linked to the caller's account.",
+        "operationId": "get_linked_identities"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/identity/identities/linked/{id}",
+        "summary": "Revoke a linked user's delegated access (soft-delete).",
+        "operationId": "unlink_identity"
+      },
+      {
+        "method": "PATCH",
+        "path": "/v1/identity/identities/linked/{id}/roles",
+        "summary": "Replace the role set of a linked identity.",
+        "operationId": "update_linked_identity_roles"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/identity/identities/search",
+        "summary": "Full-text + filtered identity search (paged).",
+        "operationId": "search"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/identities/{identity_id}/profiles",
+        "summary": "List all active (non-soft-deleted) profiles for an identity.",
+        "operationId": "list_profiles"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/identity/identities/{identity_id}/profiles",
+        "summary": "Create a profile under the given identity.",
+        "operationId": "create_profile"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/identity/identities/{identity_id}/profiles/{profile_id}",
+        "summary": "Soft-delete a profile.",
+        "operationId": "delete_profile"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/identities/{identity_id}/profiles/{profile_id}",
+        "summary": "Fetch one fully hydrated profile by UUID, scoped to the path identity.",
+        "operationId": "get_profile"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/identity/identities/{identity_id}/profiles/{profile_id}",
+        "summary": "Update a profile's scalar fields and/or nested sub-entities.",
+        "operationId": "update_profile"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/identity/identities/{id}",
+        "summary": "Soft-delete an identity.",
+        "operationId": "delete"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/identities/{id}",
+        "summary": "Fetch one fully hydrated identity by UID.",
+        "operationId": "get_by_id"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/identity/identities/{id}",
+        "summary": "Update the owner-editable fields of an identity.",
+        "operationId": "update"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/identities/{id}/preferences",
+        "summary": "List an identity's preferences.",
+        "operationId": "list_preferences"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/invitations",
+        "summary": "Find invitations (Java `findInvitations`).",
+        "operationId": "find_invitations"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/identity/invitations",
+        "summary": "Create an invitation.",
+        "operationId": "create_invitation"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/identity/invitations/{id}",
+        "summary": "Revoke an invitation (Java `revokeInvitation` — soft-delete so it can no",
+        "operationId": "revoke_invitation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/invitations/{id}",
+        "summary": "Get an invitation by its UUID (Java `getById`). Returns the fully",
+        "operationId": "get_invitation_by_id"
+      },
+      {
+        "method": "PATCH",
+        "path": "/v1/identity/invitations/{id}",
+        "summary": "Edit an invitation (Java `editInvitation` — patch `target_email` and/or",
+        "operationId": "edit_invitation"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/identity/invitations/{id}/accept",
+        "summary": "Accept an invitation (Java `acceptInvitation`).",
+        "operationId": "accept_invitation"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/identity/invitations/{id}/resend",
+        "summary": "Resend an invitation (Java `resendInvitation` — extends expiry by 7 days",
+        "operationId": "resend_invitation"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/linked/{id}/permissions",
+        "summary": "Return the permission bundle projected from a linked identity's roles.",
+        "operationId": "get_linked_identity_permissions"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/permissions",
+        "summary": "Return the calling identity's permission bundle.",
+        "operationId": "get_caller_permissions"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/identity/signup",
+        "summary": "`POST /v1/identity/signup` — complete sign-up for the authenticated",
+        "operationId": "sign_up"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/users/{user_id}/verifications/stream",
+        "summary": "`GET /v1/identity/users/{user_id}/verifications/stream` — SSE stream that",
+        "operationId": "stream_user_verifications"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/verifications/identity/{identity_id}",
+        "summary": "Get the latest verification for an identity.",
+        "operationId": "get_by_identity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/verifications/identity/{identity_id}/all",
+        "summary": "Get all verifications for an identity (current rows, latest first).",
+        "operationId": "get_all_by_identity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/verifications/identity/{identity_id}/status",
+        "summary": "Get the effective (aggregate) verification status for an identity.",
+        "operationId": "get_effective_status"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/identity/verifications/initiate",
+        "summary": "Initiate a KYC/KYB verification.",
+        "operationId": "initiate"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/identity/verifications/profile/{profile_id}",
+        "summary": "Get the latest verification for a profile.",
+        "operationId": "get_by_profile"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/identity/{id}/accreditation/verify",
+        "summary": "Dispatch an accredited-investor verification inquiry to the",
+        "operationId": "accreditation_verify"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/instruments",
+        "summary": "List all instruments.",
+        "operationId": "list_instruments"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/instruments",
+        "summary": "Create a new financial instrument in DRAFT status.",
+        "operationId": "create_instrument"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/instruments/{id}",
+        "summary": "Get a specific instrument by ID.",
+        "operationId": "get_instrument"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/instruments/{id}/activate",
+        "summary": "Activate an issued instrument (ISSUED → ACTIVE).",
+        "operationId": "activate_instrument"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/instruments/{id}/cancel",
+        "summary": "Cancel an instrument (any non-terminal → CANCELLED).",
+        "operationId": "cancel_instrument"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/instruments/{id}/classify",
+        "summary": "Classify an instrument against pack-backed candidate regimes.",
+        "operationId": "classify_instrument"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/instruments/{id}/complete-conversion",
+        "summary": "Complete a conversion (CONVERTING → CONVERTED).",
+        "operationId": "complete_instrument_conversion"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/instruments/{id}/convert",
+        "summary": "Convert an instrument (ACTIVE → CONVERTING).",
+        "operationId": "convert_instrument"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/instruments/{id}/issue",
+        "summary": "Issue an instrument (DRAFT → ISSUED).",
+        "operationId": "issue_instrument"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/instruments/{id}/mature",
+        "summary": "Mature an active instrument (ACTIVE → MATURED).",
+        "operationId": "mature_instrument"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/investment",
+        "summary": "`POST /v1/investment` — create (or create-or-update) an investment.",
+        "operationId": "create_investment"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/investment",
+        "summary": "`PUT /v1/investment` — update an investment (id carried in the body).",
+        "operationId": "update_investment"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/investment/all",
+        "summary": "`GET /v1/investment/all` — all investments (direction / payment-status",
+        "operationId": "list_all_investments"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/investment/confirm-received/{investment_id}",
+        "summary": "`POST /v1/investment/confirm-received/{investment_id}` — confirm receipt of",
+        "operationId": "confirm_payment_received"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/investment/fundraiser/{fundraiser_id}",
+        "summary": "`GET /v1/investment/fundraiser/{fundraiser_id}` — investments for a",
+        "operationId": "list_investments_by_fundraiser"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/investment/investor",
+        "summary": "`GET /v1/investment/investor` — investments scoped to an investor /",
+        "operationId": "list_investments_by_investor"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/investment/investor/has-investments",
+        "summary": "`GET /v1/investment/investor/has-investments` — does the logged-in user",
+        "operationId": "has_investments"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/investment/investor/{investor_id}",
+        "summary": "`GET /v1/investment/investor/{investor_id}` — investments for an investor",
+        "operationId": "list_investments_by_investor_path"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/investment/limited-partnership-agreement/fundraiser/{fundraiser_id}",
+        "summary": "`POST /v1/investment/limited-partnership-agreement/fundraiser/{fundraiser_id}`",
+        "operationId": "process_investor_lpa"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/investment/organization/{organization_id}/direction/{direction}",
+        "summary": "`GET /v1/investment/organization/{organization_id}/direction/{direction}`",
+        "operationId": "list_investments_by_org_direction"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/investment/organization/{organization_id}/signed",
+        "summary": "`GET /v1/investment/organization/{organization_id}/signed` — the",
+        "operationId": "get_organization_investment_summary"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/investment/{id}",
+        "summary": "`DELETE /v1/investment/{id}` — soft-delete an investment.",
+        "operationId": "delete_investment"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/investment/{id}",
+        "summary": "`GET /v1/investment/{id}` — read one investment.",
+        "operationId": "get_investment"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/investment/{id}/reject-payment",
+        "summary": "`POST /v1/investment/{id}/reject-payment` — reject an investment payment",
+        "operationId": "reject_investment_payment"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/investment/{id}/submit-transaction-hash",
+        "summary": "`POST /v1/investment/{id}/submit-transaction-hash` — record a transaction",
+        "operationId": "submit_transaction_hash"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/investment/{investment_id}/allocate-fundraiser/{fundraiser_id}",
+        "summary": "`POST /v1/investment/{investment_id}/allocate-fundraiser/{fundraiser_id}`",
+        "operationId": "allocate_investment_to_fundraiser"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/investment/{investment_id}/investor-profile/{profile_id}",
+        "summary": "`PUT /v1/investment/{investment_id}/investor-profile/{profile_id}` — relink",
+        "operationId": "update_investor_profile"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/investor-profile/generate/{user_id}",
+        "summary": "Generate a PDF investor-profile document for a user. The rendered PDF",
+        "operationId": "generate_investor_profile"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/invoice/all/{entity_id}",
+        "summary": "`GET /v1/invoice/all/{entity_id}` — all invoices for an entity.",
+        "operationId": "invoices_by_org"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/invoice/generate",
+        "summary": "Create an invoice. Compound write across 2 invoice tables:",
+        "operationId": "generate_invoice"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/invoice/recipient",
+        "summary": "`POST /v1/invoice/recipient` — create a standalone invoice recipient (used",
+        "operationId": "create_invoice_recipient"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/invoice/recipient/all/{entity_id}",
+        "summary": "`GET /v1/invoice/recipient/all/{entity_id}` — enabled invoice recipients for",
+        "operationId": "invoice_recipients_by_org"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/invoice/recipient/create",
+        "summary": "`POST /v1/invoice/recipient/create` — Java-compatible alias for",
+        "operationId": "create_invoice_recipient_java_alias"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/invoice/recipient/update",
+        "summary": "`PUT /v1/invoice/recipient/update` — update an invoice recipient. Java",
+        "operationId": "update_invoice_recipient"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/invoice/recipient/{id}",
+        "summary": "`DELETE /v1/invoice/recipient/{id}` — soft-delete an invoice recipient",
+        "operationId": "delete_invoice_recipient"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/invoice/recipient/{id}",
+        "summary": "`GET /v1/invoice/recipient/{id}` — fetch a single invoice recipient by id.",
+        "operationId": "invoice_recipient_by_id"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/invoice/{id}",
+        "summary": "`GET /v1/invoice/{id}` — fetch a single invoice by id. 404 when absent.",
+        "operationId": "invoice_by_id"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/invoice/{id}/cancel",
+        "summary": "Mark an invoice as cancelled.",
+        "operationId": "mark_invoice_cancelled"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/invoice/{id}/paid",
+        "summary": "Mark an invoice as paid.",
+        "operationId": "mark_invoice_paid"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/kyc/inquiries",
+        "summary": "Create a KYC/KYB inquiry for an identity.",
+        "operationId": "create_inquiry"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/legacy-audit/all/{organization_id}",
+        "summary": "`GET /v1/legacy-audit/all/{organization_id}` — paged pre-ledger transaction",
+        "operationId": "legacy_audit_by_org"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ownership/cap-table-at/{organization_id}",
+        "summary": "GET /v1/ownership/cap-table-at/:organization_id?as_of=…",
+        "operationId": "get_cap_table_at"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ownership/cap-table-transactions/{organization_id}",
+        "summary": "",
+        "operationId": "list_cap_table_transactions"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ownership/cap-table/{organization_id}",
+        "summary": "",
+        "operationId": "getCapTableById"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ownership/equity-offers/organization/{organization_id}",
+        "summary": "",
+        "operationId": "list_equity_offers"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ownership/equity-offers/{id}",
+        "summary": "",
+        "operationId": "get_equity_offer"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/ownership/options-pools/create",
+        "summary": "",
+        "operationId": "create_options_pool"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ownership/organizations/{organization_id}/options-pools",
+        "summary": "",
+        "operationId": "list_options_pools"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ownership/organizations/{organization_id}/shareholders",
+        "summary": "",
+        "operationId": "list_shareholders"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ownership/securities/{organization_id}",
+        "summary": "",
+        "operationId": "list_securities"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ownership/security/{id}",
+        "summary": "",
+        "operationId": "get_security"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/ownership/share-classes/create",
+        "summary": "",
+        "operationId": "create_share_class"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ownership/share-classes/{id}",
+        "summary": "",
+        "operationId": "list_share_classes"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/ownership/share-classes/{id}",
+        "summary": "",
+        "operationId": "authorize_more_shares"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/ownership/shareholders",
+        "summary": "",
+        "operationId": "create_shareholder"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/ownership/shareholders/{id}",
+        "summary": "",
+        "operationId": "remove_shareholder"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/ownership/shareholders/{id}",
+        "summary": "",
+        "operationId": "update_shareholder"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/ownership/vesting-schedules/{id}",
+        "summary": "GET /v1/ownership/vesting-schedules/:id — fetch a single vesting schedule.",
+        "operationId": "get_vesting_schedule"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/packs/publish",
+        "summary": "`POST /v1/packs/publish` — submit a signed pack version into the registry.",
+        "operationId": "publish_pack"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/packs/recognize",
+        "summary": "`POST /v1/packs/recognize` — record that the zone formally recognizes",
+        "operationId": "recognize_pack"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/packs/recognize/{digest}",
+        "summary": "`DELETE /v1/packs/recognize/{digest}` — revoke a prior recognition.",
+        "operationId": "revoke_pack_recognition"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/packs/signatures/{digest}",
+        "summary": "`GET /v1/packs/signatures/{digest}` — list all signatures attached to",
+        "operationId": "get_pack_signatures"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/pep/screening/query",
+        "summary": "Dispatch a PEP screening inquiry to the configured provider.",
+        "operationId": "pep_screening_query"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/processing-speeds",
+        "summary": "GET /v1/processing-speeds — all jurisdictions + all options.",
+        "operationId": "get_all_processing_speed_options"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/processing-speeds/{jurisdiction}",
+        "summary": "GET /v1/processing-speeds/:jurisdiction — options for a single jurisdiction.",
+        "operationId": "get_processing_speed_options_for_jurisdiction"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/receipt",
+        "summary": "Generate a receipt PDF for a completed transaction.",
+        "operationId": "generate_receipt"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/recipient/account/{account_id}",
+        "summary": "",
+        "operationId": "list_recipients_by_account"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/recipient/entity/{entity_id}",
+        "summary": "",
+        "operationId": "list_recipients_by_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/recipient/{id}",
+        "summary": "",
+        "operationId": "get_treasury_recipient"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/fibers/effectiveness/summary",
+        "summary": "`GET /v1/regulator/fibers/effectiveness/summary`",
+        "operationId": "get_effectiveness_summary"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/fibers/{fiber_id}/effectiveness",
+        "summary": "`GET /v1/regulator/fibers/:fiber_id/effectiveness`",
+        "operationId": "get_fiber_effectiveness"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/statements/bank-statement",
+        "summary": "`POST /v1/statements/bank-statement` — render a bank statement PDF for an",
+        "operationId": "generate_bank_statement"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/statements/bank-statement/csv",
+        "summary": "`POST /v1/statements/bank-statement/csv` — return bank statement data as",
+        "operationId": "generate_statement_csv"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/statements/legacy",
+        "summary": "`POST /v1/statements/legacy` — render a legacy-format bank statement PDF for",
+        "operationId": "generate_legacy_bank_statement"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/submission/entity/{entity_id}",
+        "summary": "List submissions for an entity.",
+        "operationId": "list_submissions_by_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/submission/reference/{reference_id}/context/{context}",
+        "summary": "Get a submission by reference_id + context.",
+        "operationId": "get_submission_by_reference_context"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/submission/{id}",
+        "summary": "Get a submission by ID (enriched with template summaries).",
+        "operationId": "get_submission"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/submission/{id}/archive",
+        "summary": "`DELETE /v1/submission/:id/archive` — soft-delete a submission.",
+        "operationId": "archive_submission"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/submission/{id}/link",
+        "summary": "Get a submission link group by submission ID — returns every submission",
+        "operationId": "get_submission_link"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/submission/{id}/resend",
+        "summary": "`POST /v1/submission/:id/resend` — request that a downstream notifier",
+        "operationId": "resend_submission_email"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/supporting-documents",
+        "summary": "`GET /v1/supporting-documents?investment_id=…` — list every supporting",
+        "operationId": "investment_supporting_documents_list"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/supporting-documents",
+        "summary": "`POST /v1/supporting-documents` — create a `REQUESTED` supporting document.",
+        "operationId": "investment_supporting_documents_create"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/supporting-documents/batch",
+        "summary": "`POST /v1/supporting-documents/batch` — request N supporting documents in one",
+        "operationId": "investment_supporting_documents_batch"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/supporting-documents/{id}/upload",
+        "summary": "`POST /v1/supporting-documents/{id}/upload` — record the uploaded object key",
+        "operationId": "investment_supporting_documents_upload"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/tax-forms/{investment_id}/generate",
+        "summary": "`POST /v1/tax-forms/{investment_id}/generate` — generate the investor tax",
+        "operationId": "generate_tax_form"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/template/create",
+        "summary": "`POST /v1/template/create` — create a new template backed by a DocuSeal",
+        "operationId": "create_template"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/template/entity/{entity_id}",
+        "summary": "List templates for an entity.",
+        "operationId": "list_templates_by_entity"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/template/manage",
+        "summary": "`POST /v1/template/manage` — activate or archive a template.",
+        "operationId": "updateTemplateStatus"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/template/options/{entity_id}",
+        "summary": "List active template projections for an entity.",
+        "operationId": "list_template_options"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/template/reference/{reference_id}/context/{context}",
+        "summary": "Get a template by reference_id + context.",
+        "operationId": "get_template_by_reference_context"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/template/requirements",
+        "summary": "`POST /v1/template/requirements` — enumerate field requirements for one",
+        "operationId": "get_field_requirements"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/template/sign",
+        "summary": "`POST /v1/template/sign` — create a signing submission for one or more",
+        "operationId": "sign_template"
+      },
+      {
+        "method": "PUT",
+        "path": "/v1/template/status",
+        "summary": "`PUT /v1/template/status` — update a template's status (activate or archive).",
+        "operationId": "update_template_status"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/template/{id}",
+        "summary": "Get a template by ID.",
+        "operationId": "get_template"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/templating/embed-tokens",
+        "summary": "Mint a DocuSeal embed-token for in-app signing.",
+        "operationId": "mint_embed_token"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/transaction/all/card/{card_id}",
+        "summary": "",
+        "operationId": "list_transactions_by_card"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/transaction/all/{account_id}",
+        "summary": "",
+        "operationId": "list_transactions_by_account"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/transaction/attestation/support",
+        "summary": "",
+        "operationId": "get_transaction_by_attestation"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/transaction/batch",
+        "summary": "Batch lookup of transactions by ID list. POST because URLs would be too long.",
+        "operationId": "get_transactions_by_ids"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/transaction/entity/{entity_id}",
+        "summary": "",
+        "operationId": "list_transactions_by_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/transaction/{id}",
+        "summary": "",
+        "operationId": "get_transaction"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/treasury/all",
+        "summary": "",
+        "operationId": "list_all_treasuries"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/treasury/context/{context}",
+        "summary": "",
+        "operationId": "list_treasuries_by_context"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/treasury/default/{entity_id}",
+        "summary": "",
+        "operationId": "get_default_treasury"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/treasury/entity/{entity_id}",
+        "summary": "",
+        "operationId": "list_treasuries_by_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/treasury/{entity_id}/{context}",
+        "summary": "",
+        "operationId": "get_treasury_by_context"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/treasury/{id}",
+        "summary": "",
+        "operationId": "get_treasury"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/verification/proof-of-balance",
+        "summary": "`POST /v1/verification/proof-of-balance` — generate a proof-of-account-balance",
+        "operationId": "generate_proof_of_balance"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/verification/verification-letter",
+        "summary": "`POST /v1/verification/verification-letter` — generate a bank account",
+        "operationId": "generate_verification_letter"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/verification/verification-letter/organization/{organization_id}",
+        "summary": "`POST /v1/verification/verification-letter/organization/{organization_id}`",
+        "operationId": "generate_verification_letter_for_organization"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#tax",
+    "tag": "tax",
+    "title": "tax",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 6,
+    "operation_count": 7,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/v1/tax/events",
+        "summary": "GET /v1/tax/events — List tax events with optional filtering.",
+        "operationId": "list_tax_events"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/tax/events",
+        "summary": "POST /v1/tax/events — Record a tax event and compute withholding.",
+        "operationId": "create_tax_event"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/tax/events/{id}",
+        "summary": "GET /v1/tax/events/:id — Get a tax event by ID.",
+        "operationId": "get_tax_event"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/tax/obligations/{entity_id}",
+        "summary": "GET /v1/tax/obligations/:entity_id — Get tax obligation summary for an entity.",
+        "operationId": "get_tax_obligations"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/tax/report",
+        "summary": "POST /v1/tax/report — Generate a tax report for tax authority submission.",
+        "operationId": "generate_tax_report"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/tax/rules",
+        "summary": "GET /v1/tax/rules — List loaded withholding rules.",
+        "operationId": "list_withholding_rules"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/tax/withhold",
+        "summary": "POST /v1/tax/withhold — Compute withholding for an event without persisting.",
+        "operationId": "compute_withholding"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#intelligence",
+    "tag": "intelligence",
+    "title": "intelligence",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 23,
+    "operation_count": 23,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/v1/agent/good-behavior",
+        "summary": "",
+        "operationId": "get_my_good_behavior"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/agent/plan-and-execute",
+        "summary": "`POST /v1/agent/plan-and-execute` — drive a remediation plan into",
+        "operationId": "plan_and_execute_handler"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/agent/telemetry/me",
+        "summary": "`GET /v1/agent/telemetry/me` — return the calling agent's redacted",
+        "operationId": "query_my_telemetry"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/agents/me/op-history",
+        "summary": "",
+        "operationId": "get_my_op_history"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/agents/me/simulate-op",
+        "summary": "POST /v1/agents/me/simulate-op — Dry-run gas + throttle projection.",
+        "operationId": "agent_simulate_throughput_for_op"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/agents/me/unlock-proposals",
+        "summary": "",
+        "operationId": "get_my_unlock_proposals"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corpus/annotate",
+        "summary": "POST /v1/corpus/annotate -- add a regulator annotation to an observation.",
+        "operationId": "corpus_annotate"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corpus/anomalies/{entity_id}",
+        "summary": "GET /v1/corpus/anomalies/:entity_id -- anomaly flags for an entity.",
+        "operationId": "corpus_anomalies"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corpus/citations/{observation_id}",
+        "summary": "GET /v1/corpus/citations/:observation_id -- citation lineage for an observation.",
+        "operationId": "corpus_citations"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/corpus/federated/aggregate",
+        "summary": "POST /v1/corpus/federated/aggregate -- MPC-based federated cross-zone aggregation.",
+        "operationId": "federated_aggregate"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corpus/privacy/budget/{entity_id}",
+        "summary": "GET /v1/corpus/privacy/budget/:entity_id -- privacy budget status.",
+        "operationId": "privacy_budget"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corpus/retrieve",
+        "summary": "GET /v1/corpus/retrieve -- structured similarity retrieval.",
+        "operationId": "corpus_retrieve"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/corpus/retrieve/dossier",
+        "summary": "`GET /v1/corpus/retrieve/dossier` — return K most similar corpus",
+        "operationId": "retrieve_dossier"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/entities/{entity_id}/compliance/remediation-plan",
+        "summary": "`POST /v1/entities/{entity_id}/compliance/remediation-plan` —",
+        "operationId": "remediation_plan_handler"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fibers/effectiveness/summary",
+        "summary": "GET /v1/fibers/effectiveness/summary -- aggregate effectiveness across all fibers.",
+        "operationId": "fiber_effectiveness_summary"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/fibers/{id}/effectiveness",
+        "summary": "GET /v1/fibers/:id/effectiveness -- fiber effectiveness metrics.",
+        "operationId": "fiber_effectiveness"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/intelligence/entity/{entity_id}",
+        "summary": "`GET /v1/intelligence/entity/{entity_id}` — behavioral intelligence",
+        "operationId": "get_entity_intelligence"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/intelligence/regulatory-inquiry",
+        "summary": "`POST /v1/intelligence/regulatory-inquiry`",
+        "operationId": "regulatory_inquiry"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/policies",
+        "summary": "GET /v1/policies — List all registered policies.",
+        "operationId": "list_policies"
+      },
+      {
+        "method": "DELETE",
+        "path": "/v1/policies/{id}",
+        "summary": "DELETE /v1/policies/:id — Unregister a policy.",
+        "operationId": "delete_policy"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/research-tools/catalog",
+        "summary": "List all registered research-tool manifests.",
+        "operationId": "catalog"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/scheduled-actions",
+        "summary": "GET /v1/scheduled-actions — List pending scheduled actions.",
+        "operationId": "list_scheduled_actions"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/triggers",
+        "summary": "POST /v1/triggers — Submit an environmental trigger for policy evaluation.",
+        "operationId": "submit_trigger"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#compliance-report",
+    "tag": "compliance-report",
+    "title": "compliance-report",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 22,
+    "operation_count": 22,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/v1/audit/chain-integrity",
+        "summary": "GET /v1/audit/chain-integrity — Verify audit hash chain integrity.",
+        "operationId": "verify_audit_chain"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/audit/{resource_type}/{resource_id}/events",
+        "summary": "GET /v1/audit/:resource_type/:resource_id/events — Audit events for a resource.",
+        "operationId": "get_audit_events"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/corridor/{corridor_id}",
+        "summary": "GET /v1/compliance/corridor/:corridor_id — Bilateral compliance for a corridor.",
+        "operationId": "query_corridor"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/domains",
+        "summary": "GET /v1/compliance/domains — List all 23 compliance domains.",
+        "operationId": "list_domains"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/entity/{entity_id}",
+        "summary": "GET /v1/compliance/entity/:entity_id — Compliance tensor for a specific entity.",
+        "operationId": "query_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/entity/{entity_id}/decision-proofs",
+        "summary": "GET /v1/compliance/entity/:entity_id/decision-proofs — List signed no-pending",
+        "operationId": "list_decision_proofs"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/entity/{entity_id}/passport",
+        "summary": "GET /v1/compliance/entity/:entity_id/passport — Get the compliance passport for an entity.",
+        "operationId": "get_compliance_passport"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/entity/{entity_id}/passport-exchanges",
+        "summary": "GET /v1/compliance/entity/:entity_id/passport-exchanges — Cross-corridor compliance view.",
+        "operationId": "get_corridor_passport_exchanges"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/compliance/entity/{entity_id}/passport/export",
+        "summary": "POST /v1/compliance/entity/:entity_id/passport/export — Export passport for cross-zone exchange.",
+        "operationId": "export_passport_exchange"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/entity/{entity_id}/passport/integrity",
+        "summary": "GET /v1/compliance/entity/:entity_id/passport/integrity — Verify passport hash",
+        "operationId": "check_passport_chain_integrity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/entity/{entity_id}/passport/vc",
+        "summary": "GET /v1/compliance/entity/:entity_id/passport/vc — Signed passport Verifiable Credential.",
+        "operationId": "get_passport_vc"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/entity/{entity_id}/proof",
+        "summary": "`GET /v1/compliance/entity/:entity_id/proof` — Export compliance proof bundle.",
+        "operationId": "export_compliance_proof_handler"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/entity/{entity_id}/unified-proof",
+        "summary": "`GET /v1/compliance/entity/:entity_id/unified-proof` — Export unified proof.",
+        "operationId": "export_unified_proof_handler"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/mutation-journal/integrity",
+        "summary": "GET /v1/compliance/mutation-journal/integrity — Verify mutation journal hash chain.",
+        "operationId": "check_journal_integrity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/passport/{entity_id}",
+        "summary": "`GET /v1/compliance/passport/{entity_id}?purpose=banking&asof=2024-06-15`",
+        "operationId": "get_contextual_passport"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/passport/{entity_id}/bbs-proof",
+        "summary": "GET /v1/compliance/passport/:entity_id/bbs-proof — BBS+ selective disclosure.",
+        "operationId": "get_passport_bbs_proof"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/compliance/proof/verify",
+        "summary": "`POST /v1/compliance/proof/verify` — Verify a compliance proof bundle.",
+        "operationId": "verify_compliance_proof_handler"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/replay",
+        "summary": "`GET /v1/compliance/replay?entity=X&asof=2023-03-15T00:00:00Z[&purpose=banking]`",
+        "operationId": "regulatory_replay"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/report",
+        "summary": "GET /v1/compliance/report — Generate a compliance report for regulator export.",
+        "operationId": "compliance_report"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/compliance/unified-proof/verify",
+        "summary": "`POST /v1/compliance/unified-proof/verify` — Verify a unified proof bundle.",
+        "operationId": "verify_unified_proof_handler"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/compliance/verify-bbs-proof",
+        "summary": "POST /v1/compliance/verify-bbs-proof — Verify a BBS+ selective-disclosure proof.",
+        "operationId": "verify_bbs_proof"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/compliance/{jurisdiction_id}",
+        "summary": "GET /v1/compliance/:jurisdiction_id — Evaluate compliance tensor for a jurisdiction.",
+        "operationId": "query_jurisdiction"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#regulator",
+    "tag": "regulator",
+    "title": "regulator",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 25,
+    "operation_count": 25,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/v1/events/correlated",
+        "summary": "GET /v1/events/correlated — regulator replay of correlated-event stream.",
+        "operationId": "get_correlated_events"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/govos/sc/compliance-summary",
+        "summary": "GET `/v1/govos/sc/compliance-summary` — Seychelles zone compliance posture.",
+        "operationId": "govos_sc_compliance_summary"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/govos/sc/csp-activity",
+        "summary": "GET `/v1/govos/sc/csp-activity` — per-CSP filing throughput in Seychelles.",
+        "operationId": "govos_sc_csp_activity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/govos/sc/entities",
+        "summary": "GET `/v1/govos/sc/entities` — list Seychelles-incorporated entities.",
+        "operationId": "govos_sc_list_entities"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/govos/sc/entities/{id}/dossier",
+        "summary": "GET `/v1/govos/sc/entities/{id}/dossier` — Seychelles entity inspection.",
+        "operationId": "govos_sc_entity_dossier"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/govos/sc/late-filings",
+        "summary": "GET `/v1/govos/sc/late-filings` — Seychelles filings overdue.",
+        "operationId": "govos_sc_late_filings"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/govos/sc/queue",
+        "summary": "GET `/v1/govos/sc/queue` — open Seychelles inspector workitems.",
+        "operationId": "govos_sc_inspector_queue"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/compare",
+        "summary": "GET /v1/regulator/compare?pack_a=X&pack_b=Y —",
+        "operationId": "compare_packs"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/compliance/{entity_id}",
+        "summary": "GET /v1/regulator/compliance/{entity_id} — Per-entity regulator compliance query.",
+        "operationId": "entity_compliance"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/dashboard",
+        "summary": "GET /v1/regulator/dashboard — Comprehensive zone operational dashboard.",
+        "operationId": "dashboard"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/effectiveness/domain/{domain}",
+        "summary": "GET /v1/regulator/effectiveness/domain/{domain} —",
+        "operationId": "domain_effectiveness"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/effectiveness/{pack_id}/{rule_id}",
+        "summary": "GET /v1/regulator/effectiveness/{pack_id}/{rule_id} —",
+        "operationId": "rule_effectiveness"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/regulator/query/attestations",
+        "summary": "POST /v1/regulator/query/attestations — Query attestations.",
+        "operationId": "query_attestations"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/rule-proposal-queue",
+        "summary": "GET /v1/regulator/rule-proposal-queue — List pending pack-update proposals.",
+        "operationId": "list_rule_proposals"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/regulator/rule-proposal-queue/{id}/approve",
+        "summary": "POST /v1/regulator/rule-proposal-queue/{id}/approve",
+        "operationId": "approve_rule_proposal"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/regulator/rule-proposal-queue/{id}/park",
+        "summary": "POST /v1/regulator/rule-proposal-queue/{id}/park",
+        "operationId": "park_rule_proposal"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/regulator/rule-proposal-queue/{id}/reject",
+        "summary": "POST /v1/regulator/rule-proposal-queue/{id}/reject",
+        "operationId": "reject_rule_proposal"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/regulator/simulate-change",
+        "summary": "POST /v1/regulator/simulate-change — Shadow-evaluate a proposed pack edit",
+        "operationId": "simulate_change"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/summary",
+        "summary": "GET /v1/regulator/summary — Compliance summary dashboard.",
+        "operationId": "compliance_summary"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/us-de/compliance-summary",
+        "summary": "GET `/v1/regulator/us-de/compliance-summary` — Delaware zone compliance",
+        "operationId": "regulator_us_de_compliance_summary"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/us-de/csp-activity",
+        "summary": "GET `/v1/regulator/us-de/csp-activity` — per-CSP filing throughput in Delaware.",
+        "operationId": "regulator_us_de_csp_activity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/us-de/entities",
+        "summary": "GET `/v1/regulator/us-de/entities` — list Delaware-domiciled entities.",
+        "operationId": "regulator_us_de_list_entities"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/us-de/entities/{id}/dossier",
+        "summary": "GET `/v1/regulator/us-de/entities/{id}/dossier` — Delaware entity inspection.",
+        "operationId": "regulator_us_de_entity_dossier"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/us-de/late-filings",
+        "summary": "GET `/v1/regulator/us-de/late-filings` — Delaware filings overdue.",
+        "operationId": "regulator_us_de_late_filings"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/regulator/us-de/queue",
+        "summary": "GET `/v1/regulator/us-de/queue` — open Delaware inspector workitems.",
+        "operationId": "regulator_us_de_inspector_queue"
+      }
+    ]
+  },
+  {
+    "file": "openapi.json#metrics",
+    "tag": "metrics",
+    "title": "metrics",
+    "version": "2026.04",
+    "description": "",
+    "path_count": 15,
+    "operation_count": 17,
+    "operations": [
+      {
+        "method": "GET",
+        "path": "/v1/agent/throughput/{jurisdiction_id}",
+        "summary": "`GET /v1/agent/throughput/{jurisdiction_id}` — read the calling",
+        "operationId": "get_agent_throughput"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/csp-partners",
+        "summary": "",
+        "operationId": "list_partners"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/csp-partners/{id}",
+        "summary": "",
+        "operationId": "get_partner"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/csp/dashboard",
+        "summary": "CSP dashboard — aggregate view of managed entities.",
+        "operationId": "csp_dashboard"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/csp/entities",
+        "summary": "List entities managed by this CSP.",
+        "operationId": "list_csp_entities"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/csp/entities/{id}",
+        "summary": "Get entity detail (CSP-scoped).",
+        "operationId": "get_csp_entity"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/csp/entities/{id}/beneficial-owners",
+        "summary": "List beneficial owners for an entity.",
+        "operationId": "list_beneficial_owners"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/csp/entities/{id}/beneficial-owners",
+        "summary": "File a beneficial ownership declaration.",
+        "operationId": "file_beneficial_owner"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/csp/entities/{id}/beneficial-owners/batch",
+        "summary": "File beneficial ownership declarations as a batch.",
+        "operationId": "file_beneficial_owners_batch"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/csp/entities/{id}/compliance",
+        "summary": "Get entity compliance posture.",
+        "operationId": "get_entity_compliance"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/csp/entities/{id}/filings",
+        "summary": "List entity filing history.",
+        "operationId": "list_entity_filings"
+      },
+      {
+        "method": "POST",
+        "path": "/v1/csp/entities/{id}/filings",
+        "summary": "Submit a filing on behalf of an entity.",
+        "operationId": "submit_entity_filing"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/csp/vasp/{id}/compliance",
+        "summary": "Get VASP compliance detail for an entity.",
+        "operationId": "get_vasp_compliance"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/transaction/analysis/analyze/entity/end-of-day-balance/{entity_id}",
+        "summary": "",
+        "operationId": "get_eod_balances"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/transaction/analysis/analyze/entity/{entity_id}",
+        "summary": "",
+        "operationId": "get_burn_rate"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/transaction/analysis/analyze/entity/{entity_id}/daily-net",
+        "summary": "",
+        "operationId": "get_daily_net"
+      },
+      {
+        "method": "GET",
+        "path": "/v1/transaction/analysis/analyze/entity/{entity_id}/top-spenders",
+        "summary": "",
+        "operationId": "get_top_spenders"
+      }
+    ]
+  }
+]

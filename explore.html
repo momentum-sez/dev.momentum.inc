@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Network Explorer — Momentum Developers</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+
+    <!-- SEO -->
+    <meta name="description" content="Interactive Momentum Network Explorer for the current developer surface: 230 zone definitions, 23 compliance domains, 3,104 operation YAMLs, 597 OpenAPI paths, 656 operations, 1,570 schemas, and proof-shaped program flows.">
+    <meta name="author" content="Momentum">
+    <link rel="canonical" href="https://dev.momentum.inc/explore.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Network Explorer — Momentum Developers">
+    <meta property="og:description" content="Interactive terminal explorer for the current Momentum network: 23 compliance domains, 3,104 operation YAMLs, 597 OpenAPI paths, and proof-shaped write flows.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dev.momentum.inc/explore.html">
+    <meta property="og:image" content="https://dev.momentum.inc/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Network Explorer — Momentum Developers">
+    <meta name="twitter:description" content="Interactive terminal explorer for the current Momentum network: 23 domains, 3,104 operation YAMLs, 597 paths, and 656 operations.">
+    <meta name="twitter:image" content="https://dev.momentum.inc/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JP8T5J8M28"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JP8T5J8M28');
+    </script>
+
+    <!-- Adobe Fonts -->
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin>
+    <link rel="preload" href="https://use.typekit.net/zlu2quo.css" as="style">
+    <link rel="stylesheet" href="https://use.typekit.net/zlu2quo.css">
+
+    <!-- Fallback + Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/dev.css">
+    <noscript><style>.reveal{opacity:1;transform:none}.explore-terminal{display:none}.explore-noscript{display:block}</style></noscript>
+</head>
+<body class="page-explore">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="site-container">
+        <!-- HEADER -->
+        <header class="site-header">
+          <div class="container">
+            <div class="header-inner">
+              <a href="/" class="logo">Momentum</a>
+              <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">Menu</button>
+              <nav class="nav-primary" id="primary-nav" aria-label="Primary navigation">
+                <a href="/explore.html" aria-current="page">Explore</a>
+                <a href="/docs.html">Mass API</a>
+                <a href="/moxie.html">Moxie API</a>
+                <a href="https://github.com/momentum-sez">GitHub</a>
+                <a href="https://momentum.inc">momentum.inc</a>
+              </nav>
+            </div>
+          </div>
+        </header>
+
+        <main id="main">
+            <h1 class="visually-hidden">Network Explorer</h1>
+            <noscript>
+                <div class="explore-noscript" style="padding: 64px 24px; color: #e5e2df; font-family: monospace; text-align: center;">
+                    <p>The Network Explorer requires JavaScript.</p>
+                    <p style="margin-top: 16px;"><a href="https://momentum.inc/ez.html" style="color: #b89f82;">View infrastructure overview</a></p>
+                </div>
+            </noscript>
+            <section class="explore-terminal" aria-label="Network Explorer Terminal">
+                <!-- macOS chrome bar -->
+                <div class="explore-chrome">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="title">momentum &mdash; network explorer demo</span>
+                </div>
+
+                <!-- Output area -->
+                <div id="explore-output" class="explore-output" role="log" aria-live="polite" aria-label="Terminal output"></div>
+
+                <!-- Input bar -->
+                <div class="explore-input-bar">
+                    <span class="prompt" aria-hidden="true">$</span>
+                    <label for="explore-input" class="visually-hidden">Terminal command input</label>
+                    <input type="text" id="explore-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type help to get started">
+                </div>
+
+                <!-- CTA bar -->
+                <div class="explore-cta-bar" aria-label="Developer links">
+                    <a href="/">For Builders</a>
+                    <span class="explore-cta-sep" aria-hidden="true">&middot;</span>
+                    <a href="/docs.html">Mass API reference</a>
+                    <span class="explore-cta-sep" aria-hidden="true">&middot;</span>
+                    <a href="mailto:developers@momentum.inc">Request developer access</a>
+                </div>
+
+                <!-- Mobile quick-command buttons -->
+                <div class="explore-mobile-cmds" aria-label="Quick commands">
+                    <button type="button" data-cmd="entity incorporate --jurisdiction us-de">incorporate</button>
+                    <button type="button" data-cmd="demo adgm sg">demo</button>
+                    <button type="button" data-cmd="sdk entity create">sdk</button>
+                    <button type="button" data-cmd="write-path">write-path</button>
+                    <button type="button" data-cmd="operation">operations</button>
+                    <button type="button" data-cmd="status">status</button>
+                    <button type="button" data-cmd="security">security</button>
+                    <button type="button" data-cmd="govos adgm">govos</button>
+                    <button type="button" data-cmd="help">help</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER (hidden via CSS on page-explore, present for crawlers) -->
+        <footer class="site-footer">
+          <div class="container">
+            <div class="footer-inner">
+              <div class="footer-contact">
+                <p class="footer-label">Developer Inquiries</p>
+                <a href="mailto:developers@momentum.inc">developers@momentum.inc</a>
+                <p class="footer-secondary">Saadiyat Island, Abu Dhabi &middot; Miami, USA &middot; Cape Town, South Africa &middot; Shanghai, China</p>
+              </div>
+              <nav class="footer-nav" aria-label="Footer">
+                <a href="/explore.html">Explore</a>
+                <a href="/docs.html">Mass API</a>
+                <a href="/moxie.html">Moxie API</a>
+                <a href="https://momentum.inc/thesis.html">Thesis</a>
+                <a href="https://momentum.inc/ez.html">Infrastructure</a>
+                <a href="https://momentum.inc/team.html">Team</a>
+              </nav>
+            </div>
+            <div class="footer-legal">
+              <p>The materials on this website are for illustration and discussion purposes only and do not constitute an offer to sell, or a solicitation of an offer to buy, any securities or interests. Any such offering may be made only to eligible investors via one or more confidential offering documents. Past performance is not indicative of future results. &copy; 2026 Momentum</p>
+            </div>
+          </div>
+        </footer>
+    </div>
+
+    <script src="/site.js" defer></script>
+    <script src="/explore.js" defer></script>
+</body>
+</html>

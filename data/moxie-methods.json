@@ -1,0 +1,1031 @@
+{
+ "_generated": "tools/extract-portal-data.sh \u2014 do not hand-edit",
+ "source": "moxie/crates/moxie-rpc/src/limits.rs::METHOD_CLASSIFICATION",
+ "extracted_at": "2026-06-12",
+ "total": 254,
+ "by_class": {
+  "Public": 163,
+  "AuthWrite": 74,
+  "AuthAdmin": 14,
+  "SignedAdmin": 1,
+  "Subscription": 2
+ },
+ "methods": [
+  {
+   "method": "moxie_addIpEdge",
+   "class": "SignedAdmin"
+  },
+  {
+   "method": "moxie_adminCreatePool",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_adminMint",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_ammSwap",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_auctionCommit",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_auctionCreate",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_auctionReveal",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_blockNumber",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_buildCertifiedTerminalPayload",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_buildTransaction",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_chainId",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_challengeComplete",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_challengeCreate",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_claimsDefine",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_claimsGet",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_claimsList",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_claimsOrderSubmit",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_claimsPreflight",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_clearinghouseDeposit",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_clearinghouseWithdraw",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_conditionalOrder",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_consensusHealth",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_createContinuousMarket",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_createEvent",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_createStandaloneMarket",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_deregisterMaker",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_deriveAddress",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_deriveId",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_dropClaim",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_dropCreate",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_emergencyHalt",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_ephemeralBuy",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_ephemeralCreate",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_ephemeralResolve",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_ephemeralSell",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_estimateBondPerpOffset",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_estimateCounterpartyBeliefIdentifiability",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_estimateCrossGameLift",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_estimateGas",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_estimateMarginWithCounterpartyOverlay",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_estimateSettlementBatch",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_evmCall",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_exportRegulatorLedger",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_faucet",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_gasFeeData",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_get24hStats",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getAccountJurisdiction",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getAccountReactions",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getAdmissibleObligationTransitions",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getArchiveEntry",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getAuctions",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getBalance",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getBlock",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getBondProduct",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getBrandExperiences",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getBrandRegistry",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getBrands",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCalibration",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCapitalBuckets",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getChallenges",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCircuitBreaker",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaimAmmPool",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaimAmmPriceStats",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaimAmmSwapHistory",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaimAmmTwap",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaimBestExecution",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaimOrderBook",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaimOrderMatchHistory",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaimOrderMatchTwap",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaimOrderMatchVwap",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaimOrderbook",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaimUnifiedReferencePrice",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getClaims",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCompoundCycleState",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getConservationReport",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getContagionBarrierState",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getContingentOrders",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getContinuousLpPosition",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getContinuousLpPositionsByMarket",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getContinuousLpPositionsByOwner",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getContinuousMarket",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCorridorQualities",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCounterpartyBeliefImages",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCounterpartyCorrelationMatrix",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCouplingGovernorCommitment",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCouplingGovernorGuards",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCrossGameCovarianceSnapshots",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCrossGameMargin",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getCrossMargin",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getDrops",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getEphemeralMarkets",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getEvents",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getExecutableDepthCertificates",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getForfeitedStakes",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getGovernanceProposals",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getGraduationProposals",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getGuardians",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getInsuranceFund",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getInvariantReport",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getIpGraph",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getKycLevel",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getLeaderboard",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getLiquidityEfficiencySnapshot",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getMakerObligation",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getMarketMakers",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getMarketStages",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getMarkets",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getMarketsFrozenThisBlock",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getMerchandise",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getNonce",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getOAuthJtiChain",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getOAuthJtiEntry",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getOrderBook",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getOrders",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPendingClearings",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPerpMarkets",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPerpPosition",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPersona",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPersonaHoldings",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPersonas",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPoolStats",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPoolVolume",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPools",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPositions",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPositionsDetailed",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPostReactions",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPredictionOdds",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getPriceHistory",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getProtocolStats",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getReceipt",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getReceiptsForBlock",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getRecognizedCorridors",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getRecoveryStatus",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getReleaseRecoveryAuthorizations",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getReputation",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getResolvedContinuousMarket",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getRevenuePool",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getRiskSnapshots",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getSocialFeed",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getSocialPosts",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getStakes",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getStateRoot",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getSupplyInfo",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTerminalHotMarketStatus",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTerminalKernelRoot",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTerminalKernelState",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTerminalRelianceInstruments",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTerminalTemplatePacks",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTickets",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTierChangesThisBlock",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTokenBalances",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTokenPrice",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTokenTemperature",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTransactionHistory",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getTransactionReceipt",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getUtilityPoints",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getValidators",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getVault",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_getVeLock",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_governanceCastVote",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_governanceSubmit",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_graduationPropose",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_graduationVote",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_health",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_lowerClaimGraph",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_marginCall",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_merchFulfill",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_merchOrder",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_metrics",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_oracleAttestation",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_payoffsCanonicalHash",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_payoffsDeclare",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_payoffsLibrary",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_payoffsValidate",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_pdcfBundleCanonicalHash",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_peerCount",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_pendingTransactionCount",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_personaBeliefUpdate",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_personaBuy",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_personaBuyCost",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_personaCreate",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_personaGraduate",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_personaManage",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_personaSell",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_personaSellProceeds",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_positionsApplyDelta",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_positionsConservationCheck",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_positionsForClaim",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_predictionMint",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_predictionSettle",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_predictionTrade",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_previewClaimMultiHopSwap",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_previewClaimOrderRouting",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_priceVectorsCanonical",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_priceVectorsGradient",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_provideContinuousLiquidity",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_pruneResolvedContinuousMarkets",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_purchaseMerch",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_quoteContinuous",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingAdminLockPool",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_racingAdminOpenPool",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_racingAdminPostTreasuryLedgerEntry",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_racingAdminSettlePool",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_racingAdminSubmitResultVersion",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_racingAdminUpsertRaceCard",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_racingAdminVoidRace",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_racingGetBet",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingGetBetsByBettor",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingGetDividends",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingGetEpochCommitment",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingGetJockey",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingGetJockeyChallengeLeaderboard",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingGetPool",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingGetRace",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingGetRaceDay",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingGetSettlementReceipt",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingListRaceDays",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingListSealedEpochs",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_racingPlaceBet",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_racingPreviewBet",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_registerMaker",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_resolveContinuousMarket",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_resolveEvent",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_revealSealedFee",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_revenueDeposit",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_revenueDistribute",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_search",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_sendRawTransaction",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_setKycLevel",
+   "class": "AuthAdmin"
+  },
+  {
+   "method": "moxie_socialPost",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_socialReact",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_spotOrder",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_stake",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_stakeExit",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_stakeQuery",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_stakeUnjail",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_submitEventAttestation",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_submitMassAttestation",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_submitSettlementBatch",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_submitSigned",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_subscribe",
+   "class": "Subscription"
+  },
+  {
+   "method": "moxie_swapContinuous",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_syncStatus",
+   "class": "Public"
+  },
+  {
+   "method": "moxie_ticketCreate",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_ticketPurchase",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_ticketRedeem",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_transfer",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_unstake",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_unsubscribe",
+   "class": "Subscription"
+  },
+  {
+   "method": "moxie_utilityAccrue",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_utilityRedeem",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_veLock",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_veUnlock",
+   "class": "AuthWrite"
+  },
+  {
+   "method": "moxie_withdrawContinuousLiquidity",
+   "class": "AuthWrite"
+  }
+ ]
+}

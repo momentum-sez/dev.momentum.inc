@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Developer Documentation — Momentum</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+
+    <!-- SEO -->
+    <meta name="description" content="Build company operations into your product with the Mass API. Explore formation, compliance, treasury, governance, and audit, plus Moxie and the open-source Stack.">
+    <meta name="author" content="Momentum">
+    <link rel="canonical" href="https://dev.momentum.inc/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Developer Documentation — Momentum">
+    <meta property="og:description" content="Build company operations into your product. Documentation for Mass, Moxie, and the open-source Stack.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dev.momentum.inc/">
+    <meta property="og:image" content="https://dev.momentum.inc/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Developer Documentation — Momentum">
+    <meta name="twitter:description" content="Build company operations into your product. Documentation for Mass, Moxie, and the open-source Stack.">
+    <meta name="twitter:image" content="https://dev.momentum.inc/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JP8T5J8M28"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JP8T5J8M28');
+    </script>
+
+    <!-- Adobe Fonts -->
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin>
+    <link rel="preload" href="https://use.typekit.net/zlu2quo.css" as="style">
+    <link rel="stylesheet" href="https://use.typekit.net/zlu2quo.css">
+
+    <!-- Fallback + Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/dev.css">
+    <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+<body class="page-dev page-dev-home">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="site-container">
+        <!-- HEADER -->
+        <header class="site-header">
+          <div class="container">
+            <div class="header-inner">
+              <a href="/" class="logo">Momentum</a>
+              <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">Menu</button>
+              <nav class="nav-primary" id="primary-nav" aria-label="Primary navigation">
+                <a href="/explore.html">Explore</a>
+                <a href="/docs.html">Mass API</a>
+                <a href="/moxie.html">Moxie API</a>
+                <a href="https://github.com/momentum-sez/stack">GitHub</a>
+                <a href="https://momentum.inc">momentum.inc</a>
+              </nav>
+            </div>
+          </div>
+        </header>
+
+        <main id="main">
+            <!-- HERO -->
+            <section class="hero dev-home-hero">
+                <div class="container dev-home-grid">
+                    <div class="hero-content">
+                        <span class="hero-eyebrow">Momentum for developers</span>
+                        <h1 class="hero-title">Run companies through an API.</h1>
+                        <p class="hero-subtitle">Mass creates and operates legal entities, businesses, and institutions. Build formation, identity, compliance, treasury, governance, and audit into your product.</p>
+                        <p class="dev-home-context">Its AI-native operating system automates the ongoing work of an organization across jurisdictions, so smaller teams can run more of it.</p>
+                        <div class="dev-home-actions">
+                            <a href="/docs.html#quickstart">Use this request <span aria-hidden="true">&rarr;</span></a>
+                            <a href="/docs.html">Read the API reference</a>
+                        </div>
+                    </div>
+                    <div class="dev-home-example">
+                        <span class="dev-home-label">01 &middot; Read the operating record</span>
+                    <div class="code-panel">
+                        <div class="code-block-header">
+                            <span class="title">HTTP &middot; read request</span>
+                        </div>
+                        <pre class="code-block"><code><span class="code-comment"># Use your deployment URL, token, and entity UUID.</span>
+curl <span class="code-string">"$MASS_BASE_URL/v1/entities/$MASS_ENTITY_ID/dossier"</span> \
+  -H <span class="code-string">"Authorization: Bearer $MASS_TOKEN"</span></code></pre>
+                    </div>
+                        <dl class="dev-request-inputs">
+                            <div><dt>Deployment</dt><dd>Your Mass API origin</dd></div>
+                            <div><dt>Authority</dt><dd>Bearer token with <code>entities:read</code> and access to the entity</dd></div>
+                            <div><dt>Subject</dt><dd>The entity&rsquo;s UUID</dd></div>
+                        </dl>
+                        <a href="mailto:developers@momentum.inc">Request development credentials <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dev-home-record" aria-labelledby="record-heading">
+                <div class="container">
+                    <header class="section-header">
+                        <span class="section-eyebrow">02 &middot; Inspect the result</span>
+                        <h2 class="section-title" id="record-heading">One entity. Its records and evidence.</h2>
+                        <p class="dev-record-intro">The dossier assembles these fields for your application or agent. Optional records appear when data exists for the entity.</p>
+                    </header>
+                    <dl class="dev-record-fields">
+                        <div><dt><code>entity</code><code>board</code><code>cap_table</code><code>identities</code></dt><dd><h3>Organization and ownership</h3><p>Read the entity, its board, its ownership table, and identity records.</p><a href="/docs.html#entities">Entity operations <span aria-hidden="true">&rarr;</span></a></dd></div>
+                        <div><dt><code>compliance_passport</code><code>corridor_acceptances</code><code>corridor_exchange_outcomes</code></dt><dd><h3>Compliance and recognition</h3><p>Inspect compliance evaluations and the decisions received from connected jurisdictions.</p><a href="/docs.html#compliance">Compliance reference <span aria-hidden="true">&rarr;</span></a></dd></div>
+                        <div><dt><code>passport_chain_integrity</code><code>recent_attestations</code><code>consolidated_at</code></dt><dd><h3>Evidence and time</h3><p>Read the passport integrity result, recent attestations, and the time the dossier was assembled.</p><a href="/docs.html#credentials">Credentials and evidence <span aria-hidden="true">&rarr;</span></a></dd></div>
+                    </dl>
+                </div>
+            </section>
+
+            <!-- RESOURCES -->
+            <section class="dev-home-resources">
+                <div class="container">
+                    <header class="section-header" style="margin-bottom: var(--space-6);">
+                        <span class="section-eyebrow">Continue building</span>
+                        <h2 class="section-title">Operations, agents, and deployments</h2>
+                    </header>
+
+                    <div class="resource-list">
+                        <a href="/docs.html#quickstart" class="resource-item">
+                            <span class="resource-title">Mass API</span>
+                            <span class="resource-meta">Read records, scope authority, and submit operations</span>
+                        </a>
+                        <a href="/explore.html" class="resource-item">
+                            <span class="resource-title">Network explorer</span>
+                            <span class="resource-meta">Browse illustrative workflows in a terminal demo</span>
+                        </a>
+                        <a href="/docs.html#sdks" class="resource-item">
+                            <span class="resource-title">Mass SDK</span>
+                            <span class="resource-meta">Client libraries for TypeScript, Go, and Python</span>
+                        </a>
+                        <a href="/configure.html" class="resource-item">
+                            <span class="resource-title">Zone Configurator</span>
+                            <span class="resource-meta">Select modules and share a deployment configuration</span>
+                        </a>
+                        <a href="/docs.html#mcp-tools" class="resource-item">
+                            <span class="resource-title">MCP Server</span>
+                            <span class="resource-meta">Connect AI agents to Mass operations and records</span>
+                        </a>
+                        <a href="/moxie.html" class="resource-item">
+                            <span class="resource-title">Moxie API</span>
+                            <span class="resource-meta">Clear and settle claims through an SDK</span>
+                        </a>
+                        <a href="https://github.com/momentum-sez/stack" class="resource-item">
+                            <span class="resource-title">Stack</span>
+                            <span class="resource-meta">The open-source zone operator kit</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+          <div class="container">
+            <div class="footer-inner">
+              <div class="footer-contact">
+                <p class="footer-label">Developer Inquiries</p>
+                <a href="mailto:developers@momentum.inc">developers@momentum.inc</a>
+                <p class="footer-secondary">Saadiyat Island, Abu Dhabi &middot; Miami, USA &middot; Cape Town, South Africa &middot; Shanghai, China</p>
+              </div>
+              <nav class="footer-nav" aria-label="Footer">
+                <a href="/explore.html">Explore</a>
+                <a href="/docs.html">Mass API</a>
+                <a href="/moxie.html">Moxie API</a>
+                <a href="https://momentum.inc/thesis.html">Thesis</a>
+                <a href="https://momentum.inc/ez.html">Infrastructure</a>
+                <a href="https://momentum.inc/team.html">Team</a>
+              </nav>
+            </div>
+            <div class="footer-legal">
+              <p>The materials on this website are for illustration and discussion purposes only and do not constitute an offer to sell, or a solicitation of an offer to buy, any securities or interests. Any such offering may be made only to eligible investors via one or more confidential offering documents. Past performance is not indicative of future results. &copy; 2026 Momentum</p>
+            </div>
+          </div>
+        </footer>
+    </div>
+
+    <script src="/site.js" defer></script>
+</body>
+</html>

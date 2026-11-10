@@ -1,0 +1,972 @@
+/* dev.css — Dark theme for dev.momentum.inc
+   ═══════════════════════════════════════════
+   Uses the SAME terminal palette as explore.html (styles.css).
+   No variable overrides. Just maps --ink/--paper to the existing
+   terminal tokens so the docs page renders dark.
+   ═══════════════════════════════════════════ */
+
+/* ── Map light-theme tokens to terminal palette ── */
+.page-dev {
+    --ink:         var(--terminal-text);
+    --ink-muted:   rgba(229, 226, 223, 0.7);
+    --ink-subtle:  var(--terminal-dim);
+    --ink-faint:   rgba(229, 226, 223, 0.35);
+    --ink-ghost:   rgba(229, 226, 223, 0.2);
+    --ink-whisper: rgba(255, 255, 255, 0.08);
+    --ink-hint:    rgba(255, 255, 255, 0.05);
+    --terminal-bg: var(--terminal-deep);
+    --paper:       var(--terminal-deep);
+    --paper-dim:   var(--terminal-deep);
+    --paper-hover: rgba(255, 255, 255, 0.04);
+    --navy:        var(--terminal-text);
+    --rule:        rgba(255, 255, 255, 0.06);
+    --selection-bg: rgba(255, 255, 255, 0.12);
+    --color-live:  #8db88d;
+
+    background: var(--terminal-deep);
+    color: var(--terminal-text);
+    scrollbar-color: rgba(255, 255, 255, 0.06) transparent;
+}
+
+.page-dev::after { display: none; }
+
+/* ── Safe-area cover for iOS ── */
+.page-dev::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: env(safe-area-inset-top, 0px);
+    background: var(--terminal-deep);
+    z-index: var(--z-header);
+    pointer-events: none;
+}
+
+/* ── All page sections: same surface ── */
+.page-dev main,
+.page-dev .docs-hero,
+.page-dev .docs-quickstart-section,
+.page-dev .docs-ref,
+.page-dev .article-header,
+.page-dev .article-content {
+    background: var(--terminal-deep);
+}
+
+/* ── Header ── */
+.page-dev .site-header {
+    background: rgba(12, 11, 10, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: none;
+}
+.page-dev .site-header.scrolled {
+    background: rgba(12, 11, 10, 0.98);
+}
+.page-dev .site-header .logo { color: var(--terminal-text); }
+.page-dev .site-header .logo:hover { color: var(--terminal-dim); }
+.page-dev .site-header .nav-primary a {
+    color: var(--terminal-dim);
+    background-image: linear-gradient(var(--terminal-dim), var(--terminal-dim));
+}
+.page-dev .site-header .nav-primary a:hover,
+.page-dev .site-header .nav-primary a[aria-current="page"] {
+    color: var(--terminal-text);
+    background-image: linear-gradient(var(--terminal-text), var(--terminal-text));
+}
+.page-dev .site-header .nav-toggle { color: var(--terminal-text); }
+
+/* ── Hero ── */
+.page-dev .hero { padding: var(--space-12) 0 var(--space-8); }
+.page-dev .hero-eyebrow { color: var(--terminal-dim); border-bottom-color: transparent; }
+.page-dev .hero-title { color: var(--terminal-text); }
+.page-dev .hero-subtitle { color: var(--terminal-dim); }
+
+/* Public developer pages must never depend on JS/scroll-triggered reveals for
+   first paint. Keep content visible immediately; motion is enhancement only. */
+.page-dev .hero-eyebrow,
+.page-dev .hero-title,
+.page-dev .hero-title.word-split,
+.page-dev .hero-title .word,
+.page-dev .hero-subtitle,
+.page-dev .reveal,
+.page-dev .reveal-on-scroll,
+.page-dev .stagger-children > * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* ── Sections ── */
+.page-dev .section-eyebrow { color: var(--terminal-dim); border-bottom-color: transparent; }
+.page-dev .section-title { color: var(--terminal-text); }
+.page-dev .section-subtitle { color: var(--terminal-dim); }
+
+/* ── Resource cards ── */
+.page-dev .resource-item {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+    transition: border-color 0.2s, background 0.2s;
+}
+.page-dev .resource-item:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+}
+.page-dev .resource-title { color: var(--terminal-text); }
+.page-dev .resource-meta { color: var(--terminal-dim); }
+
+/* ── Deployments ── */
+.page-dev .deployments-section {
+    background: var(--terminal-deep);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── Footer ── */
+.page-dev .site-footer {
+    background: var(--terminal-deep);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.page-dev .footer-label { color: var(--terminal-dim); }
+.page-dev .footer-contact > a {
+    color: var(--terminal-text);
+    background-image: linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.08));
+}
+.page-dev .footer-contact > a:hover { color: var(--terminal-dim); }
+.page-dev .footer-secondary { color: var(--terminal-dim); }
+.page-dev .footer-nav a { color: var(--terminal-dim); background-image: none; }
+.page-dev .footer-nav a:hover { color: var(--terminal-text); }
+.page-dev .footer-legal { border-top-color: rgba(255,255,255,0.06); }
+.page-dev .footer-legal p { color: rgba(255,255,255,0.15); }
+
+/* ── Focus ── */
+.page-dev :focus-visible { outline-color: var(--terminal-text); }
+.page-dev ::selection { background: rgba(255,255,255,0.12); color: var(--terminal-text); }
+.page-dev .skip-link:focus { background: var(--terminal-deep); color: var(--terminal-text); }
+
+/* ── Code blocks — NO highlights, NO background pills ── */
+.page-dev .code-block span { background: none !important; }
+.page-dev .code-block code { background: none; }
+.page-dev .code-comment { color: var(--terminal-dim); }
+.page-dev .code-cli { background: none; border: none; }
+
+/* ── Hero-mode header ── */
+.site-header--hero {
+    position: fixed; width: 100%; z-index: 100;
+    background: transparent; border-bottom-color: transparent; box-shadow: none;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+    .page-dev .site-header {
+        position: fixed;
+        width: 100%;
+        background: rgba(12, 11, 10, 1);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        padding: var(--space-1) 0;
+        padding-top: max(var(--space-1), env(safe-area-inset-top, 0px));
+    }
+    .page-dev main {
+        padding-top: calc(env(safe-area-inset-top, 0px) + 40px);
+    }
+    .page-dev .nav-primary { background: rgba(12, 11, 10, 0.98); }
+    .page-dev .nav-primary a { color: var(--terminal-dim); }
+
+    /* Hero: stop eating the viewport. Desktop is unchanged. */
+    .page-dev .hero { padding: var(--space-4) 0 var(--space-4); }
+    .page-dev .hero-eyebrow { margin-bottom: var(--space-1); }
+    .page-dev .hero-title {
+        font-size: clamp(30px, 7.2vw + 4px, 38px);
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        max-width: none;
+        margin-bottom: var(--space-2);
+    }
+    .page-dev .hero-subtitle {
+        font-size: 15px;
+        line-height: 1.5;
+        max-width: none;
+    }
+
+    /* Quickstart code block: tighter chrome so code breathes on narrow screens. */
+    .page-dev .code-block {
+        font-size: 12px;
+        line-height: 1.7;
+        padding: var(--space-3) var(--space-2);
+    }
+    .page-dev .code-block-header {
+        padding: var(--space-1) var(--space-2);
+    }
+}
+
+@media (max-width: 480px) {
+    /* The base stylesheet's <480 rule pins .hero-title to max-width: 12ch,
+       which forces every word onto its own line. Keep desktop behavior
+       while restoring natural wrapping on small screens. */
+    .page-dev .hero-title {
+        max-width: none;
+        font-size: clamp(28px, 7vw + 2px, 34px);
+    }
+    .page-dev .hero-subtitle {
+        max-width: none;
+        font-size: 14.5px;
+    }
+    .page-dev .code-block {
+        font-size: 11.5px;
+        padding: var(--space-3) var(--space-2);
+    }
+}
+
+/* ── Zone Configurator — dark controls ── */
+.page-dev .configure-section-label { color: var(--terminal-dim); }
+
+.page-dev .configure-preset {
+    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+}
+.page-dev .configure-preset:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+}
+.page-dev .configure-preset.active {
+    border-color: var(--terminal-accent);
+    background: rgba(139, 76, 58, 0.12);
+}
+.page-dev .configure-preset-name { color: var(--terminal-text); }
+.page-dev .configure-preset-detail { color: var(--terminal-dim); }
+
+.page-dev .configure-toggle {
+    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+}
+.page-dev .configure-toggle:hover { background: rgba(255, 255, 255, 0.05); }
+.page-dev .configure-toggle.active {
+    border-color: #8db88d;
+    background: rgba(141, 184, 141, 0.08);
+}
+.page-dev .configure-toggle-name { color: var(--terminal-text); }
+.page-dev .configure-toggle-syscall { color: var(--terminal-dim); }
+.page-dev .configure-toggle-indicator {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+}
+.page-dev .configure-toggle-indicator::after { background: rgba(255, 255, 255, 0.2); }
+.page-dev .configure-toggle.active .configure-toggle-indicator {
+    background: rgba(141, 184, 141, 0.15);
+    border-color: #8db88d;
+}
+.page-dev .configure-toggle.active .configure-toggle-indicator::after { background: #8db88d; }
+
+.page-dev .configure-group {
+    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+}
+.page-dev .configure-group-header:hover { background: rgba(255, 255, 255, 0.05); }
+.page-dev .configure-group-name { color: var(--terminal-text); }
+.page-dev .configure-group-count { color: var(--terminal-dim); }
+.page-dev .configure-module:hover { background: rgba(255, 255, 255, 0.05); }
+.page-dev .configure-module-check {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+}
+.page-dev .configure-module.active .configure-module-check {
+    background: #8db88d;
+    border-color: #8db88d;
+}
+.page-dev .configure-module-name { color: var(--terminal-dim); }
+
+.page-dev .configure-tier {
+    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+}
+.page-dev .configure-tier:hover { background: rgba(255, 255, 255, 0.05); }
+.page-dev .configure-tier.active {
+    border-color: var(--terminal-accent);
+    background: rgba(139, 76, 58, 0.12);
+}
+.page-dev .configure-tier-name { color: var(--terminal-text); }
+.page-dev .configure-tier-domains { color: var(--terminal-dim); }
+
+/* ── Explore page ── */
+.page-explore .site-header .nav-primary a { color: var(--terminal-dim); }
+.page-explore .site-header .nav-primary a:hover,
+.page-explore .site-header .nav-primary a[aria-current="page"] { color: var(--terminal-text); }
+
+/* ── Docs pages (Moxie / Mass API): hero + prose + sidebar scroll-spy ── */
+
+/* Hero occupies the full content column instead of a narrow left
+   gutter. The dev docs pages don't carry a right-side hero visual,
+   so the default `.hero-content { max-width: 52ch }` leaves an
+   empty right half on wide screens. Widen on docs pages so the
+   prose fills more of the viewport naturally. */
+.page-dev .docs-hero .hero-content {
+    max-width: 72ch;
+}
+.page-dev .docs-hero .hero-title {
+    max-width: 22ch;
+}
+.page-dev .docs-hero .hero-subtitle {
+    max-width: 70ch;
+}
+
+/* Inline <code> in prose must not visually dwarf the surrounding
+   serif. Garamond Premier Pro has a short x-height; JetBrains Mono
+   has a tall x-height; at equal font-size the mono looks dramatically
+   bigger. Shrink the inline-code size to match, keep the mono font
+   so it still reads as code. This applies only to INLINE <code> in
+   running prose — block code inside .code-panel / .code-block / <pre>
+   is unchanged. */
+.page-dev .hero-subtitle code,
+.page-dev .section-subtitle code,
+.page-dev .docs-desc code,
+.page-dev .docs-ref p code,
+.page-dev .docs-ref li code,
+.page-dev .docs-ref td code,
+.page-dev main p > code,
+.page-dev main li > code,
+.page-dev main td > code,
+.page-dev main h1 code,
+.page-dev main h2 code,
+.page-dev main h3 code,
+.page-dev main h4 code,
+.page-dev .resource-item code,
+.page-dev .section-eyebrow code {
+    font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+    font-size: 0.82em;
+    letter-spacing: 0;
+    line-height: inherit;
+    padding: 0;
+    background: none;
+    color: inherit;
+}
+
+/* Sidebar active-link styling — the scroll-spy in site.js toggles
+   the .active class onto whichever section the reader is currently
+   viewing. Highlight with the existing terminal accent. */
+.page-dev .docs-sidebar-link {
+    color: var(--terminal-dim);
+    font-size: 13px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+.page-dev .docs-sidebar-link.active {
+    color: var(--terminal-text);
+}
+
+.page-dev .docs-sidebar-label {
+    color: var(--terminal-dim);
+    font-size: 13px;
+}
+
+.page-dev .docs-desc > p {
+    color: var(--terminal-text);
+    font-size: 17px;
+    line-height: 1.65;
+}
+
+.page-dev .docs-desc h4 {
+    font-size: 15px;
+    color: var(--terminal-text);
+}
+
+/* ── Align all docs sections to the same column grid ── */
+
+/* The Quick Start section lives in a narrow `.container` (max 1120),
+   the API reference lives inside `.docs-ref` (100vw with an internal
+   1440 max + 200px sidebar column). The inner `.docs-split`
+   boundaries (50/50 prose|code) therefore fall at different screen
+   x-positions, producing the misaligned vertical lines between
+   sections.
+
+   Remove the hard 1px border between the description and code
+   columns — the `--terminal-deep` background on `.docs-code-col`
+   already distinguishes it from the prose column. Without the
+   border, the section-to-section column-edge misalignment is no
+   longer a visible ruler. */
+.page-dev .docs-code-col {
+    border-left: none;
+}
+
+/* Promote the Quick Start section into the same full-viewport
+   gutter as `.docs-ref` so the inner columns share a max-width
+   and their 50/50 split boundaries fall at the same x-position
+   between sections. */
+.page-dev .docs-quickstart-section {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+    background: var(--terminal-bg);
+}
+.page-dev .docs-quickstart-section > .container {
+    max-width: 1440px;
+    padding-left: 200px;
+    padding-right: 0;
+}
+
+/* Quick-Start section headings sit at the same x as the
+   Introduction heading inside `.docs-ref-content`. */
+.page-dev .docs-quickstart-section .section-eyebrow,
+.page-dev .docs-quickstart-section .section-title,
+.page-dev .docs-quickstart-section .section-subtitle {
+    max-width: 72ch;
+}
+
+@media (max-width: 1024px) {
+    .page-dev .docs-quickstart-section {
+        width: auto;
+        margin-left: 0;
+    }
+    .page-dev .docs-quickstart-section > .container {
+        padding-left: var(--gutter, 24px);
+        padding-right: var(--gutter, 24px);
+    }
+}
+
+/* ── Moxie API page: product-led hierarchy before dense reference ── */
+.page-moxie-docs .site-container,
+.page-moxie-docs main {
+    min-width: 0;
+    overflow-x: hidden;
+}
+
+.page-moxie-docs .moxie-dev-hero {
+    padding: 88px 0 78px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.page-moxie-docs .moxie-dev-hero .container,
+.page-moxie-docs .moxie-product-section > .container {
+    max-width: 1280px;
+    padding-left: clamp(24px, 4vw, 56px);
+    padding-right: clamp(24px, 4vw, 56px);
+}
+
+.page-moxie-docs .moxie-dev-hero .hero-content {
+    max-width: 1160px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.94fr) minmax(390px, 0.78fr);
+    column-gap: 84px;
+    align-items: end;
+}
+
+.page-moxie-docs p {
+    text-wrap: auto;
+    overflow-wrap: break-word;
+}
+
+.page-moxie-docs .moxie-dev-hero .hero-eyebrow,
+.page-moxie-docs .moxie-product-section .section-eyebrow {
+    font-family: var(--font-caption);
+    font-size: 12px;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: rgba(229, 226, 223, 0.56);
+    margin-bottom: var(--space-3);
+}
+
+.page-moxie-docs .moxie-dev-hero .hero-title {
+    grid-column: 1;
+    max-width: 12.5ch;
+    font-size: 82px;
+    line-height: 0.96;
+    letter-spacing: 0;
+    margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.page-moxie-docs .moxie-dev-hero .hero-subtitle {
+    grid-column: 2;
+    max-width: 520px;
+    font-size: 23px;
+    line-height: 1.5;
+    color: rgba(229, 226, 223, 0.78);
+    margin-bottom: 8px;
+}
+
+.page-moxie-docs .moxie-product-section {
+    width: auto;
+    margin-left: 0;
+    padding: clamp(72px, 8vw, 118px) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+}
+
+.page-moxie-docs .moxie-product-section .section-title {
+    max-width: 920px;
+    font-size: 58px;
+    line-height: 1;
+    letter-spacing: 0;
+    margin-bottom: clamp(18px, 2vw, 28px);
+}
+
+.page-moxie-docs .moxie-product-section .section-subtitle {
+    max-width: 820px;
+    font-size: 22px;
+    line-height: 1.52;
+    color: rgba(229, 226, 223, 0.75);
+    margin-bottom: clamp(42px, 5vw, 72px);
+}
+
+.page-moxie-docs .moxie-product-section .docs-split {
+    grid-template-columns: minmax(340px, 0.9fr) minmax(440px, 1.1fr);
+    align-items: start;
+    gap: clamp(32px, 5vw, 76px);
+    padding: clamp(34px, 4.2vw, 62px) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.page-moxie-docs .moxie-product-section .docs-split:first-of-type {
+    padding-top: 0;
+    border-top: none;
+}
+
+.page-moxie-docs .moxie-product-section .docs-desc,
+.page-moxie-docs .moxie-product-section .docs-code-col {
+    padding: 0;
+}
+
+.page-moxie-docs .moxie-product-section .docs-code-col {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    background: transparent;
+}
+
+.page-moxie-docs .moxie-product-section .docs-desc h4 {
+    font-family: var(--font-display);
+    font-size: 36px;
+    line-height: 1.08;
+    letter-spacing: 0;
+    font-variant-caps: normal;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "calt" 1;
+    color: var(--terminal-text);
+    margin: 0 0 var(--space-3);
+}
+
+.page-moxie-docs .moxie-product-section .docs-desc > p {
+    max-width: 48ch;
+    font-size: 20px;
+    line-height: 1.58;
+    color: rgba(229, 226, 223, 0.75);
+    margin-bottom: var(--space-3);
+}
+
+.page-moxie-docs .moxie-product-section .docs-example-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: rgba(229, 226, 223, 0.48);
+    margin-bottom: var(--space-2);
+}
+
+.page-moxie-docs .moxie-product-section .code-panel {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.018);
+}
+
+.page-moxie-docs .moxie-product-section .docs-code-col .code-block-header {
+    display: flex;
+}
+
+.page-moxie-docs .moxie-product-section .code-block {
+    font-size: 13.5px;
+    line-height: 1.72;
+    padding: clamp(18px, 2vw, 28px);
+}
+
+.page-moxie-docs .moxie-api-cta-section .docs-split {
+    align-items: center;
+    padding-bottom: 0;
+}
+
+.page-moxie-docs .moxie-api-cta-section .docs-desc > p {
+    max-width: 54ch;
+}
+
+.page-moxie-docs .moxie-spec-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: var(--space-3);
+    border-bottom: 1px solid rgba(229, 226, 223, 0.55);
+    color: var(--terminal-text);
+    background-image: none;
+    font-family: var(--font-body);
+    font-size: 20px;
+    line-height: 1.25;
+    text-decoration: none;
+}
+
+.page-moxie-docs .moxie-spec-link:hover {
+    color: rgba(229, 226, 223, 0.78);
+    border-bottom-color: rgba(229, 226, 223, 0.78);
+}
+
+.page-moxie-api-spec .moxie-dev-hero .hero-content {
+    display: block;
+    max-width: 920px;
+}
+
+.page-moxie-api-spec .moxie-dev-hero .hero-title {
+    max-width: 14ch;
+    font-size: 72px;
+}
+
+.page-moxie-api-spec .moxie-dev-hero .hero-subtitle {
+    max-width: 680px;
+    font-size: 22px;
+}
+
+.page-moxie-docs .moxie-advanced-section .docs-desc > p,
+.page-moxie-docs .moxie-auth-section .docs-desc > p,
+.page-moxie-docs .moxie-agent-section .docs-desc > p {
+    font-size: 18px;
+}
+
+.page-moxie-docs .docs-ref .docs-desc > p {
+    font-size: 15.5px;
+    line-height: 1.68;
+    color: rgba(229, 226, 223, 0.68);
+}
+
+.page-moxie-docs .docs-ref .docs-desc h3 {
+    font-size: 32px;
+    line-height: 1.08;
+    letter-spacing: 0;
+}
+
+@media (max-width: 900px) {
+    .page-moxie-docs .moxie-dev-hero {
+        padding: 64px 0 52px;
+    }
+
+    .page-moxie-docs .moxie-dev-hero .hero-content {
+        display: block;
+        width: 100%;
+        max-width: 720px;
+    }
+
+    .page-moxie-docs .moxie-dev-hero .hero-title {
+        max-width: 13ch;
+        font-size: 60px;
+    }
+
+    .page-moxie-api-spec .moxie-dev-hero .hero-title {
+        max-width: 14ch;
+        font-size: 52px;
+    }
+
+    .page-moxie-docs .moxie-dev-hero .hero-subtitle {
+        font-size: 18px;
+        line-height: 1.55;
+        max-width: 100%;
+    }
+
+    .page-moxie-docs .moxie-product-section {
+        padding: 58px 0;
+    }
+
+    .page-moxie-docs .moxie-product-section .section-title {
+        font-size: 44px;
+    }
+
+    .page-moxie-docs .moxie-product-section .section-subtitle {
+        font-size: 18px;
+        margin-bottom: 36px;
+        max-width: 100%;
+    }
+
+    .page-moxie-docs .moxie-product-section .docs-split {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 38px 0;
+        min-width: 0;
+    }
+
+    .page-moxie-docs .moxie-product-section .docs-desc,
+    .page-moxie-docs .moxie-product-section .docs-code-col,
+    .page-moxie-docs .moxie-product-section .code-panel {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .page-moxie-docs .moxie-product-section .docs-desc h4 {
+        font-size: 32px;
+    }
+
+    .page-moxie-docs .moxie-product-section .docs-desc > p {
+        font-size: 17.5px;
+        line-height: 1.6;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-moxie-docs .site-container,
+    .page-moxie-docs .site-header,
+    .page-moxie-docs main,
+    .page-moxie-docs .moxie-dev-hero,
+    .page-moxie-docs .moxie-product-section {
+        width: 100%;
+        max-width: 100vw;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    .page-moxie-docs .header-inner {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .page-moxie-docs .nav-toggle {
+        margin-left: auto;
+    }
+
+    .page-moxie-docs .moxie-dev-hero .container,
+    .page-moxie-docs .moxie-product-section > .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 24px;
+        padding-right: 24px;
+        box-sizing: border-box;
+    }
+
+    .page-moxie-docs .moxie-dev-hero .hero-content,
+    .page-moxie-docs .moxie-dev-hero .hero-subtitle,
+    .page-moxie-docs .moxie-product-section .section-subtitle,
+    .page-moxie-docs .moxie-product-section .docs-desc,
+    .page-moxie-docs .moxie-product-section .docs-desc > p,
+    .page-moxie-docs .moxie-product-section .docs-code-col,
+    .page-moxie-docs .moxie-product-section .code-panel,
+    .page-moxie-docs .moxie-product-section .code-block,
+    .page-moxie-docs .moxie-product-section .code-block code {
+        width: 100%;
+        max-width: calc(100vw - 48px);
+        min-width: 0;
+    }
+
+    .page-moxie-docs .moxie-dev-hero .hero-title {
+        font-size: 44px;
+        line-height: 0.98;
+    }
+
+    .page-moxie-api-spec .moxie-dev-hero .hero-title {
+        font-size: 38px;
+        max-width: 100%;
+    }
+
+    .page-moxie-docs .moxie-product-section .code-block {
+        font-size: 13px;
+        line-height: 1.62;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        overflow-x: hidden;
+    }
+}
+
+/* Developer entry and reference controls. */
+.page-dev :is(a, button, input, select, textarea, summary):focus-visible {
+    outline: 2px solid var(--terminal-accent);
+    outline-offset: 4px;
+}
+
+.docs-entry-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    margin-top: var(--space-4);
+    font-size: 18px;
+}
+
+.docs-entry-links a,
+.docs-start-copy a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+#quickstart,
+#api-reference {
+    scroll-margin-top: 80px;
+}
+
+.docs-start-copy {
+    max-width: 68ch;
+    margin: var(--space-3) 0;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--terminal-text);
+}
+
+.docs-write-example {
+    margin-top: var(--space-5);
+    border-top: 1px solid var(--terminal-accent-30);
+    padding-top: var(--space-3);
+}
+
+.docs-write-example summary {
+    cursor: pointer;
+    font-size: 20px;
+    padding: var(--space-1) 0;
+}
+
+.docs-search-label {
+    display: block;
+    margin-bottom: var(--space-1);
+    color: var(--terminal-text);
+    font-size: 16px;
+}
+
+.page-dev .docs-sidebar-search { display: none; }
+.docs-search-ready .page-dev .docs-sidebar-search { display: block; }
+
+.page-dev .docs-search-input {
+    min-height: 44px;
+    font-size: 13px;
+}
+
+.docs-search-status {
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--terminal-text);
+    margin-top: var(--space-1);
+}
+
+.docs-search-status:empty { display: none; }
+.docs-sidebar [hidden] { display: none !important; }
+.docs-navigation-toggle { display: none; }
+
+.code-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-1);
+    padding: 0 var(--space-2);
+    background: var(--terminal-deep);
+}
+
+.code-actions .code-copy-btn {
+    position: static;
+    opacity: 1;
+    min-height: 44px;
+    padding: 8px;
+    font-size: 12px;
+    color: var(--terminal-text);
+}
+
+.page-dev .code-block-header.has-code-actions {
+    flex-wrap: wrap;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.code-block-header.has-code-actions .code-actions {
+    margin-left: auto;
+    padding: 0;
+    background: transparent;
+}
+
+.dev-home-example .code-block-header .title { margin-left: 0; }
+
+.code-copy-status {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--terminal-dim);
+}
+
+.page-dev .docs-code-col .code-block,
+.page-dev .docs-section--full .code-block {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.page-dev-home .dev-home-hero { padding: var(--space-10) 0; }
+.dev-home-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: var(--space-8);
+    align-items: center;
+}
+
+.page-dev-home .hero-title {
+    font-size: clamp(44px, 4.3vw, 68px);
+    line-height: 1.04;
+    max-width: 13ch;
+    margin-bottom: var(--space-3);
+}
+
+.page-dev-home .hero-subtitle { font-size: 23px; line-height: 1.4; }
+.dev-home-context { color: var(--ink-muted); font-size: 18px; line-height: 1.55; margin-top: var(--space-3); }
+.dev-home-actions { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin-top: var(--space-4); font-size: 18px; }
+.dev-home-actions > a { text-decoration: underline; text-underline-offset: 4px; }
+.dev-home-example { min-width: 0; }
+.dev-home-label { display: block; font-family: var(--font-mono); font-size: 12px; line-height: 1.5; color: var(--ink-muted); margin-bottom: var(--space-2); }
+.dev-home-example .code-panel { background: var(--terminal-surface); color: var(--terminal-text); border: 1px solid var(--terminal-accent-30); }
+.dev-home-example .code-actions { background: var(--terminal-surface); }
+.dev-home-example .code-block { font-size: 13px; line-height: 1.75; padding: var(--space-3); white-space: pre-wrap; overflow-wrap: anywhere; }
+.dev-home-example > p { color: var(--ink-muted); font-size: 17px; line-height: 1.5; margin: var(--space-2) 0; }
+.dev-home-example > a { font-size: 18px; text-decoration: underline; text-underline-offset: 4px; }
+.dev-request-inputs { margin: var(--space-3) 0; }
+.dev-request-inputs > div { display: grid; grid-template-columns: 90px 1fr; gap: var(--space-2); margin: var(--space-1) 0; font-size: 16px; line-height: 1.4; }
+.dev-request-inputs dt { color: var(--terminal-dim); }
+.dev-request-inputs dd { margin: 0; }
+.dev-request-inputs code { font-family: var(--font-mono); font-size: 12px; }
+.dev-home-record { border-top: 1px solid var(--terminal-accent-30); padding: var(--space-8) 0; }
+.dev-home-record .section-header { margin-bottom: var(--space-5); }
+.dev-record-intro { max-width: 60ch; color: var(--ink-muted); font-size: 20px; line-height: 1.5; margin-top: var(--space-3); }
+.dev-record-fields > div { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--space-8); padding: var(--space-4) 0; border-top: 1px solid var(--terminal-accent-30); }
+.dev-record-fields dt { display: flex; flex-direction: column; gap: var(--space-1); }
+.dev-record-fields dt code { font-family: var(--font-mono); font-size: 14px; color: var(--terminal-accent); overflow-wrap: anywhere; }
+.dev-record-fields dd { margin: 0; }
+.dev-record-fields h3 { font-family: var(--font-display); font-size: 26px; font-weight: 400; margin-bottom: var(--space-1); }
+.dev-record-fields p { font-size: 18px; line-height: 1.5; color: var(--ink-muted); margin-bottom: var(--space-2); }
+.dev-record-fields a { font-size: 17px; text-decoration: underline; text-underline-offset: 4px; }
+.dev-home-resources { padding: 0 0 var(--space-10); }
+.page-dev-home .resource-item { border: 0; border-top: 1px solid var(--rule); background: transparent; padding: var(--space-3) 0; }
+.page-dev-home .resource-item:hover { background: var(--paper-hover); }
+.page-dev-home .resource-title { color: var(--ink); font-size: 22px; }
+.page-dev-home .resource-meta { color: var(--ink-muted); font-size: 17px; }
+
+@media (max-width: 1024px) {
+    .dev-home-grid { gap: var(--space-5); }
+    .dev-record-fields > div { gap: var(--space-4); }
+}
+
+@media (max-width: 900px) {
+    .page-dev .docs-sidebar { display: block; background: var(--terminal-deep); padding: var(--space-2) var(--gutter); }
+    .docs-navigation-toggle { display: flex; justify-content: space-between; align-items: center; width: 100%; min-height: 44px; padding: 8px 0; background: transparent; border: 0; color: var(--terminal-text); font-family: var(--font-text); font-size: 20px; cursor: pointer; text-align: left; }
+    .docs-navigation-toggle::after { content: '+'; font-family: var(--font-mono); }
+    .docs-navigation-toggle[aria-expanded="true"]::after { content: '\2212'; }
+    .docs-navigation-ready .docs-sidebar-content { display: none; }
+    .docs-navigation-toggle[aria-expanded="true"] + .docs-sidebar-content { display: block; padding-top: var(--space-2); }
+    .page-dev .docs-sidebar-group { display: block; margin-bottom: var(--space-3); }
+    .page-dev .docs-sidebar-label { display: block; margin: var(--space-1) 0; }
+    .page-dev .docs-sidebar-link { min-height: 44px; }
+    .page-dev .docs-search-input { font-size: 16px; }
+}
+
+@media (max-width: 768px) {
+    .page-dev-home .dev-home-hero { padding: var(--space-5) 0 var(--space-6); }
+    .dev-home-grid { grid-template-columns: 1fr; gap: var(--space-5); }
+    .page-dev-home .hero-title { max-width: 15ch; font-size: clamp(42px, 8vw, 60px); }
+    .page-dev-home .hero-subtitle { font-size: 22px; }
+    .dev-record-fields > div { grid-template-columns: 1fr; gap: var(--space-3); }
+    .dev-home-record { padding: var(--space-6) 0; }
+    .page-dev-home .resource-item { align-items: flex-start; gap: var(--space-1); }
+    .page-dev-home .resource-meta { text-align: left; }
+    .docs-entry-links { gap: var(--space-2) var(--space-3); }
+    .page-dev .docs-code-col .code-block { white-space: pre; overflow-x: auto; overflow-wrap: normal; word-break: normal; }
+    html:not(.site-nav-ready) .site-header { position: static; }
+    html:not(.site-nav-ready) main { padding-top: 0; }
+    html:not(.site-nav-ready) .nav-toggle { display: none; }
+    html:not(.site-nav-ready) .nav-primary { display: flex; flex-direction: row; flex-wrap: wrap; gap: var(--space-1) var(--space-3); }
+    html:not(.site-nav-ready) .nav-primary a { display: flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-dev .docs-sidebar-link,
+    .page-dev .code-copy-btn { transition: none; }
+}

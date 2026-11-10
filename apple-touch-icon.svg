@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="40" fill="#0c0b0a"/>
+  <text
+    x="90"
+    y="130"
+    font-family="garamond-premier-pro, Garamond, Georgia, Times New Roman, serif"
+    font-size="140"
+    font-weight="400"
+    fill="#e5e2df"
+    text-anchor="middle">M</text>
+</svg>

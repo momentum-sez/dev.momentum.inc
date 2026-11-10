@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Zone Configurator — Momentum</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+
+    <!-- SEO -->
+    <meta name="description" content="Configure a programmable economic zone. Select jurisdiction, toggle modules across five primitives, choose compliance tier, and generate a deployment specification in real time.">
+    <meta name="author" content="Momentum">
+    <link rel="canonical" href="https://dev.momentum.inc/configure.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Zone Configurator — Momentum">
+    <meta property="og:description" content="Interactive zone configuration tool. Select jurisdiction, five primitives, compliance tier. Generate deployment specification in real time.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dev.momentum.inc/configure.html">
+    <meta property="og:image" content="https://dev.momentum.inc/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Zone Configurator — Momentum">
+    <meta name="twitter:description" content="Interactive zone configuration tool. Select jurisdiction, five primitives, compliance tier. Generate deployment specification in real time.">
+    <meta name="twitter:image" content="https://dev.momentum.inc/og-image.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JP8T5J8M28"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JP8T5J8M28');
+    </script>
+
+    <!-- Adobe Fonts -->
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin>
+    <link rel="preload" href="https://use.typekit.net/zlu2quo.css" as="style">
+    <link rel="stylesheet" href="https://use.typekit.net/zlu2quo.css">
+
+    <!-- Fallback + Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/dev.css">
+    <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+<body class="page-dev">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div class="site-container">
+        <!-- HEADER -->
+        <header class="site-header">
+          <div class="container">
+            <div class="header-inner">
+              <a href="/" class="logo">Momentum</a>
+              <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">Menu</button>
+              <nav class="nav-primary" id="primary-nav" aria-label="Primary navigation">
+                <a href="/explore.html">Explore</a>
+                <a href="/docs.html">Mass API</a>
+                <a href="/moxie.html">Moxie API</a>
+                <a href="https://github.com/momentum-sez/stack">GitHub</a>
+                <a href="https://momentum.inc">momentum.inc</a>
+              </nav>
+            </div>
+          </div>
+        </header>
+
+        <main id="main">
+            <!-- HERO -->
+            <section class="hero" style="padding-bottom: var(--space-4);">
+                <div class="container">
+                    <div class="hero-content">
+                        <span class="hero-eyebrow">Interactive Tool</span>
+                        <h1 class="hero-title">Build a Zone</h1>
+                        <p class="hero-subtitle">Select a jurisdiction archetype. Toggle modules across five primitives. Choose a compliance tier. Watch the zone specification write itself.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONFIGURATOR -->
+            <section class="reveal">
+                <div class="container configure-grid">
+
+                    <!-- LEFT: Controls -->
+                    <div class="configure-controls">
+
+                        <!-- Jurisdiction presets -->
+                        <div>
+                            <div class="configure-section-label">Jurisdiction Archetype</div>
+                            <div class="configure-presets" id="configure-presets" role="radiogroup" aria-label="Jurisdiction archetype"></div>
+                        </div>
+
+                        <!-- Primitive toggles -->
+                        <div>
+                            <div class="configure-section-label">Primitives</div>
+                            <div class="configure-primitives" id="configure-primitives"></div>
+                        </div>
+
+                        <!-- Module groups -->
+                        <div>
+                            <div class="configure-section-label">Infrastructure Modules</div>
+                            <div class="configure-modules" id="configure-modules"></div>
+                        </div>
+
+                        <!-- Compliance tier -->
+                        <div>
+                            <div class="configure-section-label">Compliance Tier</div>
+                            <div class="configure-tiers" id="configure-tiers" role="radiogroup" aria-label="Compliance tier"></div>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT: Terminal panel -->
+                    <div class="configure-terminal" role="region" aria-label="Zone specification output">
+                        <div class="configure-chrome">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="title">zone.yaml</span>
+                        </div>
+
+                        <div class="configure-yaml" id="configure-yaml" aria-live="polite" tabindex="0"></div>
+
+                        <div class="configure-summary" id="configure-summary"></div>
+
+                        <div class="configure-actions">
+                            <button type="button" id="configure-share" aria-label="Copy share link">Copy share link</button>
+                            <button type="button" id="configure-copy" aria-label="Copy YAML">Copy YAML</button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SPACER -->
+            <div style="height: var(--space-16);"></div>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+          <div class="container">
+            <div class="footer-inner">
+              <div class="footer-contact">
+                <p class="footer-label">Developer Inquiries</p>
+                <a href="mailto:developers@momentum.inc">developers@momentum.inc</a>
+                <p class="footer-secondary">Saadiyat Island, Abu Dhabi &middot; Miami, USA &middot; Cape Town, South Africa &middot; Shanghai, China</p>
+              </div>
+              <nav class="footer-nav" aria-label="Footer">
+                <a href="/explore.html">Explore</a>
+                <a href="/docs.html">Mass API</a>
+                <a href="/moxie.html">Moxie API</a>
+                <a href="https://momentum.inc/thesis.html">Thesis</a>
+                <a href="https://momentum.inc/ez.html">Infrastructure</a>
+                <a href="https://momentum.inc/team.html">Team</a>
+              </nav>
+            </div>
+            <div class="footer-legal">
+              <p>The materials on this website are for illustration and discussion purposes only and do not constitute an offer to sell, or a solicitation of an offer to buy, any securities or interests. Any such offering may be made only to eligible investors via one or more confidential offering documents. Past performance is not indicative of future results. &copy; 2026 Momentum</p>
+            </div>
+          </div>
+        </footer>
+    </div>
+
+    <script src="/site.js" defer></script>
+    <script src="/configure.js" defer></script>
+</body>
+</html>
