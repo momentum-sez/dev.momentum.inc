@@ -2913,7 +2913,7 @@
   var _dataCache = {};
   function loadData(name, callback) {
     if (_dataCache[name]) { callback(_dataCache[name]); return; }
-    fetch('/data/' + name + '.json')
+    fetch('data/' + name + '.json')
       .then(function (r) { return r.json(); })
       .then(function (data) { _dataCache[name] = data; callback(data); })
       .catch(function () {
