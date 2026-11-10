@@ -161,7 +161,7 @@
     var timing = $('sb-timing');
     if (!resource || !action || !send || !body || !output) return;
 
-    loadJson('/data/openapi-index.json')
+    loadJson('data/openapi-index.json')
       .then(function (specs) {
         state.specs = specs;
         clearSelect(resource, 'Select resource');
@@ -232,7 +232,7 @@
   function initSchemas() {
     var select = $('schema-select');
     if (!select) return;
-    loadJson('/data/schemas.json')
+    loadJson('data/schemas.json')
       .then(function (schemas) {
         state.schemas = schemas;
         clearSelect(select, 'Select a schema');

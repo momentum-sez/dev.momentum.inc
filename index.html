@@ -6,8 +6,8 @@
     <title>Developer Documentation — Momentum</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.svg">
 
     <!-- SEO -->
     <meta name="description" content="Build company operations into your product with the Mass API. Explore formation, compliance, treasury, governance, and audit, plus Moxie and the open-source Stack.">
@@ -45,8 +45,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/dev.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dev.css">
     <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body class="page-dev page-dev-home">
@@ -56,12 +56,12 @@
         <header class="site-header">
           <div class="container">
             <div class="header-inner">
-              <a href="/" class="logo">Momentum</a>
+              <a href="./" class="logo">Momentum</a>
               <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">Menu</button>
               <nav class="nav-primary" id="primary-nav" aria-label="Primary navigation">
-                <a href="/explore.html">Explore</a>
-                <a href="/docs.html">Mass API</a>
-                <a href="/moxie.html">Moxie API</a>
+                <a href="explore.html">Explore</a>
+                <a href="docs.html">Mass API</a>
+                <a href="moxie.html">Moxie API</a>
                 <a href="https://github.com/momentum-sez/stack">GitHub</a>
                 <a href="https://momentum.inc">momentum.inc</a>
               </nav>
@@ -79,8 +79,8 @@
                         <p class="hero-subtitle">Mass creates and operates legal entities, businesses, and institutions. Build formation, identity, compliance, treasury, governance, and audit into your product.</p>
                         <p class="dev-home-context">Its AI-native operating system automates the ongoing work of an organization across jurisdictions, so smaller teams can run more of it.</p>
                         <div class="dev-home-actions">
-                            <a href="/docs.html#quickstart">Use this request <span aria-hidden="true">&rarr;</span></a>
-                            <a href="/docs.html">Read the API reference</a>
+                            <a href="docs.html#quickstart">Use this request <span aria-hidden="true">&rarr;</span></a>
+                            <a href="docs.html">Read the API reference</a>
                         </div>
                     </div>
                     <div class="dev-home-example">
@@ -111,9 +111,9 @@ curl <span class="code-string">"$MASS_BASE_URL/v1/entities/$MASS_ENTITY_ID/dossi
                         <p class="dev-record-intro">The dossier assembles these fields for your application or agent. Optional records appear when data exists for the entity.</p>
                     </header>
                     <dl class="dev-record-fields">
-                        <div><dt><code>entity</code><code>board</code><code>cap_table</code><code>identities</code></dt><dd><h3>Organization and ownership</h3><p>Read the entity, its board, its ownership table, and identity records.</p><a href="/docs.html#entities">Entity operations <span aria-hidden="true">&rarr;</span></a></dd></div>
-                        <div><dt><code>compliance_passport</code><code>corridor_acceptances</code><code>corridor_exchange_outcomes</code></dt><dd><h3>Compliance and recognition</h3><p>Inspect compliance evaluations and the decisions received from connected jurisdictions.</p><a href="/docs.html#compliance">Compliance reference <span aria-hidden="true">&rarr;</span></a></dd></div>
-                        <div><dt><code>passport_chain_integrity</code><code>recent_attestations</code><code>consolidated_at</code></dt><dd><h3>Evidence and time</h3><p>Read the passport integrity result, recent attestations, and the time the dossier was assembled.</p><a href="/docs.html#credentials">Credentials and evidence <span aria-hidden="true">&rarr;</span></a></dd></div>
+                        <div><dt><code>entity</code><code>board</code><code>cap_table</code><code>identities</code></dt><dd><h3>Organization and ownership</h3><p>Read the entity, its board, its ownership table, and identity records.</p><a href="docs.html#entities">Entity operations <span aria-hidden="true">&rarr;</span></a></dd></div>
+                        <div><dt><code>compliance_passport</code><code>corridor_acceptances</code><code>corridor_exchange_outcomes</code></dt><dd><h3>Compliance and recognition</h3><p>Inspect compliance evaluations and the decisions received from connected jurisdictions.</p><a href="docs.html#compliance">Compliance reference <span aria-hidden="true">&rarr;</span></a></dd></div>
+                        <div><dt><code>passport_chain_integrity</code><code>recent_attestations</code><code>consolidated_at</code></dt><dd><h3>Evidence and time</h3><p>Read the passport integrity result, recent attestations, and the time the dossier was assembled.</p><a href="docs.html#credentials">Credentials and evidence <span aria-hidden="true">&rarr;</span></a></dd></div>
                     </dl>
                 </div>
             </section>
@@ -127,27 +127,27 @@ curl <span class="code-string">"$MASS_BASE_URL/v1/entities/$MASS_ENTITY_ID/dossi
                     </header>
 
                     <div class="resource-list">
-                        <a href="/docs.html#quickstart" class="resource-item">
+                        <a href="docs.html#quickstart" class="resource-item">
                             <span class="resource-title">Mass API</span>
                             <span class="resource-meta">Read records, scope authority, and submit operations</span>
                         </a>
-                        <a href="/explore.html" class="resource-item">
+                        <a href="explore.html" class="resource-item">
                             <span class="resource-title">Network explorer</span>
                             <span class="resource-meta">Browse illustrative workflows in a terminal demo</span>
                         </a>
-                        <a href="/docs.html#sdks" class="resource-item">
+                        <a href="docs.html#sdks" class="resource-item">
                             <span class="resource-title">Mass SDK</span>
                             <span class="resource-meta">Client libraries for TypeScript, Go, and Python</span>
                         </a>
-                        <a href="/configure.html" class="resource-item">
+                        <a href="configure.html" class="resource-item">
                             <span class="resource-title">Zone Configurator</span>
                             <span class="resource-meta">Select modules and share a deployment configuration</span>
                         </a>
-                        <a href="/docs.html#mcp-tools" class="resource-item">
+                        <a href="docs.html#mcp-tools" class="resource-item">
                             <span class="resource-title">MCP Server</span>
                             <span class="resource-meta">Connect AI agents to Mass operations and records</span>
                         </a>
-                        <a href="/moxie.html" class="resource-item">
+                        <a href="moxie.html" class="resource-item">
                             <span class="resource-title">Moxie API</span>
                             <span class="resource-meta">Clear and settle claims through an SDK</span>
                         </a>
@@ -170,9 +170,9 @@ curl <span class="code-string">"$MASS_BASE_URL/v1/entities/$MASS_ENTITY_ID/dossi
                 <p class="footer-secondary">Saadiyat Island, Abu Dhabi &middot; Miami, USA &middot; Cape Town, South Africa &middot; Shanghai, China</p>
               </div>
               <nav class="footer-nav" aria-label="Footer">
-                <a href="/explore.html">Explore</a>
-                <a href="/docs.html">Mass API</a>
-                <a href="/moxie.html">Moxie API</a>
+                <a href="explore.html">Explore</a>
+                <a href="docs.html">Mass API</a>
+                <a href="moxie.html">Moxie API</a>
                 <a href="https://momentum.inc/thesis.html">Thesis</a>
                 <a href="https://momentum.inc/ez.html">Infrastructure</a>
                 <a href="https://momentum.inc/team.html">Team</a>
@@ -185,6 +185,6 @@ curl <span class="code-string">"$MASS_BASE_URL/v1/entities/$MASS_ENTITY_ID/dossi
         </footer>
     </div>
 
-    <script src="/site.js" defer></script>
+    <script src="site.js" defer></script>
 </body>
 </html>

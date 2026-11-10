@@ -6,8 +6,8 @@
     <title>Moxie - clearing and settlement for claims</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.svg">
 
     <!-- SEO -->
     <meta name="description" content="Moxie clears and settles PDCF-priced claims and their derivatives. Build event contracts, parimutuels, brand markets, royalty-linked assets, receivables, and custom claim programs over typed Claim primitives, CPCAM convex-program clearing, and AOT settlement receipts.">
@@ -45,8 +45,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/dev.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dev.css">
     <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body class="page-dev page-moxie-docs">
@@ -56,13 +56,13 @@
         <header class="site-header">
           <div class="container">
             <div class="header-inner">
-              <a href="/" class="logo">Momentum</a>
+              <a href="./" class="logo">Momentum</a>
               <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">Menu</button>
               <nav class="nav-primary" id="primary-nav" aria-label="Primary navigation">
-                <a href="/explore.html">Explore</a>
-                <a href="/docs.html">Mass API</a>
-                <a href="/moxie.html" aria-current="page">Moxie</a>
-                <a href="/moxie-api.html">API Spec</a>
+                <a href="explore.html">Explore</a>
+                <a href="docs.html">Mass API</a>
+                <a href="moxie.html" aria-current="page">Moxie</a>
+                <a href="moxie-api.html">API Spec</a>
                 <a href="https://github.com/momentum-sez">GitHub</a>
                 <a href="https://momentum.inc">momentum.inc</a>
               </nav>
@@ -628,7 +628,7 @@ console.log(page.items[0].pdcf_root);    <span class="code-comment">// valuation
                     <div class="docs-split">
                         <div class="docs-desc">
                             <h4><code>client.claimAmm().*</code> &mdash; reference prices from both venues, no indexer</h4>
-                            <p>Every claim trades on a per-claim order book and a per-claim AMM; the venue-oracle resource turns their receipts into reference prices your product can settle against. Volume-weighted (<code>ammPriceStats</code>, <code>orderMatchVwap</code>) for execution-quality views, block-time-weighted (<code>ammTwap</code>, <code>orderMatchTwap</code>) for manipulation-resistant settlement strikes, raw tape (<code>ammSwapHistory</code>, <code>orderMatchHistory</code>) for your own analytics, and one cross-venue canonical price (<code>unifiedReferencePrice</code>) that never mixes consideration units. Identical resources in Rust (<code>client.claim_amm()</code>) and Python (<code>client.claims.amm_*</code> / <code>order_match_*</code>). Full wire shapes on the <a href="/moxie-api.html#claim-oracles">API spec</a>.</p>
+                            <p>Every claim trades on a per-claim order book and a per-claim AMM; the venue-oracle resource turns their receipts into reference prices your product can settle against. Volume-weighted (<code>ammPriceStats</code>, <code>orderMatchVwap</code>) for execution-quality views, block-time-weighted (<code>ammTwap</code>, <code>orderMatchTwap</code>) for manipulation-resistant settlement strikes, raw tape (<code>ammSwapHistory</code>, <code>orderMatchHistory</code>) for your own analytics, and one cross-venue canonical price (<code>unifiedReferencePrice</code>) that never mixes consideration units. Identical resources in Rust (<code>client.claim_amm()</code>) and Python (<code>client.claims.amm_*</code> / <code>order_match_*</code>). Full wire shapes on the <a href="moxie-api.html#claim-oracles">API spec</a>.</p>
                         </div>
                         <div class="docs-code-col">
                             <span class="docs-example-label">settle against a TWAP strike</span>
@@ -996,7 +996,7 @@ GET    /v1/price-vectors/{claim_id}/gradient?at_block= <span class="code-comment
                         <div class="docs-desc">
                             <h4>Reference for backend, engine, and market infrastructure teams</h4>
                             <p>The builder page stays focused on what you can ship first. The spec page carries the dense protocol material: clearing primitives, compliance preflight, AOT settlement receipts, MCP agent tools, method families, pagination, errors, WebSockets, and SDK amount helpers.</p>
-                            <a class="moxie-spec-link" href="/moxie-api.html">Open the Moxie API spec</a>
+                            <a class="moxie-spec-link" href="moxie-api.html">Open the Moxie API spec</a>
                         </div>
                         <div class="docs-code-col">
                             <span class="docs-example-label">production reference</span>
@@ -1676,7 +1676,7 @@ MoxieSdk = <span class="code-string">"moxie/moxie-sdk@1.0.0-rc.1"</span></code><
                 <div class="container">
                     <span class="section-eyebrow">Universal Invariants</span>
                     <h2 class="section-title">28 invariants thread every surface</h2>
-                    <p class="section-subtitle">28 universal invariants (I-1 through I-28) thread every surface. The eight that bind Claim resources directly are surfaced here; the full catalog is on the <a href="/moxie-api.html">API spec page</a>.</p>
+                    <p class="section-subtitle">28 universal invariants (I-1 through I-28) thread every surface. The eight that bind Claim resources directly are surfaced here; the full catalog is on the <a href="moxie-api.html">API spec page</a>.</p>
 
                     <div class="docs-split">
                         <div class="docs-desc">
@@ -1851,10 +1851,10 @@ MoxieSdk = <span class="code-string">"moxie/moxie-sdk@1.0.0-rc.1"</span></code><
                 <p class="footer-secondary">Saadiyat Island, Abu Dhabi &middot; Miami, USA &middot; Cape Town, South Africa &middot; Shanghai, China</p>
               </div>
               <nav class="footer-nav" aria-label="Footer">
-                <a href="/explore.html">Explore</a>
-                <a href="/docs.html">Mass API</a>
-                <a href="/moxie.html">Moxie</a>
-                <a href="/moxie-api.html">API Spec</a>
+                <a href="explore.html">Explore</a>
+                <a href="docs.html">Mass API</a>
+                <a href="moxie.html">Moxie</a>
+                <a href="moxie-api.html">API Spec</a>
                 <a href="https://momentum.inc/thesis.html">Thesis</a>
                 <a href="https://momentum.inc/ez.html">Infrastructure</a>
                 <a href="https://momentum.inc/team.html">Team</a>
@@ -1867,6 +1867,6 @@ MoxieSdk = <span class="code-string">"moxie/moxie-sdk@1.0.0-rc.1"</span></code><
         </footer>
     </div>
 
-    <script src="/site.js" defer></script>
+    <script src="site.js" defer></script>
 </body>
 </html>
